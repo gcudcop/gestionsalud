@@ -5,13 +5,13 @@
  */
 package master.logica.funciones;
 
-import actividades.logica.clases.CausasBajoRendimiento;
-import actividades.logica.clases.ModalidadTutoria;
-import actividades.logica.funciones.FCausasBajoRendimiento;
-import actividades.logica.funciones.FModalidadTutoria;
-import planificacion.logica.clases.ActividadesPlanificadas;
-import planificacion.logica.funciones.FActividadesPlanificadas;
-import planificacion.presentacion.beans.ActividadesPlanificadasControladorTutor;
+//import actividades.logica.clases.CausasBajoRendimiento;
+//import actividades.logica.clases.ModalidadTutoria;
+//import actividades.logica.funciones.FCausasBajoRendimiento;
+//import actividades.logica.funciones.FModalidadTutoria;
+//import planificacion.logica.clases.ActividadesPlanificadas;
+//import planificacion.logica.funciones.FActividadesPlanificadas;
+//import planificacion.presentacion.beans.ActividadesPlanificadasControladorTutor;
 import java.util.ArrayList;
 import master.logica.clases.Escuela;
 import master.logica.clases.Estudiante;

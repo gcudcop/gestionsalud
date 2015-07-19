@@ -61,7 +61,7 @@ public class FVictima {
         boolean eje = false;
         try {
             ArrayList<Parametro> lstP = new ArrayList<Parametro>();
-            String sql = "select * from vif.f_insert_victima(?,?,?,?,?,?,?,?,?,?)";
+            String sql = "select * from med_general.f_insert_paciente(?,?,?,?,?,?,?,?,?,?)";
             lstP.add(new Parametro(1, victima.getCedula_identidad()));
             lstP.add(new Parametro(2, victima.getPnombres()));
             lstP.add(new Parametro(3, victima.getPapellidos()));

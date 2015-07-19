@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>
+            <ui:define name="Paciente">Gestión de Pacientes</ui:define>
+        </title>
+
+    </h:head>
+    <h:body>
+        <ui:composition template="../../templates/plantillaInternaCenter.xhtml">
+            <ui:define name="top">Gestión de Pacientes</ui:define>
+            <ui:define name="contenido">
+                <p:growl id="mensajes" autoUpdate="true" showDetail="true"/>
+                <h:form id="frmpaciente">
+                    <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                    <p:panel id="pnlPaciente">
+                        <p:dataTable  id="tblPaciente" value="#{controladorPaciente.lstPaciente}" 
+                                      var="Paciente" 
+                                      paginator="true" rows="10" rowKey="#{Paciente.id_paciente}" selectionMode="single" 
+                                      selection="#{controladorPaciente.pacienteSel}">
+                            <p:column >
+                                <f:facet name="header">
+                                    <h:outputText value="Historia Clinica"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.historia_clinica}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Cedula de Ciudadanía"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.cedula_ciudadania}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Apellido Paterno"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.apellido_paterno}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Apellido Materno"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.apellido_materno}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Primer Nombre"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.primer_nombre}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Segundo Nombre"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.segundo_nombre}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Direccion"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.direccion}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Barrio"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.barrio}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Parroquia"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.parroquia}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Canton"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.canton}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Provincia"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.provincia}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Zona"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.zona}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Telefono"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.telefono}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Fecha de Nacimiento"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.fecha_nacimiento}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Lugar de Nacimiento"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.lugar_nacimiento}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nacionalidad"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.nacionalidad}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Etnia"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.etnia}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Edad"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.edad}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Sexo"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.sexo}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Estado Civil"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.estado_civil}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Intruccion Academica"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.instruccion_academica}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Fecha Admision"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.fecha_admision}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Ocupacion"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.ocupacion}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Empresa donde Trabaja"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.empresa_trabajo}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Tipo de Seguro"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.tipo_seguro_salud}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Referido de"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.referido_de}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="En caso de Emergencia llamar a"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.familiar_emergencia}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Parentesco-Afinidad"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.parentesco_afinidad}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Direccion del Familiar"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.direccion_familiar}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Telefono Pariente"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.telefono_pariente}"/>
+                            </p:column>
+                            <p:column exportable="false">
+                                <p:commandButton id="btnEditarPaciente" icon="ui-icon-pencil"  title="Editar Paciente" 
+                                                 oncomplete="wdlgEditarPaciente.show()" 
+                                                 process="@this" update=":dlgEditarPaciente, @form">                                   
+                                    <f:setPropertyActionListener value="#{Paciente}" 
+                                                                 target="#{pacienteControlador.pacienteSel}"/>
+                                </p:commandButton>
+                                <p:commandButton id="btnEliminarPaciente" icon="ui-icon-close"  title="Eliminar Paciente"
+                                                 oncomplete="wdlgEliminarPaciente.show()" 
+                                                 update=":dlgEliminarPaciente">                                   
+                                    <f:setPropertyActionListener value="#{Paciente}" 
+                                                                 target="#{pacienteControlador.pacienteSel}"/>
+                                </p:commandButton>
+                            </p:column>  
+                            <!-- PIE DE PAGINA -->
+                            <f:facet name="footer">  
+                                <p:commandButton id="btnNuevoPaciente" value="Nuevo" icon="ui-icon-newwin"
+                                                 oncomplete="wdlgNuevoPaciente.show()" title="Nuevo Paciente"/>  
+                                <h:commandLink>
+                                    <img src="../../resources/images/excel.png" alt=""/>
+                                    <p:dataExporter type="xls" target="tblPaciente" fileName="Paciente" pageOnly="true" />
+                                </h:commandLink>
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/pdf.png" alt=""/>
+                                    <p:dataExporter type="pdf" target="tblPaciente" fileName="Paciente" pageOnly="true" />
+                                </h:commandLink>
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/csv.png" alt=""/>
+                                    <p:dataExporter type="csv" target="tblPaciente" fileName="Paciente" pageOnly="true" />
+                                </h:commandLink>
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/xml.png" alt=""/>
+                                    <p:dataExporter type="xml" target="tblPaciente" fileName="Paciente" pageOnly="true" />
+                                </h:commandLink>
+                            </f:facet>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="dialogos">
+
+                <p:dialog id="dlgNuevoPaciente" header="Nuevo Paciente" widgetVar="wdlgNuevoPaciente" 
+                          modal="true" closable="false" resizable="false"
+                          showEffect="clip" hideEffect="fold"> 
+                    <h:form id="frmNuevoPaciente">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                        <p:panelGrid id="pngNuevoPaciente" columns="2">
+                            <h:outputText value="Historia Clinica:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.historia_clinica}" title="ej: 21345" 
+                                         required="true" requiredMessage="Ingrese la historia clinica"/>
+                            <h:outputText value="Cedula de Ciudadanía:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.cedula_identidad}" title="ej: 0603977224" 
+                                         required="true" requiredMessage="Ingrese el número de cédula"/>
+                            <h:outputText value="Apellido Paterno:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.apellido_paterno}" title="ej: Guzman" 
+                                         required="true" requiredMessage="Ingrese el apellido paterno"/>
+                            <h:outputText value="Apellido Materno:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.apellido_materno}" title="ej: Juarez" 
+                                         required="true" requiredMessage="Ingrese el apellido materno"/>
+                            <h:outputText value="Primer Nombre:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.primer_nombre}" title="ej: Lucia" 
+                                         required="true" requiredMessage="Ingrese el primer_nombre"/>
+                            <h:outputText value="Segundo Nombre:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.segundo_nombre}" title="ej: Angela" 
+                                         required="true" requiredMessage="Ingrese el segundo nombre"/>
+                            <h:outputText value="Direccion:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.direccion}" title="ej: av.de los heroes y rocafuerte" 
+                                         required="true" requiredMessage="Ingrese la Direccion"/>
+                            <h:outputText value="Barrio:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.barrio}" title="ej:San Alfonso" 
+                                         required="true" requiredMessage="Ingrese el Barrio"/>
+                            <h:outputText value="Parroquia:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.parroquia}" title="ej:Maldonado" 
+                                         required="true" requiredMessage="Ingrese la Parroquia"/>
+                            <h:outputText value="Canton:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.canton}" title="ej: Riobamba" 
+                                         required="true" requiredMessage="Ingrese el Canton"/>
+                            <h:outputText value="Provincia:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.provincia}" title="ej:Chimborazo" 
+                                         required="true" requiredMessage="Ingrese la Provincia"/>
+                            <h:outputText value="Zona"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.zona}" title="ej: Urbana" 
+                                         required="true" requiredMessage="Ingrese la Zona"/>
+                            <h:outputText value="Telefono:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.telefono}" title="ej: 0987345648" 
+                                         required="true" requiredMessage="Ingrese el telefono"/>
+                            <h:outputText value="Fecha de Nacimiento:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.fecha_nacimiento}" title="ej: 26/07/1990" 
+                                         required="true" requiredMessage="Ingrese la fecha de nacimiento"/>
+                            <h:outputText value="Lugar de Nacimiento:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.lugar_nacimiento}" title="ej:Riobamba" 
+                                         required="true" requiredMessage="Ingrese el lugar de Nacimiento"/>
+                            <h:outputText value="Nacionalidad:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.nacionalidad}" title="ej:Ecuatoriana" 
+                                         required="true" requiredMessage="Ingrese la Nacionalidad"/>
+                            <h:outputText value="Etnia:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.etnia}" title="ej:Meztizo" 
+                                         required="true" requiredMessage="Ingrese la Etnia"/>
+                            <h:outputText value="Edad:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.edad}" title="ej: 25" 
+                                         required="true" requiredMessage="Ingrese la Edad"/> 
+                            <h:outputText value="Sexo:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.sexo}" title="ej:F-M" 
+                                         required="true" requiredMessage="Ingrese el sexo "/>
+                            <h:outputText value="Estado Civil:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.estado_civil}" title="ej: casado" 
+                                         required="true" requiredMessage="Ingrese el Estado Civil"/>
+                            <h:outputText value="Intruccion Academica:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.intruccion_academica}" title="ej:bachiller" 
+                                         required="true" requiredMessage="Ingrese la Intruccion Academica"/>
+                            <h:outputText value="Fecha Admision:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.fecha_admision}" title="ej:23/04/2011" 
+                                         required="true" requiredMessage="Ingrese la Fecha Admision"/>
+                            <h:outputText value="Ocupacion:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.ocupacion}" title="ej:empleada domestica" 
+                                         required="true" requiredMessage="Ingrese la Ocupacion"/>
+                            <h:outputText value="Empresa donde trabaja:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.empresa_trabajo}" title="ej:unach" 
+                                         required="true" requiredMessage="Ingrese la Empresa donde Trabaja"/>
+                            <h:outputText value="Tipo de Seguro:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.tipo_seguro}" title="ej:iees" 
+                                         required="true" requiredMessage="Ingrese Tipo de Seguro"/>
+                            <h:outputText value="Rederido de:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.referido_de}" title="ej:hospital general" 
+                                         required="true" requiredMessage="Ingrese referido de"/>
+                            <h:outputText value="En caso de Emergencia llamar a:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.familiar_emergecia}" title="ej: Rosa Guzman" 
+                                         required="true" requiredMessage="Ingrese en caso de emergencia llamar a"/>
+                            <h:outputText value="Parentesco-Afinidad:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.parentesco_afinida}" title="ej:tia" 
+                                         required="true" requiredMessage="Ingrese el Parentesco-Afinadad"/>
+                            <h:outputText value="Direccion del Familiar:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.direccion_familiar}" title="ej:Licto" 
+                                         required="true" requiredMessage="Ingrese la Direccion Familiar"/>
+                            <h:outputText value="Telefono Pariente:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.telefono_pariente}" title="ej:0987654342" 
+                                         required="true" requiredMessage="Ingrese el telefono del pariente"/>
+                        </p:panelGrid>
+                        <p:commandButton value="Aceptar" action="#{pacienteControlador.insertarPaciente()}" 
+                                         update=":frmpaciente:pnlPaciente"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgNuevoPaciente.hide()" type="reset"/>
+                    </h:form>
+                </p:dialog>
+                <p:dialog modal="true" widgetVar="dlgStatus" header="Procesando" draggable="false" closable="false" 
+                          resizable="false"> 
+                    <p:graphicImage value="/resources/images/ajaxloadingbar.gif" />  
+                </p:dialog>
+                  <!-- EDITAR VICTIMA-->
+
+                <p:dialog id="dlgEditarPaciente" header="Editar Paciente" widgetVar="wdlgEditarPaciente" 
+                          modal="true" 
+                          closable="false" resizable="false" showEffect="clip" hideEffect="fold">  
+                    <h:form id="frmEditarPaciente">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                        <p:messages id="messages" autoUpdate="true"/>  
+                        <p:panelGrid id="pngEditarPaciente" columns="2">
+                            <h:outputText value="Historia Clinica:"/>
+                           <p:inputText value="#{pacienteControlador.pacienteSel.historia_clinica}"  title="ej: 21345" 
+                                         required="true" requiredMessage="Ingrese la historia clinica"/>
+                           <h:outputText value="Cedula de Ciudadanía:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.cedula_identidad}" title="ej: 0603977224" 
+                                         required="true" requiredMessage="Ingrese el número de cédula"/>
+                            <h:outputText value="Apellido Paterno:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.apellido_paterno}" title="ej: Guzman" 
+                                         required="true" requiredMessage="Ingrese el apellido paterno"/>
+                            <h:outputText value="Apellido Materno:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.apellido_materno}" title="ej: Juarez" 
+                                         required="true" requiredMessage="Ingrese el apellido materno"/>
+                            <h:outputText value="Primer Nombre:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.primer_nombre}" title="ej: Lucia" 
+                                         required="true" requiredMessage="Ingrese el primer_nombre"/>
+                            <h:outputText value="Segundo Nombre:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.segundo_nombre}" title="ej: Angela" 
+                                         required="true" requiredMessage="Ingrese el segundo nombre"/>
+                            <h:outputText value="Direccion:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.direccion}" title="ej: av.de los heroes y rocafuerte" 
+                                         required="true" requiredMessage="Ingrese la Direccion"/>
+                            <h:outputText value="Barrio:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.barrio}" title="ej:San Alfonso" 
+                                         required="true" requiredMessage="Ingrese el Barrio"/>
+                            <h:outputText value="Parroquia:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.parroquia}" title="ej:Maldonado" 
+                                         required="true" requiredMessage="Ingrese la Parroquia"/>
+                            <h:outputText value="Canton:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.canton}" title="ej: Riobamba" 
+                                         required="true" requiredMessage="Ingrese el Canton"/>
+                            <h:outputText value="Provincia:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.provincia}" title="ej:Chimborazo" 
+                                         required="true" requiredMessage="Ingrese la Provincia"/>
+                            <h:outputText value="Zona"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.zona}" title="ej: Urbana" 
+                                         required="true" requiredMessage="Ingrese la Zona"/>
+                            <h:outputText value="Telefono:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.telefono}" title="ej: 0987345648" 
+                                         required="true" requiredMessage="Ingrese el telefono"/>
+                            <h:outputText value="Fecha de Nacimiento:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.fecha_nacimiento}" title="ej: 26/07/1990" 
+                                         required="true" requiredMessage="Ingrese la fecha de nacimiento"/>
+                            <h:outputText value="Lugar de Nacimiento:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.lugar_nacimiento}" title="ej:Riobamba" 
+                                         required="true" requiredMessage="Ingrese el lugar de Nacimiento"/>
+                            <h:outputText value="Nacionalidad:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.nacionalidad}" title="ej:Ecuatoriana" 
+                                         required="true" requiredMessage="Ingrese la Nacionalidad"/>
+                            <h:outputText value="Etnia:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.etnia}" title="ej:Meztizo" 
+                                         required="true" requiredMessage="Ingrese la Etnia"/>
+                            <h:outputText value="Edad:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.edad}" title="ej: 25" 
+                                         required="true" requiredMessage="Ingrese la Edad"/> 
+                            <h:outputText value="Sexo:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.sexo}" title="ej:F-M" 
+                                         required="true" requiredMessage="Ingrese el sexo "/>
+                            <h:outputText value="Estado Civil:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.estado_civil}" title="ej: casado" 
+                                         required="true" requiredMessage="Ingrese el Estado Civil"/>
+                            <h:outputText value="Intruccion Academica:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.intruccion_academica}" title="ej:bachiller" 
+                                         required="true" requiredMessage="Ingrese la Intruccion Academica"/>
+                            <h:outputText value="Fecha Admision:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.fecha_admision}" title="ej:23/04/2011" 
+                                         required="true" requiredMessage="Ingrese la Fecha Admision"/>
+                            <h:outputText value="Ocupacion:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.ocupacion}" title="ej:empleada domestica" 
+                                         required="true" requiredMessage="Ingrese la Ocupacion"/>
+                            <h:outputText value="Empresa donde trabaja:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.empresa_trabajo}" title="ej:unach" 
+                                         required="true" requiredMessage="Ingrese la Empresa donde Trabaja"/>
+                            <h:outputText value="Tipo de Seguro:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.tipo_seguro}" title="ej:iees" 
+                                         required="true" requiredMessage="Ingrese Tipo de Seguro"/>
+                            <h:outputText value="Rederido de:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.referido_de}" title="ej:hospital general" 
+                                         required="true" requiredMessage="Ingrese referido de"/>
+                            <h:outputText value="En caso de Emergencia llamar a:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.familiar_emergecia}" title="ej: Rosa Guzman" 
+                                         required="true" requiredMessage="Ingrese en caso de emergencia llamar a"/>
+                            <h:outputText value="Parentesco-Afinidad:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.parentesco_afinida}" title="ej:tia" 
+                                         required="true" requiredMessage="Ingrese el Parentesco-Afinadad"/>
+                            <h:outputText value="Direccion del Familiar:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.direccion_familiar}" title="ej:Licto" 
+                                         required="true" requiredMessage="Ingrese la Direccion Familiar"/>
+                            <h:outputText value="Telefono Pariente:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.telefono_pariente}" title="ej:0987654342" 
+                                         required="true" requiredMessage="Ingrese el telefono del pariente"/>
+                            
+                        </p:panelGrid>
+                        <p:commandButton value="Aceptar" action="#{pacienteControlador.editarPaciente()}" 
+                                         update=":frmpaciente:pnlPaciente"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgEditarPaciente.hide()" type="reset"/>
+                         </h:form> 
+                </p:dialog>
+                
+                <p:dialog id="dlgEliminarPaciente" header="Eliminar Paciente" widgetVar="wdlgEliminarPaciente" 
+                          modal="true" closable="false" resizable="false" showEffect="clip" hideEffect="fold">  
+                    <h:form id="frmEliminarPaciente">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                        <h:outputText value="¿Desea Eliminar a esta persona?"/>
+                        <p:panelGrid id="pngEliminarPaciente" columns="2">                         
+                           <h:outputText value="Historia Clinica:"/>
+                           <p:inputText value="#{pacienteControlador.pacienteSel.historia_clinica}"  title="ej: 21345" 
+                                        required="true" requiredMessage="Ingrese la historia clinica" disabled="true"/>
+                           <h:outputText value="Cedula de Ciudadanía:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.cedula_identidad}" title="ej: 0603977224" 
+                                         required="true" requiredMessage="Ingrese el número de cédula" disabled="true"/>
+                            <h:outputText value="Apellido Paterno:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.apellido_paterno}" title="ej: Guzman" 
+                                         required="true" requiredMessage="Ingrese el apellido paterno" disabled="true"/>
+                            <h:outputText value="Apellido Materno:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.apellido_materno}" title="ej: Juarez" 
+                                         required="true" requiredMessage="Ingrese el apellido materno" disabled="true"/>
+                            <h:outputText value="Primer Nombre:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.primer_nombre}" title="ej: Lucia" 
+                                         required="true" requiredMessage="Ingrese el primer_nombre" disabled="true"/>
+                            <h:outputText value="Segundo Nombre:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.segundo_nombre}" title="ej: Angela" 
+                                         required="true" requiredMessage="Ingrese el segundo nombre" disabled="true"/>
+                            <h:outputText value="Direccion:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.direccion}" title="ej: av.de los heroes y rocafuerte" 
+                                         required="true" requiredMessage="Ingrese la Direccion" disabled="true"/>
+                            <h:outputText value="Barrio:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.barrio}" title="ej:San Alfonso" 
+                                         required="true" requiredMessage="Ingrese el Barrio" disabled="true"/>
+                            <h:outputText value="Parroquia:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.parroquia}" title="ej:Maldonado" 
+                                         required="true" requiredMessage="Ingrese la Parroquia" disabled="true"/>
+                            <h:outputText value="Canton:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.canton}" title="ej: Riobamba" 
+                                         required="true" requiredMessage="Ingrese el Canton" disabled="true"/>
+                            <h:outputText value="Provincia:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.provincia}" title="ej:Chimborazo" 
+                                         required="true" requiredMessage="Ingrese la Provincia" disabled="true"/>
+                            <h:outputText value="Zona"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.zona}" title="ej: Urbana" 
+                                         required="true" requiredMessage="Ingrese la Zona" disabled="true"/>
+                            <h:outputText value="Telefono:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.telefono}" title="ej: 0987345648" 
+                                         required="true" requiredMessage="Ingrese el telefono" disabled="true"/>
+                            <h:outputText value="Fecha de Nacimiento:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.fecha_nacimiento}" title="ej: 26/07/1990" 
+                                         required="true" requiredMessage="Ingrese la fecha de nacimiento" disabled="true"/>
+                            <h:outputText value="Lugar de Nacimiento:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.lugar_nacimiento}" title="ej:Riobamba" 
+                                         required="true" requiredMessage="Ingrese el lugar de Nacimiento" disabled="true"/>
+                            <h:outputText value="Nacionalidad:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.nacionalidad}" title="ej:Ecuatoriana" 
+                                         required="true" requiredMessage="Ingrese la Nacionalidad" disabled="true"/>
+                            <h:outputText value="Etnia:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.etnia}" title="ej:Meztizo" 
+                                         required="true" requiredMessage="Ingrese la Etnia" disabled="true"/>
+                            <h:outputText value="Edad:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.edad}" title="ej: 25" 
+                                         required="true" requiredMessage="Ingrese la Edad" disabled="true"/> 
+                            <h:outputText value="Sexo:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.sexo}" title="ej:F-M" 
+                                         required="true" requiredMessage="Ingrese el sexo " disabled="true"/>
+                            <h:outputText value="Estado Civil:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.estado_civil}" title="ej: casado" 
+                                         required="true" requiredMessage="Ingrese el Estado Civil" disabled="true"/>
+                            <h:outputText value="Intruccion Academica:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.intruccion_academica}" title="ej:bachiller" 
+                                         required="true" requiredMessage="Ingrese la Intruccion Academica" disabled="true"/>
+                            <h:outputText value="Fecha Admision:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.fecha_admision}" title="ej:23/04/2011" 
+                                         required="true" requiredMessage="Ingrese la Fecha Admision" disabled="true"/>
+                            <h:outputText value="Ocupacion:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.ocupacion}" title="ej:empleada domestica" 
+                                         required="true" requiredMessage="Ingrese la Ocupacion" disabled="true"/>
+                            <h:outputText value="Empresa donde trabaja:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.empresa_trabajo}" title="ej:unach" 
+                                         required="true" requiredMessage="Ingrese la Empresa donde Trabaja" disabled="true"/>
+                            <h:outputText value="Tipo de Seguro:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.tipo_seguro}" title="ej:iees" 
+                                         required="true" requiredMessage="Ingrese Tipo de Seguro" disabled="true"/>
+                            <h:outputText value="Rederido de:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.referido_de}" title="ej:hospital general" 
+                                         required="true" requiredMessage="Ingrese referido de" disabled="true"/>
+                            <h:outputText value="En caso de Emergencia llamar a:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.familiar_emergecia}" title="ej: Rosa Guzman" 
+                                         required="true" requiredMessage="Ingrese en caso de emergencia llamar a" disabled="true"/>
+                            <h:outputText value="Parentesco-Afinidad:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.parentesco_afinida}" title="ej:tia" 
+                                         required="true" requiredMessage="Ingrese el Parentesco-Afinadad" disabled="true"/>
+                            <h:outputText value="Direccion del Familiar:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.direccion_familiar}" title="ej:Licto" 
+                                         required="true" requiredMessage="Ingrese la Direccion Familiar" disabled="true"/>
+                            <h:outputText value="Telefono Pariente:"/>
+                            <p:inputText value="#{pacienteControlador.pacienteSel.telefono_pariente}" title="ej:0987654342" 
+                                         required="true" requiredMessage="Ingrese el telefono del pariente" disabled="true"/>
+                             </p:panelGrid>
+                        <p:commandButton value="Aceptar" action="#{pacienteControlador.eliminarPaciente()}" 
+                                         update=":frmpaciente:pnlPaciente"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgEliminarPaciente.hide()" type="reset"/>
+                    </h:form> 
+                </p:dialog>
+                  <p:dialog modal="true" widgetVar="dlgStatus" header="Procesando" draggable="false" closable="false" 
+                          resizable="false"> 
+                    <p:graphicImage value="/resources/images/ajaxloadingbar.gif" />  
+                </p:dialog>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
