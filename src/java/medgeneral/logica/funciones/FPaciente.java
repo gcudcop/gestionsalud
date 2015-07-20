@@ -80,7 +80,7 @@ public class FPaciente {
         return lst;
     }
 
-    //insertar victimas    
+    //insertar Pacientes   
     public static boolean InsertarPaciente(Paciente paciente) throws Exception {
         boolean eje = false;
         try {
@@ -127,7 +127,7 @@ public class FPaciente {
         return eje;
     }
     
-    //editar victimas    
+    //editar paciente    
     public static boolean EditarPaciente(Paciente paciente) throws Exception {
         boolean eje = false;
         try {
@@ -141,7 +141,7 @@ public class FPaciente {
             lstP.add(new Parametro(6,paciente.getSegundo_nombre()));
             lstP.add(new Parametro(7,paciente.getDireccion()));
             lstP.add(new Parametro(8,paciente.getBarrio()));
-            lstP.add(new Parametro(8,paciente.getParroquia()));
+            lstP.add(new Parametro(9,paciente.getParroquia()));
             lstP.add(new Parametro(10,paciente.getCanton()));
             lstP.add(new Parametro(11,paciente.getProvincia()));
             lstP.add(new Parametro(12,paciente.getZona()));
@@ -151,7 +151,7 @@ public class FPaciente {
             lstP.add(new Parametro(16,paciente.getNacionalidad()));
             lstP.add(new Parametro(17,paciente.getEtnia()));
             lstP.add(new Parametro(18,paciente.getEdad()));
-            lstP.add(new Parametro(10,paciente.getSexo()));
+            lstP.add(new Parametro(19,paciente.getSexo()));
             lstP.add(new Parametro(20,paciente.getEstado_civil()));
             lstP.add(new Parametro(21,paciente.getInstruccion_academica()));
             lstP.add(new Parametro(22,paciente.getFecha_admision()));           

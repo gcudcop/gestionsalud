@@ -49,6 +49,7 @@ public class Paciente {
     }
 
     public Paciente(int id_paciente, int historia_clinica, String cedula_ciudadania, String apellido_paterno, String apellido_materno, String primer_nombre, String segundo_nombre, String direccion, String barrio, String parroquia, String canton, String provincia, String zona, String telefono, Date fecha_nacimiento, String lugar_nacimiento, String nacionalidad, String etnia, int edad, String sexo, String estado_civil, String instruccion_academica, Date fecha_admision, String ocupacion, String empresa_trabajo, String tipo_seguro_salud, String referido_de, String familiar_emergencia, String parentesco_afinidad, String direccion_familiar, String telefono_pariente) {
+       
         this.id_paciente = id_paciente;
         this.historia_clinica = historia_clinica;
         this.cedula_ciudadania = cedula_ciudadania;

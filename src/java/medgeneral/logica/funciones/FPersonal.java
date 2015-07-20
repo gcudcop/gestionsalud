@@ -1,0 +1,130 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package medgeneral.logica.funciones;
+
+import accesodatos.AccesoDatos;
+import accesodatos.ConjuntoResultado;
+import accesodatos.Parametro;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import medgeneral.logica.clases.Personal;
+/**
+ *
+ * @author Mari
+ */
+public class FPersonal {
+   
+    public static ArrayList<Personal> llenarPersonal(ConjuntoResultado rs) throws Exception {
+        ArrayList<Personal> lst = new ArrayList<Personal>();
+        Personal personal = null; 
+         try {
+            while (rs.next()) {
+                personal = new Personal(
+                        rs.getInt("pid_personal"),
+                        rs.getString("papellidos"),
+                        rs.getString("pnombres"),
+                        rs.getString("pcedula_ciudadania"),
+                        rs.getString("pdireccion"),
+                        rs.getString("pcedula_profecional"),
+                        rs.getString("pcargo"),
+                        rs.getDate("pfecha_nacimiento"),
+                        rs.getString("ptelefono"),
+                        rs.getString("pcorreo_elctronico")
+  );
+                lst.add(personal);
+            }
+        } catch (Exception e) {
+            lst.clear();
+            throw e;
+        }
+        return lst;
+    }
+    //obtener personal  
+    public static ArrayList<Personal> ObtenerPersonal() throws Exception {
+        ArrayList<Personal> lst = new ArrayList<Personal>();
+        try {
+            String sql = "select * from med_general.f_select_personal()";
+            ConjuntoResultado rs = AccesoDatos.ejecutaQuery(sql);
+            lst = llenarPersonal(rs);
+            rs = null;
+        } catch (SQLException exConec) {
+            throw new Exception(exConec.getMessage());
+        }
+        return lst;
+    }
+     //insertar personal   
+    public static boolean InsertarPersonal(Personal personal) throws Exception {
+        boolean eje = false;
+        try {
+            ArrayList<Parametro> lstP = new ArrayList<Parametro>();
+            String sql = "select * from med_general.f_insert_personal(?,?,?,?,?,?,?,?,?)";                        
+            lstP.add(new Parametro(1, personal.getApellidos()));
+            lstP.add(new Parametro(2, personal.getNombres()));
+            lstP.add(new Parametro(3,personal.getCedula_ciudadania()));
+            lstP.add(new Parametro(4,personal.getDireccion()));
+            lstP.add(new Parametro(5,personal.getCedula_profecional()));
+            lstP.add(new Parametro(6,personal.getCargo()));
+            lstP.add(new Parametro(7,personal.getFecha_nacimiento()));
+            lstP.add(new Parametro(8,personal.getTelefono()));
+            lstP.add(new Parametro(9,personal.getCorreo_electronico()));
+            ConjuntoResultado rs = AccesoDatos.ejecutaQuery(sql, lstP);
+            while (rs.next()) {
+                if (rs.getString(0).equals("true"));
+                eje = true;
+            }
+        } catch (SQLException exConec) {
+            throw new Exception(exConec.getMessage());
+        }
+        return eje;
+    }
+     //editar personal    
+    public static boolean EditarPersonal(Personal personal) throws Exception {
+        boolean eje = false;
+        try {
+            ArrayList<Parametro> lstP = new ArrayList<Parametro>();
+            String sql = "select * from med_general.f_update_personal(?,?,?,?,?,?,?,?,?)";                        
+            lstP.add(new Parametro(1, personal.getApellidos()));
+            lstP.add(new Parametro(2, personal.getNombres()));
+            lstP.add(new Parametro(3,personal.getCedula_ciudadania()));
+            lstP.add(new Parametro(4,personal.getDireccion()));
+            lstP.add(new Parametro(5,personal.getCedula_profecional()));
+            lstP.add(new Parametro(6,personal.getCargo()));
+            lstP.add(new Parametro(7,personal.getFecha_nacimiento()));
+            lstP.add(new Parametro(8,personal.getTelefono()));
+            lstP.add(new Parametro(9,personal.getCorreo_electronico()));
+     ConjuntoResultado rs = AccesoDatos.ejecutaQuery(sql, lstP);
+            while (rs.next()) {
+                if (rs.getString(0).equals("true"));
+                eje = true;
+            }
+        } catch (SQLException exConec) {
+            throw new Exception(exConec.getMessage());
+        }
+        return eje;
+    }
+     public static  boolean eliminarPersonal (int vid) throws  Exception
+    {
+        boolean eje=false;
+         try
+        {
+        ArrayList<Parametro> lstP = new ArrayList<Parametro>();
+        String sql = "select * from med_general.f_delete_personal(?)";
+        lstP.add(new Parametro(1,vid));
+        ConjuntoResultado rs= AccesoDatos.ejecutaQuery(sql,lstP);
+        while(rs.next() )
+            {
+              if(rs.getString(0).equals("true"));
+                   eje=true;
+            }
+            } catch (SQLException exConec) {
+               throw  new Exception(exConec.getMessage());
+         }
+          return eje;
+    }
+
+
+}
+
