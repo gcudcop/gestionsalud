@@ -200,7 +200,7 @@ and open the template in the editor.
                                          required="true" requiredMessage="Ingrese el Correo Electronico"/>
                         </p:panelGrid>
                         <p:commandButton value="Aceptar" action="#{personalControlador.editarPersonal()}" 
-                                         update=":frmpaciente:pnlPersonal"/>
+                                         update=":frmpersonal:pnlPersonal"/>
                         <p:commandButton value="Cancelar" onclick="wdlgEditarPersonal.hide()" type="reset"/>
                     </h:form> 
                 </p:dialog>
@@ -213,31 +213,31 @@ and open the template in the editor.
                         <p:panelGrid id="pngEliminarPersonal" columns="2">  
                             <h:outputText value="Apellidos:"/>
                             <p:inputText value="#{personalControlador.objPersonal.apellidos}" title="ej: Yagos Vilema" 
-                                         required="true" requiredMessage="Ingrese los Apellidos"/>   
+                                         required="true" requiredMessage="Ingrese los Apellidos" disabled="true"/>   
                             <h:outputText value="Nombres:"/>
                             <p:inputText value="#{personalControlador.objPersonal.nombres}" title="ej: Cristhian Mauricio" 
                                          required="true" requiredMessage="Ingrese los Nombres" disabled="true"/>
                             <h:outputText value="Cedula de Ciudadanía:"/>
                             <p:inputText value="#{personalControlador.objPersonal.cedula_identidad}" title="ej: 0603977224" 
-                                         required="true" requiredMessage="Ingrese el número de cédula"disabled="true"/>
+                                         required="true" requiredMessage="Ingrese el número de cédula" disabled="true"/>
                             <h:outputText value="Direccion:"/>
                             <p:inputText value="#{personalControlador.objPersonal.direccion}" title="ej: Av.Antonio de Sucre y Nueva York" 
-                                         required="true" requiredMessage="Ingrese la Direccion"disabled="true"/>
+                                         required="true" requiredMessage="Ingrese la Direccion" disabled="true"/>
                             <h:outputText value="Cedula Profecional:"/>
                             <p:inputText value="#{personalControlador.objPersonal.cedula_profecional}" title="ej: Fe234567" 
-                                         required="true" requiredMessage="Ingrese la Cedula Profecional"disabled="true"/>
+                                         required="true" requiredMessage="Ingrese la Cedula Profecional" disabled="true"/>
                             <h:outputText value="Cargo:"/>
                             <p:inputText value="#{personalControlador.objPersonal.cargo}" title="ej: Medico General" 
-                                         required="true" requiredMessage="Ingrese el Cargo"disabled="true"/>
+                                         required="true" requiredMessage="Ingrese el Cargo" disabled="true"/>
                             <h:outputText value="Fecha de Nacimiento:"/>
                             <p:inputText value="#{personalControlador.objPersonal.fecha_nacimiento}" title="ej: 26/07/1990" 
-                                         required="true" requiredMessage="Ingrese la fecha de nacimiento"disabled="true"/>
+                                         required="true" requiredMessage="Ingrese la fecha de nacimiento" disabled="true"/>
                             <h:outputText value="Telefono:"/>
                             <p:inputText value="#{personalControlador.objPersonal.telefono}" title="ej:0987654342" 
-                                         required="true" requiredMessage="Ingrese el telefono"disabled="true"/>
+                                         required="true" requiredMessage="Ingrese el telefono" disabled="true"/>
                             <h:outputText value="Correo Electronico:"/>
                             <p:inputText value="#{personalControlador.objPersonal.correo_electronico}" title="ej:crisyagos@hotmail.com" 
-                                         required="true" requiredMessage="Ingrese el Correo Electronico"disabled="true"/>
+                                         required="true" requiredMessage="Ingrese el Correo Electronico" disabled="true"/>
                         </p:panelGrid>
                         <p:commandButton value="Aceptar" action="#{personalControlador.eliminarPersonal()}" 
                                          update=":frmpersonal:pnlPersonal"/>
