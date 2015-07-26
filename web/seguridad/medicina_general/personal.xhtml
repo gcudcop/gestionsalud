@@ -117,8 +117,8 @@ and open the template in the editor.
                     </p:panel>
                 </h:form>
             </ui:define>
+            
             <ui:define name="dialogos">
-
                 <p:dialog id="dlgNuevoPersonal" header="Nuevo Personal" widgetVar="wdlgNuevoPersonal" 
                           modal="true" closable="false" resizable="false"
                           showEffect="clip" hideEffect="fold"> 
@@ -155,6 +155,7 @@ and open the template in the editor.
                         </p:panelGrid>
                         <p:commandButton value="Aceptar" action="#{personalControlador.insertarPersonal()}" 
                                          update=":frmpersonal:pnlPersonal"/>
+                        
                         <p:commandButton value="Cancelar" onclick="wdlgNuevoPersonal.hide()" type="reset"/>
                     </h:form>
                 </p:dialog>
@@ -244,8 +245,7 @@ and open the template in the editor.
                         <p:commandButton value="Cancelar" onclick="wdlgEliminarPersonal.hide()" type="reset"/>
                     </h:form> 
                 </p:dialog>
-                <p:dialog modal="true" widgetVar="dlgStatus" header="Procesando" draggable="false" closable="false" 
-                          resizable="false"> 
+                <p:dialog modal="true" widgetVar="dlgStatus" header="Procesando" draggable="false" closable="false" resizable="false"> 
                     <p:graphicImage value="/resources/images/ajaxloadingbar.gif" />  
                 </p:dialog>
             </ui:define>
