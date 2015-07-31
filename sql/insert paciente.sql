@@ -2,7 +2,8 @@
   RETURNS boolean AS
 $BODY$declare band boolean;
 begin
-INSERT INTO subcentro_licto.f_insert_paciente(apellidos,nombres,historia_clinica,sexo,fecha_nacimiento,cedula_ciudadana,nacionalidad,autoedificacion,aporta_afiliado,provincia,canton,parroquia,barrio,sector,recinto,comunidad,direccion,telefono) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19);
+INSERT INTO subcentro_licto.f_insert_paciente(apellidos,nombres,historia_clinica,sexo,fecha_nacimiento,cedula_ciudadana,nacionalidad,autoedificacion,aporta_afiliado,provincia,canton,parroquia,barrio,sector,recinto,comunidad,direccion,telefono,grupo_prioritario) 
+VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19);
 band=true;
 return band;
 end;$BODY$
