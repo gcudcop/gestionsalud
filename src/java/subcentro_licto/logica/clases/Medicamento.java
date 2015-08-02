@@ -36,23 +36,31 @@ public class Medicamento {
     public int getId_Medicamento() {
         return id_medicamento;
     }
-
     public void setid_mediamento(int id_medicamento) {
         this.id_medicamento = id_medicamento;
     }
-
+      public String getCodigo_Medicamento() {
+        return codigo_medicamento;
+    }
+    public void setcodigo_medicamento(String codigo_medicamento) {
+        this.codigo_medicamento = codigo_medicamento;
+    }
     public String getNombre_Medicamento() {
         return nombre_medicamento;
     }
-
-    public void setForma_Farmaceutica(String forma_farmaceutica) {
+    public void setnombre_medicamento(String nombre_medicamento) {
+        this.nombre_medicamento = nombre_medicamento;
+    }
+    public String getForma_Farmaceutica() {
+        return forma_farmaceutica;
+     }
+    public void setforma_farmaceutica(String forma_farmaceutica) {
         this.forma_farmaceutica = forma_farmaceutica;
     }
     public String getConcentracion() {
         return concentracion;
     }
-
-    public void setConcentracion(String concentracion) {
+    public void setconcentracion(String concentracion) {
         this.concentracion = concentracion;
     }
     }
