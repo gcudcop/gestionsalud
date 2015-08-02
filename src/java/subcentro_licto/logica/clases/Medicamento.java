@@ -63,4 +63,8 @@ public class Medicamento {
     public void setconcentracion(String concentracion) {
         this.concentracion = concentracion;
     }
+
+    public void getInt(String pid_medicamento) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     }

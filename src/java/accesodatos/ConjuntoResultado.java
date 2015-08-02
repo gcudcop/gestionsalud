@@ -297,4 +297,8 @@ public class ConjuntoResultado {
     public int getTamFil() {
         return tamFil;
     }
+
+    public void getInteger(String pconcentracion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

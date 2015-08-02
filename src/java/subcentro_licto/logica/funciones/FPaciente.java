@@ -30,12 +30,12 @@ public class FPaciente {
                         rs.getString("papellidos"),
                         rs.getString("pnombres"),
                         rs.getString("phistoria_clinica"),
-                        rs.getInteger("psexo"),
+                        rs.getInt("psexo"),
                         rs.getDate("pfecha_nacimiento"),
                         rs.getString("pcedula_ciudadania"),
-                        rs.getInteger("pnacionalidad"),
-                        rs.getInteger("pautoidentificacion"),
-                        rs.getInteger("paportado_afiliado"),
+                        rs.getInt("pnacionalidad"),
+                        rs.getInt("pautoidentificacion"),
+                        rs.getInt("paportado_afiliado"),
                         rs.getString("pprovincia"),
                         rs.getString("pcanton"),
                         rs.getString("pparroquia"),
@@ -43,9 +43,9 @@ public class FPaciente {
                         rs.getString("psector"),
                         rs.getString("precinto"),
                         rs.getString("pcomunidad"),
-                        rs.getInt("pdireccion"),
+                        rs.getString("pdireccion"),
                         rs.getString("ptelefono"),
-                        rs.getInteger("pgrupo_prioritario")
+                        rs.getInt("pgrupo_prioritario")
                       );
                 lst.add(paciente);
             }
