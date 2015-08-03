@@ -237,4 +237,8 @@ public class Paciente {
     public Object getGrupo_Prioritario() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public void setId_paciente(int id_paciente) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

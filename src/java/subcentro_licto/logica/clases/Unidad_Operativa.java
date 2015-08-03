@@ -116,5 +116,9 @@ public class Unidad_Operativa {
     public Object getCircuito() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public void setId_UO(int id_UO) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
    
