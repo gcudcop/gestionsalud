@@ -112,5 +112,9 @@ public class Unidad_Operativa {
     public void setinstitucion_sistema(String instirucion_sistema) {
         this.institucion_sistema = institucion_sistema;
     }
+
+    public Object getCircuito() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
    
