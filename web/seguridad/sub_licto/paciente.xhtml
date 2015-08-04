@@ -6,11 +6,408 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+     xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>
+            <ui:define name="Paciente">Gestión de Pacientes</ui:define>
+        </title>
+
+    </h:head>
+    <h:body>
+        <ui:composition template="../../templates/plantillaInternaCenter.xhtml">
+            <ui:define name="top">Gestión de Pacientes</ui:define>
+            <ui:define name="contenido">
+                <p:growl id="mensajes" autoUpdate="true" showDetail="true"/>
+                <h:form id="frmpaciente">
+                    <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                    <p:panel id="pnlPaciente">
+                        <p:dataTable  id="tblPaciente" value="#{controladorPaciente.lstPaciente}" 
+                                      var="Paciente" 
+                                      paginator="true" rows="10" rowKey="#{Paciente.id_paciente}" selectionMode="single" 
+                                      selection="#{controladorPaciente.pacienteSel}">
+                            <p:column >
+                                <f:facet name="header">
+                                    <h:outputText value="Apellidos"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.apellidos}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nombres"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.nombres}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Historia Clinica"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.historia_clinica}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Sexo"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.sexo}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Fecha Nacimientos"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.fecha_nacimiento}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Cedula Ciudadania"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.cedula_ciudadania}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nacionalidad"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.nacionalidad}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Autoidentificacion"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.autoidentificacion}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Aporta o Afiliado"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.aporta_afiliado}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Provincia"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.provincia}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Canton"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.canton}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Parroquia"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.parroquia}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Barrio"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.barrio}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Sector"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.sector}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Recinto"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.recinto}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Comunidad"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.comunidad}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Direccion"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.direccion}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Telefono"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.telefono}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Grupo Prioritario"/>
+                                </f:facet>
+                                <h:outputText value="#{Paciente.grupo_prioritario}"/>
+                            </p:column>
+                            <p:column exportable="false">
+                                <p:commandButton id="btnEditarPaciente" icon="ui-icon-pencil"  title="Editar Paciente" 
+                                                 oncomplete="wdlgEditarPaciente.show()" 
+                                                 process="@this" update=":dlgEditarPaciente, @form">                                   
+                                    <f:setPropertyActionListener value="#{Paciente}" 
+                                                                 target="#{pacienteControlador.pacienteSel}"/>
+                                </p:commandButton>
+                                <p:commandButton id="btnEliminarPaciente" icon="ui-icon-close"  title="Eliminar Paciente"
+                                                 oncomplete="wdlgEliminarPaciente.show()" 
+                                                 update=":dlgEliminarPaciente">                                   
+                                    <f:setPropertyActionListener value="#{Paciente}" 
+                                                                 target="#{pacienteControlador.pacienteSel}"/>
+                                </p:commandButton>
+                            </p:column>  
+                            <!-- PIE DE PAGINA -->
+                            <f:facet name="footer">  
+                                <p:commandButton id="btnNuevoPaciente" value="Nuevo" icon="ui-icon-newwin"
+                                                 oncomplete="wdlgNuevoPaciente.show()" title="Nuevo Paciente"/>  
+                                <h:commandLink>
+                                    <img src="../../resources/images/excel.png" alt=""/>
+                                    <p:dataExporter type="xls" target="tblPaciente" fileName="Paciente" pageOnly="true" />
+                                </h:commandLink>
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/pdf.png" alt=""/>
+                                    <p:dataExporter type="pdf" target="tblPaciente" fileName="Paciente" pageOnly="true" />
+                                </h:commandLink>
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/csv.png" alt=""/>
+                                    <p:dataExporter type="csv" target="tblPaciente" fileName="Paciente" pageOnly="true" />
+                                </h:commandLink>
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/xml.png" alt=""/>
+                                    <p:dataExporter type="xml" target="tblPaciente" fileName="Paciente" pageOnly="true" />
+                                </h:commandLink>
+                            </f:facet>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="dialogos">
+
+                <p:dialog id="dlgNuevoPaciente" header="Nuevo Paciente" widgetVar="wdlgNuevoPaciente" 
+                          modal="true" closable="false" resizable="false"
+                          showEffect="clip" hideEffect="fold"> 
+                    <h:form id="frmNuevoPaciente">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                        <p:panelGrid id="pngNuevoPaciente" columns="2">
+                            <h:outputText value="Apellidos:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.apellidos}" title="ej: Yagos Guaman " 
+                                         required="true" requiredMessage="Ingrese los Apellidos"/>
+                            <h:outputText value="Nombres:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.nombres}" title="ej: Alejadra Estefania" 
+                                         required="true" requiredMessage="Ingrese los Nombres"/>
+                            <h:outputText value="Historia Clinica:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.historia_clinica}" title="ej: 23456" 
+                                         required="true" requiredMessage="Ingrese el numero de historia clinica"/>
+                            <h:outputText value="Sexo:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.sexo}" title="ej: M-F" 
+                                         required="true" requiredMessage="Ingrese el Sexo"/>
+                            <h:outputText value="Fecha Nacimiento"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.fecha_nacimiento}" title="ej: 23/5/1998" 
+                                         required="true" requiredMessage="Ingrese la Fecha de Nacimiento"/>
+                            <h:outputText value="Cedula Ciudadania:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.cedula_ciudadania}" title="ej: 0607856980" 
+                                         required="true" requiredMessage="Ingrese la cedula de ciudadania"/>
+                            <h:outputText value="Nacionalidad:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.nacionalidad}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese la Nacionalidad"/>
+                            <h:outputText value="Autoidentificacion:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.autoidentificacion}" title="ej:" 
+                                         required="true" requiredMessage="Ingrese la Autoidentificacion"/>
+                            <h:outputText value="Aporta o Afiliado:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.aporta_afiliado}" title="ej: " 
+                                         required="true" requiredMessage="Aporta o Afiliado"/>
+                            <h:outputText value="Provincia:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.provincia}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese la Provincia"/>
+                            <h:outputText value="Canton:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.canton}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese el Canton"/>
+                            <h:outputText value="Parroquia"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.parroquia}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese la Parroquia"/>
+                            <h:outputText value="Barrio:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.barrio}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese el Barrio"/>
+                            <h:outputText value="Sector:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.sector}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese el Sector"/>
+                            <h:outputText value="Recinto:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.recinto}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese el Recinto"/>
+                            <h:outputText value="Comunidad:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.comunidad}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese la Comunidad"/>
+                            <h:outputText value="Direccion:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.direccion}" title="ej:   " 
+                                         required="true" requiredMessage="Ingrese la Direccion"/>
+                            <h:outputText value="Telefono:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.telefono}" title="ej: 2534567" 
+                                         required="true" requiredMessage="Ingrese el Telefono"/> 
+                            <h:outputText value="Grupo Prioritario:"/>
+                            <p:inputText value="#{pacienteControlador.objPaciente.grupo_prioritario}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese al Grupo Prioritario que Pertenece "/>
+                        </p:panelGrid>
+                        <p:commandButton value="Aceptar" action="#{pacienteControlador.insertarPaciente()}" 
+                                         update=":frmpaciente:pnlPaciente"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgNuevoPaciente.hide()" type="reset"/>
+                    </h:form>
+                </p:dialog>
+                <p:dialog modal="true" widgetVar="dlgStatus" header="Procesando" draggable="false" closable="false" 
+                          resizable="false"> 
+                    <p:graphicImage value="/resources/images/ajaxloadingbar.gif" />  
+                </p:dialog>
+                
+<!-- EDITAR PACIENTE-->
+
+                <p:dialog id="dlgEditarPaciente" header="Editar Paciente" widgetVar="wdlgEditarPaciente" 
+                          modal="true" 
+                          closable="false" resizable="false" showEffect="clip" hideEffect="fold">  
+                    <h:form id="frmEditarPaciente">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                        <p:messages id="messages" autoUpdate="true"/>  
+                        <p:panelGrid id="pngEditarPaciente" columns="2">
+                            <h:outputText value="Apellidos:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.apellidos}" title="ej: Yagos Guaman " 
+                                         required="true" requiredMessage="Ingrese los Apellidos"/>
+                            <h:outputText value="Nombres:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.nombres}" title="ej: Alejadra Estefania" 
+                                         required="true" requiredMessage="Ingrese los Nombres"/>
+                            <h:outputText value="Historia Clinica:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.historia_clinica}" title="ej: 23456" 
+                                         required="true" requiredMessage="Ingrese el numero de historia clinica"/>
+                            <h:outputText value="Sexo:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.sexo}" title="ej: M-F" 
+                                         required="true" requiredMessage="Ingrese el Sexo"/>
+                            <h:outputText value="Fecha Nacimiento"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.fecha_nacimiento}" title="ej: 23/5/1998" 
+                                         required="true" requiredMessage="Ingrese la Fecha de Nacimiento"/>
+                            <h:outputText value="Cedula Ciudadania:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.cedula_ciudadania}" title="ej: 0607856980" 
+                                         required="true" requiredMessage="Ingrese la cedula de ciudadania"/>
+                            <h:outputText value="Nacionalidad:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.nacionalidad}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese la Nacionalidad"/>
+                            <h:outputText value="Autoidentificacion:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.autoidentificacion}" title="ej:" 
+                                         required="true" requiredMessage="Ingrese la Autoidentificacion"/>
+                            <h:outputText value="Aporta o Afiliado:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.aporta_afiliado}" title="ej: " 
+                                         required="true" requiredMessage="Aporta o Afiliado"/>
+                            <h:outputText value="Provincia:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.provincia}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese la Provincia"/>
+                            <h:outputText value="Canton:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.canton}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese el Canton"/>
+                            <h:outputText value="Parroquia"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.parroquia}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese la Parroquia"/>
+                            <h:outputText value="Barrio:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.barrio}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese el Barrio"/>
+                            <h:outputText value="Sector:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.sector}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese el Sector"/>
+                            <h:outputText value="Recinto:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.recinto}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese el Recinto"/>
+                            <h:outputText value="Comunidad:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.comunidad}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese la Comunidad"/>
+                            <h:outputText value="Direccion:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.direccion}" title="ej:   " 
+                                         required="true" requiredMessage="Ingrese la Direccion"/>
+                            <h:outputText value="Telefono:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.telefono}" title="ej: 2534567" 
+                                         required="true" requiredMessage="Ingrese el Telefono"/> 
+                            <h:outputText value="Grupo Prioritario:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.grupo_prioritario}" title="ej:  " 
+                                         required="true" requiredMessage="Ingrese al Grupo Prioritario que Pertenece "/>
+                        </p:panelGrid>
+                        <p:commandButton value="Aceptar" action="#{pacienteControlador.editarPaciente()}" 
+                                         update=":frmpaciente:pnlPaciente"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgEditarPaciente.hide()" type="reset"/>
+                         </h:form> 
+                </p:dialog>
+             <!-- ELIMINAR PACIENTE-->
+                <p:dialog id="dlgEliminarPaciente" header="Eliminar Paciente" widgetVar="wdlgEliminarPaciente" 
+                          modal="true" closable="false" resizable="false" showEffect="clip" hideEffect="fold">  
+                    <h:form id="frmEliminarPaciente">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                        <h:outputText value="¿Desea Eliminar a esta persona?"/>
+                        <p:panelGrid id="pngEliminarPaciente" columns="2">                         
+                            <h:outputText value="Apellidos:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.apellidos}" title="ej: Yagos Guaman " 
+                                         required="true" requiredMessage="Ingrese los Apellidos" disabled="true"/>
+                            <h:outputText value="Nombres:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.nombres}" title="ej: Alejadra Estefania" 
+                                         required="true" requiredMessage="Ingrese los Nombres" disabled="true"/>
+                            <h:outputText value="Historia Clinica:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.historia_clinica}" title="ej: 23456" 
+                                         required="true" requiredMessage="Ingrese el numero de historia clinica" disabled="true"/>
+                            <h:outputText value="Sexo:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.sexo}" title="ej: M-F" 
+                                         required="true" requiredMessage="Ingrese el Sexo" disabled="true"/>
+                            <h:outputText value="Fecha Nacimiento"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.fecha_nacimiento}" title="ej: 23/5/1998" 
+                                         required="true" requiredMessage="Ingrese la Fecha de Nacimiento" disabled="true"/>
+                            <h:outputText value="Cedula Ciudadania:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.cedula_ciudadania}" title="ej: 0607856980" 
+                                         required="true" requiredMessage="Ingrese la cedula de ciudadania" disabled="true"/>
+                            <h:outputText value="Nacionalidad:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.nacionalidad}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese la Nacionalidad" disabled="true"/>
+                            <h:outputText value="Autoidentificacion:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.autoidentificacion}" title="ej:" 
+                                         required="true" requiredMessage="Ingrese la Autoidentificacion" disabled="true"/>
+                            <h:outputText value="Aporta o Afiliado:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.aporta_afiliado}" title="ej: " 
+                                         required="true" requiredMessage="Aporta o Afiliado" disabled="true"/>
+                            <h:outputText value="Provincia:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.provincia}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese la Provincia" disabled="true"/>
+                            <h:outputText value="Canton:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.canton}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese el Canton" disabled="true"/>
+                            <h:outputText value="Parroquia"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.parroquia}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese la Parroquia" disabled="true"/>
+                            <h:outputText value="Barrio:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.barrio}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese el Barrio" disabled="true"/>
+                            <h:outputText value="Sector:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.sector}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese el Sector" disabled="true"/>
+                            <h:outputText value="Recinto:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.recinto}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese el Recinto" disabled="true"/>
+                            <h:outputText value="Comunidad:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.comunidad}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese la Comunidad" disabled="true"/>
+                            <h:outputText value="Direccion:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.direccion}" title="ej:   " 
+                                         required="true" requiredMessage="Ingrese la Direccion" disabled="true"/>
+                            <h:outputText value="Telefono:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.telefono}" title="ej: 2534567" 
+                                         required="true" requiredMessage="Ingrese el Telefono" disabled="true"/>
+                            <h:outputText value="Grupo Prioritario:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.grupo_prioritario}" title="ej:  " 
+                                         required="true" requiredMessage="Ingrese al Grupo Prioritario que Pertenece disabled="true"/>
+                             </p:panelGrid>
+                        <p:commandButton value="Aceptar" action="#{pacienteControlador.eliminarPaciente()}" 
+                                         update=":frmpaciente:pnlPaciente"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgEliminarPaciente.hide()" type="reset"/>
+                    </h:form> 
+                </p:dialog>
+                  <p:dialog modal="true" widgetVar="dlgStatus" header="Procesando" draggable="false" closable="false" 
+                          resizable="false"> 
+                    <p:graphicImage value="/resources/images/ajaxloadingbar.gif" />  
+                </p:dialog>
+            </ui:define>
+        </ui:composition>
+    </h:body>
 </html>
