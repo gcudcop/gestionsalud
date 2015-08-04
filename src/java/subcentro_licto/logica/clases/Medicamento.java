@@ -67,4 +67,8 @@ public class Medicamento {
     public void getInt(String pid_medicamento) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public void setId_Medicamento(int id_Medicamento) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     }
