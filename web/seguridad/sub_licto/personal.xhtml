@@ -6,11 +6,272 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+      <h:head>
+        <title>
+            <ui:define name="Personal">Gestión de Personal</ui:define>
+        </title>
+
+    </h:head>
+    <h:body>
+        <ui:composition template="../../templates/plantillaInternaCenter.xhtml">
+            <ui:define name="top">Gestión de Personal</ui:define>
+            <ui:define name="contenido">
+                <p:growl id="mensajes" autoUpdate="true" showDetail="true"/>
+                <h:form id="frmpersonal">
+                    <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                    <p:panel id="pnlPersonal">
+                        <p:dataTable  id="tblPersonal" value="#{controladorPersonal.lstPersonal}" 
+                                      var="Personal" 
+                                      paginator="true" rows="10" rowKey="#{Personal.id_personal}" selectionMode="single" 
+                                      selection="#{controladorPersonal.personalSel}">
+                            <p:column >
+                                <f:facet name="header">
+                                    <h:outputText value="Apellidos"/>
+                                </f:facet>
+                                <h:outputText value="#{Personal.apellidos}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nombres"/>
+                                </f:facet>
+                                <h:outputText value="#{Personal.nombres}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Fecha Nacimiento"/>
+                                </f:facet>
+                                <h:outputText value="#{Personal.fecha_nacimiento}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Cedula Ciudadania"/>
+                                </f:facet>
+                                <h:outputText value="#{Personal.cedula_ciudadania}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Sexo"/>
+                                </f:facet>
+                                <h:outputText value="#{Personal.sexo}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Formacion"/>
+                                </f:facet>
+                                <h:outputText value="#{Personal.formacion}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Especialidad Subespecialidad"/>
+                                </f:facet>
+                                <h:outputText value="#{Personal.especialidad_subespecialidad}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nacionalidad"/>
+                                </f:facet>
+                                <h:outputText value="#{Personal.nacionalidad}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Autoidentificacion"/>
+                                </f:facet>
+                                <h:outputText value="#{Personal.autoidentificacion}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Codigo MPS"/>
+                                </f:facet>
+                                <h:outputText value="#{Personal.codigo_mps}"/>
+                            </p:column>
+                                <p:column exportable="false">
+                                <p:commandButton id="btnEditarPersonal" icon="ui-icon-pencil"  title="Editar Personal" 
+                                                 oncomplete="wdlgEditarPersonal.show()" 
+                                                 process="@this" update=":dlgEditarPersonal, @form">                                   
+                                    <f:setPropertyActionListener value="#{Personal}" 
+                                                                 target="#{personalControlador.personalSel}"/>
+                                </p:commandButton>
+                                <p:commandButton id="btnEliminarPersonal" icon="ui-icon-close"  title="Eliminar Personal"
+                                                 oncomplete="wdlgEliminarPersonal.show()" 
+                                                 update=":dlgEliminarPersonal">                                   
+                                    <f:setPropertyActionListener value="#{Personal}" 
+                                                                 target="#{personalControlador.personalSel}"/>
+                                </p:commandButton>
+                            </p:column>  
+                            <!-- PIE DE PAGINA -->
+                            <f:facet name="footer">  
+                                <p:commandButton id="btnNuevoPersonal" value="Nuevo" icon="ui-icon-newwin"
+                                                 oncomplete="wdlgNuevoPersonal.show()" title="Nuevo Personal"/>  
+                                <h:commandLink>
+                                    <img src="../../resources/images/excel.png" alt=""/>
+                                    <p:dataExporter type="xls" target="tblPersonal" fileName="Personal" pageOnly="true" />
+                                </h:commandLink>
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/pdf.png" alt=""/>
+                                    <p:dataExporter type="pdf" target="tblPersonal" fileName="Personal" pageOnly="true" />
+                                </h:commandLink>
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/csv.png" alt=""/>
+                                    <p:dataExporter type="csv" target="tblPersonal" fileName="Personal" pageOnly="true" />
+                                </h:commandLink>
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/xml.png" alt=""/>
+                                    <p:dataExporter type="xml" target="tblPersonal" fileName="Personal" pageOnly="true" />
+                                </h:commandLink>
+                            </f:facet>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="dialogos">
+
+        
+    <!-- INGRESAS PERSONAL-->    
+    
+                <p:dialog id="dlgNuevoPersonal" header="Nuevo Personal" widgetVar="wdlgNuevoPersonal" 
+                          modal="true" closable="false" resizable="false"
+                          showEffect="clip" hideEffect="fold"> 
+                    <h:form id="frmNuevoPersonal">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                        <p:panelGrid id="pngNuevoPersonal" columns="2">
+                            <h:outputText value="Apellidos:"/>
+                            <p:inputText value="#{personalControlador.objPersonal.apellidos}" title="ej: Yagos Guaman " 
+                                         required="true" requiredMessage="Ingrese los Apellidos"/>
+                            <h:outputText value="Nombres:"/>
+                            <p:inputText value="#{personalControlador.objPersonal.nombres}" title="ej: Alejadra Estefania" 
+                                         required="true" requiredMessage="Ingrese los Nombres"/>
+                            <h:outputText value="Fecha Nacimiento"/>
+                            <p:inputText value="#{personalControlador.objPersonal.fecha_nacimiento}" title="ej: 23/5/1998" 
+                                         required="true" requiredMessage="Ingrese la Fecha de Nacimiento"/>
+                            <h:outputText value="Cedula Ciudadania:"/>
+                            <p:inputText value="#{personalControlador.objPersonal.cedula_ciudadania}" title="ej: 0607856980" 
+                                         required="true" requiredMessage="Ingrese la cedula de ciudadania"/>
+                            <h:outputText value="Sexo:"/>
+                            <p:inputText value="#{personalControlador.objPersonal.sexo}" title="ej: M-F" 
+                                         required="true" requiredMessage="Ingrese el Sexo"/>
+                            <h:outputText value="Formacion:"/>
+                            <p:inputText value="#{personalControlador.objPersonal.formacion}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese la Formacion"/>
+                            <h:outputText value="Especialidad o Subespecialidad:"/>
+                            <p:inputText value="#{personalControlador.objPersonal.especialidad_subespecialidad}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese la Especialidad o la Subespecialidad"/>
+                            <h:outputText value="Nacionalidad:"/>
+                            <p:inputText value="#{personalControlador.objPersonal.nacionalidad}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese la Nacionalidad"/>
+                            <h:outputText value="Autoidentificacion:"/>
+                            <p:inputText value="#{personalControlador.objPersonal.autoidentificacion}" title="ej: "           
+                                         required="true" requiredMessage="Ingrese la Autoidentificacion"/>
+                            <h:outputText value="Codigo MPS:"/>
+                            <p:inputText value="#{personalControlador.objPersonal.codigo_mps}" title="ej: "           
+                                         required="true" requiredMessage="Ingrese el Codigo MPS"/>
+                        </p:panelGrid>
+                        <p:commandButton value="Aceptar" action="#{personalControlador.insertarPersonal()}" 
+                                         update=":frmpersonal:pnlPersonal"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgNuevoPersonal.hide()" type="reset"/>
+                    </h:form>
+                </p:dialog>
+                <p:dialog modal="true" widgetVar="dlgStatus" header="Procesando" draggable="false" closable="false" 
+                          resizable="false"> 
+                    <p:graphicImage value="/resources/images/ajaxloadingbar.gif" />  
+                </p:dialog>
+                
+<!-- EDITAR PACIENTE-->
+
+                <p:dialog id="dlgEditarPaciente" header="Editar Personal" widgetVar="wdlgEditarPersonal" 
+                          modal="true" 
+                          closable="false" resizable="false" showEffect="clip" hideEffect="fold">  
+                    <h:form id="frmEditarPersonal">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                        <p:messages id="messages" autoUpdate="true"/>  
+                        <p:panelGrid id="pngEditarPersonal" columns="2">
+                            <h:outputText value="Apellidos:"/>
+                            <p:inputText value="#{personalControlador.SelPersonal.apellidos}" title="ej: Yagos Guaman " 
+                                         required="true" requiredMessage="Ingrese los Apellidos"/>
+                            <h:outputText value="Nombres:"/>
+                            <p:inputText value="#{personalControlador.SelPersonal.nombres}" title="ej: Alejadra Estefania" 
+                                         required="true" requiredMessage="Ingrese los Nombres"/>
+                            <h:outputText value="Fecha Nacimiento"/>
+                            <p:inputText value="#{personalControlador.SelPersonal.fecha_nacimiento}" title="ej: 23/5/1998" 
+                                         required="true" requiredMessage="Ingrese la Fecha de Nacimiento"/>
+                            <h:outputText value="Cedula Ciudadania:"/>
+                            <p:inputText value="#{personalControlador.SelPersonal.cedula_ciudadania}" title="ej: 0607856980" 
+                                         required="true" requiredMessage="Ingrese la cedula de ciudadania"/>
+                            <h:outputText value="Sexo:"/>
+                            <p:inputText value="#{personalControlador.SelPersonal.sexo}" title="ej: M-F" 
+                                         required="true" requiredMessage="Ingrese el Sexo"/>
+                            <h:outputText value="Formacion:"/>
+                            <p:inputText value="#{personalControlador.SelPersonal.formacion}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese la Formacion"/>
+                            <h:outputText value="Especialidad o Subespecialidad:"/>
+                            <p:inputText value="#{personalControlador.SelPersonal.especialidad_subespecialidad}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese la Especialidad o la Subespecialidad"/>
+                            <h:outputText value="Nacionalidad:"/>
+                            <p:inputText value="#{personalControlador.SelPersonal.nacionalidad}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese la Nacionalidad"/>
+                            <h:outputText value="Autoidentificacion:"/>
+                            <p:inputText value="#{personalControlador.SelPersonal.autoidentificacion}" title="ej: "           
+                                         required="true" requiredMessage="Ingrese la Autoidentificacion"/>
+                            <h:outputText value="Codigo MPS:"/>
+                            <p:inputText value="#{personalControlador.SelPersonal.codigo_mps}" title="ej: "           
+                                         required="true" requiredMessage="Ingrese el Codigo MPS"/>
+                        </p:panelGrid>
+                        <p:commandButton value="Aceptar" action="#{personalControlador.editarPersonal()}" 
+                                         update=":frmpersonal:pnlPersonal"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgEditarPersonal.hide()" type="reset"/>
+                         </h:form> 
+                </p:dialog>
+             <!-- ELIMINAR PACIENTE-->
+                <p:dialog id="dlgEliminarPersonal" header="Eliminar Personal" widgetVar="wdlgEliminarPersonal" 
+                          modal="true" closable="false" resizable="false" showEffect="clip" hideEffect="fold">  
+                    <h:form id="frmEliminarPaciente">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                        <h:outputText value="¿Desea Eliminar a esta persona?"/>
+                        <p:panelGrid id="pngEliminarPaciente" columns="2">                         
+                            <h:outputText value="Apellidos:"/>
+                            <p:inputText value="#{personalControlador.SelPaciente.apellidos}" title="ej: Yagos Guaman " 
+                                         required="true" requiredMessage="Ingrese los Apellidos" disabled="true"/>
+                             <h:outputText value="Nombres:"/>
+                            <p:inputText value="#{personalControlador.SelPersonal.nombres}" title="ej: Alejadra Estefania" 
+                                         required="true" requiredMessage="Ingrese los Nombres" disabled="true"/>
+                            <h:outputText value="Fecha Nacimiento"/>
+                            <p:inputText value="#{personalControlador.SelPersonal.fecha_nacimiento}" title="ej: 23/5/1998" 
+                                         required="true" requiredMessage="Ingrese la Fecha de Nacimiento" disabled="true"/>
+                            <h:outputText value="Cedula Ciudadania:"/>
+                            <p:inputText value="#{personalControlador.SelPersonal.cedula_ciudadania}" title="ej: 0607856980" 
+                                         required="true" requiredMessage="Ingrese la cedula de ciudadania" disabled="true"/>
+                            <h:outputText value="Sexo:"/>
+                            <p:inputText value="#{personalControlador.SelPersonal.sexo}" title="ej: M-F" 
+                                         required="true" requiredMessage="Ingrese el Sexo" disabled="true"/>
+                            <h:outputText value="Formacion:"/>
+                            <p:inputText value="#{personalControlador.SelPersonal.formacion}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese la Formacion" disabled="true"/>
+                            <h:outputText value="Especialidad o Subespecialidad:"/>
+                            <p:inputText value="#{personalControlador.SelPersonal.especialidad_subespecialidad}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese la Especialidad o la Subespecialidad" disabled="true"/>
+                            <h:outputText value="Nacionalidad:"/>
+                            <p:inputText value="#{personalControlador.SelPersonal.nacionalidad}" title="ej: " 
+                                         required="true" requiredMessage="Ingrese la Nacionalidad" disabled="true"/>
+                            <h:outputText value="Autoidentificacion:"/>
+                            <p:inputText value="#{personalControlador.SelPersonal.autoidentificacion}" title="ej: "           
+                                         required="true" requiredMessage="Ingrese la Autoidentificacion" disabled="true"/>
+                            <h:outputText value="Codigo MPS:"/>
+                            <p:inputText value="#{personalControlador.SelPersonal.codigo_mps}" title="ej: "           
+                                         required="true" requiredMessage="Ingrese el Codigo MPS" disabled="true"/>
+                             </p:panelGrid>
+                        <p:commandButton value="Aceptar" action="#{personalControlador.eliminarPersonal()}" 
+                                         update=":frmpersonal:pnlPersonal"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgEliminarPersonal.hide()" type="reset"/>
+                    </h:form> 
+                </p:dialog>
+                  <p:dialog modal="true" widgetVar="dlgStatus" header="Procesando" draggable="false" closable="false" 
+                          resizable="false"> 
+                    <p:graphicImage value="/resources/images/ajaxloadingbar.gif" />  
+                </p:dialog>
+            </ui:define>
+        </ui:composition>
+    </h:body>
 </html>

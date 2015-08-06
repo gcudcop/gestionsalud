@@ -54,7 +54,7 @@ and open the template in the editor.
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Fecha Nacimientos"/>
+                                    <h:outputText value="Fecha Nacimiento"/>
                                 </f:facet>
                                 <h:outputText value="#{Paciente.fecha_nacimiento}"/>
                             </p:column>
@@ -396,7 +396,7 @@ and open the template in the editor.
                                          required="true" requiredMessage="Ingrese el Telefono" disabled="true"/>
                             <h:outputText value="Grupo Prioritario:"/>
                             <p:inputText value="#{pacienteControlador.Sel.Paciente.grupo_prioritario}" title="ej:  " 
-                                         required="true" requiredMessage="Ingrese al Grupo Prioritario que Pertenece disabled="true"/>
+                                         required="true" requiredMessage="Ingrese al Grupo Prioritario que Pertenece" disabled="true"/>
                              </p:panelGrid>
                         <p:commandButton value="Aceptar" action="#{pacienteControlador.eliminarPaciente()}" 
                                          update=":frmpaciente:pnlPaciente"/>
