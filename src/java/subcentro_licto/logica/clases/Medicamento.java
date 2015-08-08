@@ -36,7 +36,7 @@ public class Medicamento {
     public int getId_Medicamento() {
         return id_medicamento;
     }
-    public void setid_mediamento(int id_medicamento) {
+    public void setid_medicamento(int id_medicamento) {
         this.id_medicamento = id_medicamento;
     }
       public String getCodigo_Medicamento() {
@@ -63,12 +63,4 @@ public class Medicamento {
     public void setconcentracion(String concentracion) {
         this.concentracion = concentracion;
     }
-
-    public void getInt(String pid_medicamento) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setId_Medicamento(int id_Medicamento) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    }
+}

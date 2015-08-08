@@ -57,36 +57,36 @@ public class Personal {
         return apellidos;
     }
 
-    public void setApellidos(String apellidos) {
+    public void setapellidos(String apellidos) {
         this.apellidos = apellidos;
     }
     public String getNombres() {
         return nombres;
     }
 
-    public void setNombres(String nombres) {
+    public void setnombres(String nombres) {
         this.nombres = nombres;
     }
 
-    public Date getFecha_Nacimiento() {
+    public Date getFecha_nacimiento() {
         return fecha_nacimiento;
     }
 
-    public void setFecha_nacimiento(Date fecha_nacimiento) {
+    public void setfecha_nacimiento(Date fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
     }
     public String getCedula_ciudadania() {
         return cedula_ciudadania;
     }
 
-    public void setCedula_ciudadania(String cedula_ciudadania) {
+    public void setcedula_ciudadania(String cedula_ciudadania) {
         this.cedula_ciudadania = cedula_ciudadania;
     }
     public Integer getSexo() {
         return sexo;
     }
 
-    public void setSexo(Integer sexo) {
+    public void setsexo(Integer sexo) {
         this.sexo = sexo;
     }
 
@@ -94,7 +94,7 @@ public class Personal {
         return formacion;
     }
 
-    public void setFormacion(Integer formacion) {
+    public void setformacion(Integer formacion) {
         this.formacion = formacion;
     }
 
@@ -102,7 +102,7 @@ public class Personal {
         return especialidad_subespecialidad;
     }
 
-    public void setEspecialidad_Subespecialidad(Integer especialidad_subespecialidad) {
+    public void setespecialidad_subespecialidad(Integer especialidad_subespecialidad) {
         this.especialidad_subespecialidad = especialidad_subespecialidad;
     }
 
@@ -110,7 +110,7 @@ public class Personal {
         return nacionalidad;
     }
 
-    public void setNacionalidad(Integer nacionalidad) {
+    public void setnacionalidad(Integer nacionalidad) {
         this.nacionalidad = nacionalidad;
     }
 
@@ -118,7 +118,7 @@ public class Personal {
         return autoidentificacion;
     }
 
-    public void setAutoidentificacion(String autoidentificacion) {
+    public void setautoidentificacion(String autoidentificacion) {
         this.autoidentificacion = autoidentificacion;
     }
 
@@ -126,7 +126,7 @@ public class Personal {
         return codigo_mps;
     }
 
-    public void setCodigo_Mps(String codigo_mps) {
+    public void setcodigo_mps(String codigo_mps) {
         this.codigo_mps = codigo_mps;
     }
 }

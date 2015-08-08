@@ -62,16 +62,16 @@ public static ArrayList<Personal> llenarPersonal(ConjuntoResultado rs) throws Ex
         try {
             ArrayList<Parametro> lstP = new ArrayList<Parametro>();
             String sql = "select * from subcentro_licto.f_insert_personal(?,?,?,?,?,?,?,?,?,?)";                        
-            lstP.add(new Parametro(1, personal.getapellidos()));
-            lstP.add(new Parametro(2, personal.getnombres()));
-            lstP.add(new Parametro(3,personal.getfecha_nacimiento()));
-            lstP.add(new Parametro(4,personal.getcedula_ciudadania()));
-            lstP.add(new Parametro(5,personal.getsexo()));
-            lstP.add(new Parametro(6,personal.getformacion()));
-            lstP.add(new Parametro(7,personal.getespecialida_subespecialidad()));
-            lstP.add(new Parametro(8,personal.getautoidentificacion()));
-            lstP.add(new Parametro(9,personal.getnacionalidad()));
-            lstP.add(new Parametro(10,personal.getcodigo_mps()));
+            lstP.add(new Parametro(1, personal.getApellidos()));
+            lstP.add(new Parametro(2, personal.getNombres()));
+            lstP.add(new Parametro(3,personal.getFecha_nacimiento()));
+            lstP.add(new Parametro(4,personal.getCedula_ciudadania()));
+            lstP.add(new Parametro(5,personal.getSexo()));
+            lstP.add(new Parametro(6,personal.getFormacion()));
+            lstP.add(new Parametro(7,personal.getEspecialidad_Subespecialidad()));
+            lstP.add(new Parametro(8,personal.getAutoidentificacion()));
+            lstP.add(new Parametro(9,personal.getNacionalidad()));
+            lstP.add(new Parametro(10,personal.getCodigo_Mps()));
             ConjuntoResultado rs = AccesoDatos.ejecutaQuery(sql, lstP);
             while (rs.next()) {
                 if (rs.getString(0).equals("true"));
@@ -88,16 +88,16 @@ public static ArrayList<Personal> llenarPersonal(ConjuntoResultado rs) throws Ex
         try {
             ArrayList<Parametro> lstP = new ArrayList<Parametro>();
             String sql = "select * from Subcentro_licto.f_update_personal(?,?,?,?,?,?,?,?,?,?)";                        
-             lstP.add(new Parametro(1, personal.getapellidos()));
-            lstP.add(new Parametro(2, personal.getnombres()));
-            lstP.add(new Parametro(3,personal.getfecha_nacimiento()));
-            lstP.add(new Parametro(4,personal.getcedula_ciudadania()));
-            lstP.add(new Parametro(5,personal.getsexo()));
-            lstP.add(new Parametro(6,personal.getformacion()));
-            lstP.add(new Parametro(7,personal.getespecialida_subespecialidad()));
-            lstP.add(new Parametro(8,personal.getautoidentificacion()));
-            lstP.add(new Parametro(9,personal.getnacionalidad()));
-            lstP.add(new Parametro(10,personal.getcodigo_mps()));
+             lstP.add(new Parametro(1, personal.getApellidos()));
+            lstP.add(new Parametro(2, personal.getNombres()));
+            lstP.add(new Parametro(3,personal.getFecha_nacimiento()));
+            lstP.add(new Parametro(4,personal.getCedula_ciudadania()));
+            lstP.add(new Parametro(5,personal.getSexo()));
+            lstP.add(new Parametro(6,personal.getFormacion()));
+            lstP.add(new Parametro(7,personal.getEspecialidad_Subespecialidad()));
+            lstP.add(new Parametro(8,personal.getAutoidentificacion()));
+            lstP.add(new Parametro(9,personal.getNacionalidad()));
+            lstP.add(new Parametro(10,personal.getCodigo_Mps()));
      ConjuntoResultado rs = AccesoDatos.ejecutaQuery(sql, lstP);
             while (rs.next()) {
                 if (rs.getString(0).equals("true"));

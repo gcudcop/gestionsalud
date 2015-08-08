@@ -72,7 +72,7 @@ public class Atencion {
     public void setprevencion(String prevencion) {
         this.prevencion = prevencion;
     }
-    public String getDrescripcion () {
+    public String getDescripcion () {
         return descripcion;
     }
     public void setdescripcion(String descripcion) {
@@ -96,12 +96,4 @@ public class Atencion {
     public void setlugar_atencion(String lugar_atencion) {
         this.lugar_atencion = lugar_atencion;
     }
-
-    public Object getDescripcion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setId_Atencion(int id_Atencion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-}   
+}

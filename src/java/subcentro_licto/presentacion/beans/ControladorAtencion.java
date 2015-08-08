@@ -41,7 +41,7 @@ public class ControladorAtencion {
         return atencionSel;
     }
 
-    public void setAtencionSel(Atencion atencionSel) {
+    public void setatencionSel(Atencion atencionSel) {
         this.atencionSel = atencionSel;
     }
 
@@ -93,7 +93,7 @@ public class ControladorAtencion {
     }
 public void editarAtencion() {
         try {
-            atencionSel.setId_Atencion(atencionSel.getId_Atencion());
+            atencionSel.setid_atencion(atencionSel.getId_Atencion());
             if (FAtencion.EditarAtencion(atencionSel)) {
                 atencionSel = new Atencion();
                 mostrarActualizar = false;

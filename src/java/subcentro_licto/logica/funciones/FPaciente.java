@@ -81,7 +81,7 @@ public class FPaciente {
             lstP.add(new Parametro(3,paciente.getHistoria_Clinica()));
             lstP.add(new Parametro(4,paciente.getSexo()));
             lstP.add(new Parametro(5,paciente.getFecha_Nacimiento()));
-            lstP.add(new Parametro(6,paciente.getCedula_ciudadana()));
+            lstP.add(new Parametro(6,paciente.getCedula_ciudadania()));
             lstP.add(new Parametro(7,paciente.getNacionalidad()));
             lstP.add(new Parametro(8,paciente.getAutoidentificacion()));
             lstP.add(new Parametro(9,paciente.getAporta_Afiliado()));
@@ -94,7 +94,7 @@ public class FPaciente {
             lstP.add(new Parametro(16,paciente.getComunidad()));
             lstP.add(new Parametro(17,paciente.getDireccion()));
             lstP.add(new Parametro(18,paciente.getTelefono()));
-            lstP.add(new Parametro(19,paciente.getGrupo_Prioritario()));
+            lstP.add(new Parametro(19,paciente.getGrupo_prioritario()));
             ConjuntoResultado rs = AccesoDatos.ejecutaQuery(sql, lstP);
             while (rs.next()) {
                 if (rs.getString(0).equals("true"));
@@ -117,7 +117,7 @@ public class FPaciente {
             lstP.add(new Parametro(3,paciente.getHistoria_Clinica()));
             lstP.add(new Parametro(4,paciente.getSexo()));
             lstP.add(new Parametro(5,paciente.getFecha_Nacimiento()));
-            lstP.add(new Parametro(6,paciente.getCedula_ciudadana()));
+            lstP.add(new Parametro(6,paciente.getCedula_ciudadania()));
             lstP.add(new Parametro(7,paciente.getNacionalidad()));
             lstP.add(new Parametro(8,paciente.getAutoidentificacion()));
             lstP.add(new Parametro(9,paciente.getAporta_Afiliado()));
@@ -130,7 +130,7 @@ public class FPaciente {
             lstP.add(new Parametro(16,paciente.getComunidad()));
             lstP.add(new Parametro(17,paciente.getDireccion()));
             lstP.add(new Parametro(18,paciente.getTelefono()));
-            lstP.add(new Parametro(19,paciente.getGrupo_Prioritario()));
+            lstP.add(new Parametro(19,paciente.getGrupo_prioritario()));
             ConjuntoResultado rs = AccesoDatos.ejecutaQuery(sql, lstP);
             while (rs.next()) {
                 if (rs.getString(0).equals("true"));

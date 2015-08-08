@@ -63,7 +63,7 @@ public class Unidad_Operativa {
         return provincia;
     }
 
-    public void setProvincia(String provincia) {
+    public void setprovincia(String provincia) {
         this.provincia = provincia;
 
     }
@@ -71,7 +71,7 @@ public class Unidad_Operativa {
         return canton;
     }
 
-    public void setCanton(String canton) {
+    public void setcanton(String canton) {
         this.canton = canton;
     }
     public String getParroquia() {
@@ -97,6 +97,14 @@ public class Unidad_Operativa {
 
     public void setdistrito(String distrito) {
         this.distrito = distrito;
+    }
+    
+    public String getCircuito() {
+        return circuito;
+    }
+
+    public void setcircuito(String circuito) {
+        this.circuito = circuito;
     }
      public String getTipo_UO() {
         return tipo_uo;

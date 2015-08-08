@@ -96,7 +96,7 @@ public class ControladorPaciente {
 
     public void editarPaciente() {
         try {
-            pacienteSel.setId_paciente(pacienteSel.getId_paciente());
+            pacienteSel.setid_paciente(pacienteSel.getId_paciente());
             if (FPaciente.EditarPaciente(pacienteSel)) {
                 pacienteSel = new Paciente();
                 mostrarActualizar = false;

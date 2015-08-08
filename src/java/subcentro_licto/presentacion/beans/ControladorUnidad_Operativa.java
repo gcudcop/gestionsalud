@@ -91,7 +91,7 @@ public class ControladorUnidad_Operativa {
     }
 public void editarUnidad_Operativa() {
         try {
-            unidad_operativaSel.setId_UO(unidad_operativaSel.getId_UO());
+            unidad_operativaSel.setid_uo(unidad_operativaSel.getId_UO());
             if (FUnidad_Operativa.EditarUnidad_Operativa(unidad_operativaSel)) {
                 unidad_operativaSel = new Unidad_Operativa();
                 mostrarActualizar = false;

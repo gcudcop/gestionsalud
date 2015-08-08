@@ -78,7 +78,7 @@ public class Paciente {
         this.apellidos = apellidos;
     }
 
-    public String getnombres() {
+    public String getNombres() {
         return nombres;
     }
 
@@ -86,11 +86,11 @@ public class Paciente {
         this.nombres = nombres;
     }
 
-    public String getHistoria_clinica() {
+    public String getHistoria_Clinica() {
         return historia_clinica;
     }
 
-    public void setHistoria_clinica(String historia_clinica) {
+    public void sethistoria_clinica(String historia_clinica) {
         this.historia_clinica = historia_clinica;
     }
 
@@ -98,7 +98,7 @@ public class Paciente {
         return sexo;
     }
 
-    public void setSexo(Integer sexo) {
+    public void setsexo(Integer sexo) {
         this.sexo = sexo;
     }
 
@@ -106,7 +106,7 @@ public class Paciente {
         return fecha_nacimiento;
     }
 
-    public void setFecha_nacimiento(Date fecha_nacimiento) {
+    public void setfecha_nacimiento(Date fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 
@@ -114,7 +114,7 @@ public class Paciente {
         return cedula_ciudadania;
     }
 
-    public void setCedula_ciudadania(String cedula_ciudadania) {
+    public void setcedula_ciudadania(String cedula_ciudadania) {
         this.cedula_ciudadania = cedula_ciudadania;
     }
 
@@ -122,7 +122,7 @@ public class Paciente {
         return nacionalidad;
     }
 
-    public void setNacionalidad(Integer nacionalidad) {
+    public void setnacionalidad(Integer nacionalidad) {
         this.nacionalidad = nacionalidad;
     }
 
@@ -130,7 +130,7 @@ public class Paciente {
         return autoidentificacion;
     }
 
-    public void setAutoidentificacion(Integer autoidentificacion) {
+    public void setautoidentificacion(Integer autoidentificacion) {
         this.autoidentificacion = autoidentificacion;
     }
 
@@ -138,7 +138,7 @@ public class Paciente {
         return aporta_afiliado;
     }
 
-    public void setAporta_Afiliado(Integer aporta_afiliado) {
+    public void setaporta_afiliado(Integer aporta_afiliado) {
         this.aporta_afiliado = aporta_afiliado;
     }
 
@@ -146,7 +146,7 @@ public class Paciente {
         return provincia;
     }
 
-    public void setProvincia(String provincia) {
+    public void setprovincia(String provincia) {
         this.provincia = provincia;
     }
 
@@ -154,7 +154,7 @@ public class Paciente {
         return canton;
     }
 
-    public void setCanton(String canton) {
+    public void setcanton(String canton) {
         this.canton = canton;
     }
 
@@ -162,7 +162,7 @@ public class Paciente {
         return parroquia;
     }
 
-    public void setParroquia(String parroquia) {
+    public void setparroquia(String parroquia) {
         this.parroquia = parroquia;
     }
 
@@ -170,7 +170,7 @@ public class Paciente {
         return barrio;
     }
 
-    public void setBarrio(String barrio) {
+    public void setbarrio(String barrio) {
         this.barrio = barrio;
     }
 
@@ -178,7 +178,7 @@ public class Paciente {
         return sector;
     }
 
-    public void setSector(String sector) {
+    public void setsector(String sector) {
         this.sector = sector;
     }
 
@@ -186,7 +186,7 @@ public class Paciente {
         return sector;
     }
 
-    public void setRecinto(String recinto) {
+    public void setrecinto(String recinto) {
         this.recinto = recinto;
     }
 
@@ -194,7 +194,7 @@ public class Paciente {
         return comunidad;
     }
 
-    public void setComunidad(String comunidad) {
+    public void setcomunidad(String comunidad) {
         this.comunidad = comunidad;
     }
 
@@ -202,7 +202,7 @@ public class Paciente {
         return direccion;
     }
 
-    public void setDireccion(String direccion) {
+    public void setdireccion(String direccion) {
         this.direccion = direccion;
     }
 
@@ -210,7 +210,7 @@ public class Paciente {
         return telefono;
     }
 
-    public void setTelefono(String telefono) {
+    public void settelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -218,7 +218,7 @@ public class Paciente {
         return grupo_prioritario;
     }
 
-    public void setGrupo_prioritario(Integer grupo_prioritario) {
+    public void setgrupo_prioritario(Integer grupo_prioritario) {
         this.grupo_prioritario = grupo_prioritario;
     }
 }

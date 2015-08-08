@@ -93,7 +93,7 @@ public class ControladorMedicamento {
     }
 public void editarMedicamento() {
         try {
-            medicamentoSel.setId_Medicamento(medicamentoSel.getId_Medicamento());
+            medicamentoSel.setid_medicamento(medicamentoSel.getId_Medicamento());
             if (FMedicamento.EditarMedicamento(medicamentoSel)) {
                 medicamentoSel = new Medicamento();
                 mostrarActualizar = false;
