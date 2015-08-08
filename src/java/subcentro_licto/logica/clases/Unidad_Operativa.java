@@ -109,16 +109,7 @@ public class Unidad_Operativa {
         return institucion_sistema;
     }
 
-    public void setinstitucion_sistema(String instirucion_sistema) {
+    public void setinstitucion_sistema(Integer institucion_sistema) {
         this.institucion_sistema = institucion_sistema;
     }
-
-    public Object getCircuito() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setId_UO(int id_UO) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
-   
