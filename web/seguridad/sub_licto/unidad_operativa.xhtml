@@ -6,11 +6,259 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+   <h:head>
+        
+        <title>
+            <ui:define name="Unidad_Operativa"> **Gestión de Unidad Operativa**</ui:define>
+        </title>
+
+    </h:head>
+    <h:body>
+        <ui:composition template="../../templates/plantillaInternaCenter.xhtml">
+            <ui:define name="top">Gestión de Unidad Operativa</ui:define>
+            <ui:define name="contenido">
+                <p:growl id="mensajes" autoUpdate="true" showDetail="true"/>
+                <h:form id="frmunidad_operativa">
+                    <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                    <p:panel id="pnlUnidad_Operativa">
+                        <p:dataTable  id="tblUnidad_Operativa" value="#{controladorUnidad_Operativa.lstUnidad_Operativa}" 
+                                      var="Unidad_Operativa" 
+                                      paginator="true" rows="10" rowKey="#{Unidad_Operativa.id_uo}" selectionMode="single" 
+                                      selection="#{controladorUnidad_Operativa.Unidad_OperativaSel}">
+                            <p:column >
+                                <f:facet name="header">
+                                    <h:outputText value="Nombre UO"/>
+                                </f:facet>
+                                <h:outputText value="#{Unidad_Operativa.nombre_uo}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Provincia"/>
+                                </f:facet>
+                                <h:outputText value="#{Unidad_Operativa.provincia}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Canton"/>
+                                </f:facet>
+                                <h:outputText value="#{Unidad_Operativa.canton}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Parroquia"/>
+                                </f:facet>
+                                <h:outputText value="#{Unidad_Operativa.parroquia}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Zona"/>
+                                </f:facet>
+                                <h:outputText value="#{Unidad_Operativa.zona}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Distrito"/>
+                                </f:facet>
+                                <h:outputText value="#{Unidad_Operativa.distrito}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Circuito"/>
+                                </f:facet>
+                                <h:outputText value="#{Unidad_Operativa.circuito}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Tipo Unidad Operativa"/>
+                                </f:facet>
+                                <h:outputText value="#{Unidad_Operativa.tipo_uo}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Institucion Sistema"/>
+                                </f:facet>
+                                <h:outputText value="#{Unidad_Operativa.institucion_sistema}"/>
+                            </p:column>
+                                <p:column exportable="false">
+                                <p:commandButton id="btnEditarUnidad_Operativa" icon="ui-icon-pencil"  title="Editar Unidad_Operativa" 
+                                                 oncomplete="wdlgEditarUnidad_Operativa.show()" 
+                                                 process="@this" update=":dlgEditarUnidad_Operativa, @form">                                   
+                                    <f:setPropertyActionListener value="#{Unidad_Operativa}" 
+                                                                 target="#{unidad_operativaControlador.unidad_operativaSel}"/>
+                                </p:commandButton>
+                                <p:commandButton id="btnEliminarUnidad_Operativa" icon="ui-icon-close"  title="Eliminar Unidad_Operativa"
+                                                 oncomplete="wdlgEliminarUnidad_Operativa.show()" 
+                                                 update=":dlgEliminarUnidad_Operativa">                                   
+                                    <f:setPropertyActionListener value="#{Unidad_Operativa}" 
+                                                                 target="#{unidad_operativaControlador.unidad_operativaSel}"/>
+                                </p:commandButton>
+                            </p:column>  
+                            <!-- PIE DE PAGINA -->
+                            <f:facet name="footer">  
+                                <p:commandButton id="btnNuevaUnidad_Operativa" value="Nueva" icon="ui-icon-newwin"
+                                                 oncomplete="wdlgNuevaUnidad_Operativa.show()" title="Nueva Unidad_Operativa"/>  
+                                <h:commandLink>
+                                    <img src="../../resources/images/excel.png" alt=""/>
+                                    <p:dataExporter type="xls" target="tblUnidad_Operativa" fileName="Unidad_Operativa" pageOnly="true" />
+                                </h:commandLink>
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/pdf.png" alt=""/>
+                                    <p:dataExporter type="pdf" target="tblUnidad_Operativa" fileName="Unidad_Operativa" pageOnly="true" />
+                                </h:commandLink>
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/csv.png" alt=""/>
+                                    <p:dataExporter type="csv" target="tblUnidad_Operativa" fileName="Unidad_Operativa" pageOnly="true" />
+                                </h:commandLink>
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/xml.png" alt=""/>
+                                    <p:dataExporter type="xml" target="tblUnidad_Operativa" fileName="Unidad_Operativa" pageOnly="true" />
+                                </h:commandLink>
+                            </f:facet>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="dialogos">
+
+                <p:dialog id="dlgNuevaUnidad_Operativa" header="Nueva Unidad_Operativa" widgetVar="wdlgNuevaUnidad_Operativa" 
+                          modal="true" closable="false" resizable="false"
+                          showEffect="clip" hideEffect="fold"> 
+                    <h:form id="frmNuevaUnidad_Operativa">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                        <p:panelGrid id="pngNuevaUnidad_Operativa" columns="2">
+                            <h:outputText value="Nombre Unidad Operativa:"/>
+                            <p:inputText value="#{unidad_operativaControlador.objUnidad_Operativa.nombre_uo}" title="ej: 390-Licto " 
+                                         required="true" requiredMessage="Ingrese el Nombre de la Unidad"/>
+                            <h:outputText value="Provincia:"/>
+                            <p:inputText value="#{unidad_operativaControlador.objUnidad_Operativa.provincia}" title="ej: 06-Chimborazo" 
+                                         required="true" requiredMessage="Ingrese la Provincia"/>
+                            <h:outputText value="Canton:"/>
+                            <p:inputText value="#{unidad_operativaControlador.objUnidad_Operativa.canton}" title="ej: 0601-Riobamba" 
+                                         required="true" requiredMessage="Ingrese el Canton"/>
+                            <h:outputText value="Parroquia:"/>
+                            <p:inputText value="#{unidad_operativaControlador.objUnidad_Operativa.parroquia}" title="ej: 060156-Licto " 
+                                         required="true" requiredMessage="Ingrese la Parroquia"/>
+                            <h:outputText value="Zona"/>
+                            <p:inputText value="#{unidad_operativaControlador.objUnidad_Operativa.zona}" title="ej: Z03-Zona 3  " 
+                                         required="true" requiredMessage="Ingrese la Zona"/>
+                            <h:outputText value="Distrito:"/>
+                            <p:inputText value="#{unidad_operativaControlador.objUnidad_Operativa.distrito}" title="ej: 06D01-" 
+                                         required="true" requiredMessage="Ingrese el Distrito"/>
+                            <h:outputText value="Circuito:"/>
+                            <p:inputText value="#{unidad_operativaControlador.objUnidad_Operativa.circuito}" title="ej: 06D01C17 " 
+                                         required="true" requiredMessage="Ingrese el Circuito"/>
+                            <h:outputText value="Tipo de Unidad:"/>
+                            <p:inputText value="#{unidad_operativaControlador.objUnidad_Operativa.tipo_uo}" title="ej: CS-Centro de Salud" 
+                                         required="true" requiredMessage="Ingrese el Tipo de Unidad"/>
+                            <h:outputText value="Institucion del Sistema:"/>
+                            <p:inputText value="#{unidad_operativaControlador.objUnidad_Operativa.institucion_sistema}" title="ej: 1 " 
+                                         required="true" requiredMessage="Ingrese la Institucion del Sistema"/>
+                      
+                        </p:panelGrid>
+                        <p:commandButton value="Aceptar" action="#{unidad_operativaControlador.insertarUnidad_Operativa()}" 
+                                         update=":frmpaciente:pnlUnidad_Operativa"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgNuevoUnidad_Operativa.hide()" type="reset"/>
+                    </h:form>
+                </p:dialog>
+                <p:dialog modal="true" widgetVar="dlgStatus" header="Procesando" draggable="false" closable="false" 
+                          resizable="false"> 
+                    <p:graphicImage value="/resources/images/ajaxloadingbar.gif" />  
+                </p:dialog>
+                
+<!-- EDITAR PACIENTE-->
+
+                <p:dialog id="dlgEditarPaciente" header="Editar Paciente" widgetVar="wdlgEditarPaciente" 
+                          modal="true" 
+                          closable="false" resizable="false" showEffect="clip" hideEffect="fold">  
+                    <h:form id="frmEditarPaciente">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                        <p:messages id="messages" autoUpdate="true"/>  
+                        <p:panelGrid id="pngEditarPaciente" columns="2">
+                            <h:outputText value="Nombre Unidad Operativa:"/>
+                            <p:inputText value="#{unidad_operativaControlador.Sel.Unidad_Operativa.nombre_uo}" title="ej: 390-Licto " 
+                                         required="true" requiredMessage="Ingrese el Nombre de la Unidad"/>
+                            <h:outputText value="Provincia:"/>
+                            <p:inputText value="#{unidad_operativaControlador.Sel.Unidad_Operativa.provincia}" title="ej: 06-Chimborazo" 
+                                         required="true" requiredMessage="Ingrese la Provincia"/>
+                            <h:outputText value="Canton:"/>
+                            <p:inputText value="#{unidad_operativaControlador.Sel.Unidad_Operativa.canton}" title="ej: 0601-Riobamba" 
+                                         required="true" requiredMessage="Ingrese el Canton"/>
+                            <h:outputText value="Parroquia:"/>
+                            <p:inputText value="#{unidad_operativaControlador.Sel.Unidad_Operativa.parroquia}" title="ej: 060156-Licto " 
+                                         required="true" requiredMessage="Ingrese la Parroquia"/>
+                            <h:outputText value="Zona"/>
+                            <p:inputText value="#{unidad_operativaControlador.Sel.Unidad_Operativa.zona}" title="ej: Z03-Zona 3  " 
+                                         required="true" requiredMessage="Ingrese la Zona"/>
+                            <h:outputText value="Distrito:"/>
+                            <p:inputText value="#{unidad_operativaControlador.Sel.Unidad_Operativa.distrito}" title="ej: 06D01-" 
+                                         required="true" requiredMessage="Ingrese el Distrito"/>
+                            <h:outputText value="Circuito:"/>
+                            <p:inputText value="#{unidad_operativaControlador.Sel.Unidad_Operativa.circuito}" title="ej: 06D01C17 " 
+                                         required="true" requiredMessage="Ingrese el Circuito"/>
+                            <h:outputText value="Tipo de Unidad:"/>
+                            <p:inputText value="#{unidad_operativaControlador.Sel.Unidad_Operativa.tipo_uo}" title="ej: CS-Centro de Salud" 
+                                         required="true" requiredMessage="Ingrese el Tipo de Unidad"/>
+                            <h:outputText value="Institucion del Sistema:"/>
+                            <p:inputText value="#{unidad_operativaControlador.Sel.Unidad_Operativa.institucion_sistema}" title="ej: 1 " 
+                                         required="true" requiredMessage="Ingrese la Institucion del Sistema"/>
+                        </p:panelGrid>
+                        <p:commandButton value="Aceptar" action="#{unidad_operativaControlador.editarUnidad_Operativa()}" 
+                                         update=":frmpaciente:pnlUnidad_Operativa"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgEditarUnidad_Operativa.hide()" type="reset"/>
+                         </h:form> 
+                </p:dialog>
+             <!-- ELIMINAR PACIENTE-->
+                <p:dialog id="dlgEliminarUnidad_Operativa" header="Eliminar Unidad_Operativa" widgetVar="wdlgEliminarUnidad_Operativa" 
+                          modal="true" closable="false" resizable="false" showEffect="clip" hideEffect="fold">  
+                    <h:form id="frmEliminarUnidad_Operativa">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                        <h:outputText value="¿Desea Eliminar a esta Unidad Operativa?"/>
+                        <p:panelGrid id="pngEliminarUnidad_Operativa" columns="2">                         
+                            <h:outputText value="Apellidos:"/>
+                            <p:inputText value="#{pacienteControlador.Sel.Paciente.apellidos}" title="ej: Yagos Guaman " 
+                                         required="true" requiredMessage="Ingrese los Apellidos" disabled="true"/>
+                            <h:outputText value="Nombre Unidad Operativa:"/>
+                            <p:inputText value="#{unidad_operativaControlador.Sel.Unidad_Operativa.nombre_uo}" title="ej: 390-Licto " 
+                                         required="true" requiredMessage="Ingrese el Nombre de la Unidad" disabled="true"/>
+                            <h:outputText value="Provincia:"/>
+                            <p:inputText value="#{unidad_operativaControlador.Sel.Unidad_Operativa.provincia}" title="ej: 06-Chimborazo" 
+                                         required="true" requiredMessage="Ingrese la Provincia" disabled="true"/>
+                            <h:outputText value="Canton:"/>
+                            <p:inputText value="#{unidad_operativaControlador.Sel.Unidad_Operativa.canton}" title="ej: 0601-Riobamba" 
+                                         required="true" requiredMessage="Ingrese el Canton" disabled="true"/>
+                            <h:outputText value="Parroquia:"/>
+                            <p:inputText value="#{unidad_operativaControlador.Sel.Unidad_Operativa.parroquia}" title="ej: 060156-Licto " 
+                                         required="true" requiredMessage="Ingrese la Parroquia" disabled="true"/>
+                            <h:outputText value="Zona"/>
+                            <p:inputText value="#{unidad_operativaControlador.Sel.Unidad_Operativa.zona}" title="ej: Z03-Zona 3  " 
+                                         required="true" requiredMessage="Ingrese la Zona" disabled="true"/>
+                            <h:outputText value="Distrito:"/>
+                            <p:inputText value="#{unidad_operativaControlador.Sel.Unidad_Operativa.distrito}" title="ej: 06D01-" 
+                                         required="true" requiredMessage="Ingrese el Distrito" disabled="true"/>
+                            <h:outputText value="Circuito:"/>
+                            <p:inputText value="#{unidad_operativaControlador.Sel.Unidad_Operativa.circuito}" title="ej: 06D01C17 " 
+                                         required="true" requiredMessage="Ingrese el Circuito" disabled="true"/>
+                            <h:outputText value="Tipo de Unidad:"/>
+                            <p:inputText value="#{unidad_operativaControlador.Sel.Unidad_Operativa.tipo_uo}" title="ej: CS-Centro de Salud" 
+                                         required="true" requiredMessage="Ingrese el Tipo de Unidad" disabled="true"/>
+                            <h:outputText value="Institucion del Sistema:"/>
+                            <p:inputText value="#{unidad_operativaControlador.Sel.Unidad_Operativa.institucion_sistema}" title="ej: 1 " 
+                                         required="true" requiredMessage="Ingrese la Institucion del Sistema" disabled="true"/>
+                             </p:panelGrid>
+                        <p:commandButton value="Aceptar" action="#{unidad_operativaControlador.eliminarUnidad_Operativa()}" 
+                                         update=":frmunidad_operativa:pnlUnidad_Operativa"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgEliminarUnidad_Operativa.hide()" type="reset"/>
+                    </h:form> 
+                </p:dialog>
+                  <p:dialog modal="true" widgetVar="dlgStatus" header="Procesando" draggable="false" closable="false" 
+                          resizable="false"> 
+                    <p:graphicImage value="/resources/images/ajaxloadingbar.gif" />  
+                </p:dialog>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+
