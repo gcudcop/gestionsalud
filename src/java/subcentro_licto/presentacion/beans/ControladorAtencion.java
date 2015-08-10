@@ -20,8 +20,8 @@ import subcentro_licto.logica.funciones.FAtencion;
 @ManagedBean
 @RequestScoped
 public class ControladorAtencion {
-    
-  /**
+
+    /**
      * Creates a new instance of ATENCION
      */
     private Atencion objAtencion;
@@ -29,7 +29,7 @@ public class ControladorAtencion {
     private ArrayList<Atencion> lstAtencion;
     private boolean mostrarActualizar;
     private ArrayList<Atencion> lst;
-   
+
     public Atencion getObjAtencion() {
         return objAtencion;
     }
@@ -37,7 +37,8 @@ public class ControladorAtencion {
     public void setObjAtencion(Atencion objAtencion) {
         this.objAtencion = objAtencion;
     }
-     public Atencion getAtencionSel() {
+
+    public Atencion getAtencionSel() {
         return atencionSel;
     }
 
@@ -62,16 +63,21 @@ public class ControladorAtencion {
     }
 
     public ControladorAtencion() {
+        this.reinit();
     }
 
     public void reinit() {
-
+        this.lst = new ArrayList<Atencion>();
+        this.lstAtencion = new ArrayList<Atencion>();
+        this.atencionSel = new Atencion();
+        this.obtnerAtencion();
     }
- public void obtnerAtencion() {
+
+    public void obtnerAtencion() {
         try {
-            this.lst = FAtencion.ObtenerAtencion();
+            this.lstAtencion = FAtencion.ObtenerAtencion();
             this.atencionSel = lstAtencion.get(0);
-            System.out.println(lstAtencion.get(0).getId_Atencion());
+            System.out.println(lstAtencion.get(0).getId_atencion());
         } catch (Exception e) {
             Util.addErrorMessage("public void obtnerAtencion  dice: " + e.getMessage());
             System.out.println("public void obtnerAtencion dice: " + e.getMessage());
@@ -91,9 +97,11 @@ public class ControladorAtencion {
             System.out.println("private void insertarAtencion dice: " + e.getMessage());
         }
     }
-public void editarAtencion() {
-        try {
-            atencionSel.setid_atencion(atencionSel.getId_Atencion());
+    
+    
+    public void editarAtencion() {
+        try {            
+            atencionSel.setId_atencion(atencionSel.getId_atencion());
             if (FAtencion.EditarAtencion(atencionSel)) {
                 atencionSel = new Atencion();
                 mostrarActualizar = false;
@@ -110,18 +118,19 @@ public void editarAtencion() {
             System.out.println("private void editarAtencion dice: " + e.getMessage());
         }
     }
- public void eliminarAtencion(){
-        try{
-                if(FAtencion.eliminarAtencion((int)atencionSel.getId_Atencion())){
-                    Util.addErrorMessage("Error al eliminar la información.");
-                    System.out.println("public void eliminarAtencion dice: Error al eliminar la información");
-                }else {
-                    this.reinit();
-                    DefaultRequestContext.getCurrentInstance().execute("wdlgEliminarAtencion.hide()");
-                    Util.addSuccessMessage("Información eliminada.");
-                    System.out.println("public void eliminarAtencion dice: Información eliminada.");
-                }
-        }catch(Exception e) {
+    
+    public void eliminarAtencion() {
+        try {
+            if (FAtencion.eliminarAtencion((int) atencionSel.getId_atencion())) {
+                Util.addErrorMessage("Error al eliminar la información.");
+                System.out.println("public void eliminarAtencion dice: Error al eliminar la información");
+            } else {
+                this.reinit();
+                DefaultRequestContext.getCurrentInstance().execute("wdlgEliminarAtencion.hide()");
+                Util.addSuccessMessage("Información eliminada.");
+                System.out.println("public void eliminarAtencion dice: Información eliminada.");
+            }
+        } catch (Exception e) {
             Util.addErrorMessage("private void eliminarAtencion dice: " + e.getMessage());
             System.out.println("private void eliminarAtencion dice: " + e.getMessage());
         }

@@ -28,13 +28,13 @@ and open the template in the editor.
                     <p:panel id="pnlMedicamento">
                         <p:dataTable  id="tblMedicamento" value="#{controladorMedicamento.lstMedicamento}" 
                                       var="Medicamento" 
-                                      paginator="true" rows="10" rowKey="#{Medicamento.id_medicamento}" selectionMode="single" 
+                                      paginator="true" rows="10" rowKey="#{Medicamento.id_Medicamento}" selectionMode="single" 
                                       selection="#{controladorMedicamento.medicamentoSel}">
                             <p:column >
                                 <f:facet name="header">
                                     <h:outputText value="Codigo Medicamento"/>
                                 </f:facet>
-                                <h:outputText value="#{Medicamento.codigo_medicamento}"/>
+                                <h:outputText value="#{Medicamento.codigo_Medicamento}"/>
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
@@ -46,7 +46,7 @@ and open the template in the editor.
                                 <f:facet name="header">
                                     <h:outputText value="Forma Farmaceutica"/>
                                 </f:facet>
-                                <h:outputText value="#{Medicamento.forma_farmaceutica}"/>
+                                <h:outputText value="#{Medicamento.forma_Farmaceutica}"/>
                             </p:column>
                             <p:column>
                                 <f:facet name="header">

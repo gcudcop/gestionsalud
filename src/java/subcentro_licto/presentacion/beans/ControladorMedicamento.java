@@ -65,13 +65,20 @@ public class ControladorMedicamento {
     }
 
     public void reinit() {
+        this.lstMedicamento=new ArrayList<Medicamento>();
+        this.lst=new ArrayList<Medicamento>();
+        this.objMedicamento=new Medicamento();
+        this.medicamentoSel=new Medicamento();
+        this.obtnerMedicamento();
+        
 
     }
  public void obtnerMedicamento() {
         try {
-            this.lst = FMedicamento.ObtenerMedicamento();
+            this.lstMedicamento = FMedicamento.ObtenerMedicamento();
             this.medicamentoSel = lstMedicamento.get(0);
-            System.out.println(lstMedicamento.get(0).getId_Medicamento());
+            //System.out.println(lstMedicamento.get(0).getId_Medicamento()));
+            
         } catch (Exception e) {
             Util.addErrorMessage("public void obtnerMedicamento  dice: " + e.getMessage());
             System.out.println("public void obtnerMedicamento dice: " + e.getMessage());
