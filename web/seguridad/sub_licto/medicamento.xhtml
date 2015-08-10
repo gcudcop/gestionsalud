@@ -40,7 +40,7 @@ and open the template in the editor.
                                 <f:facet name="header">
                                     <h:outputText value="Nombre Medicamento"/>
                                 </f:facet>
-                                <h:outputText value="#{Medicamento.nombre_medicamento}"/>
+                                <h:outputText value="#{Medicamento.nombre_Medicamento}"/>
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
@@ -105,23 +105,23 @@ and open the template in the editor.
                         <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
                         <p:panelGrid id="pngNuevoMedicamento" columns="2">
                             <h:outputText value="Codigo Medicamento:"/>
-                            <p:inputText value="#{medicamentoControlador.objMedicamento.codigo_medicamento}" title="ej:A02BA02 " 
+                            <p:inputText value="#{controladorMedicamento.medicamentoSel.codigo_Medicamento}" title="ej:A02BA02 " 
                                          required="true" requiredMessage="Ingrese el codigo del Medicamento"/>
                             <h:outputText value="Nombre Medicamento:"/>
-                            <p:inputText value="#{medicamentoControlador.objMedicamento.nombre_medicamento}" title="ej: Omeprazol" 
+                            <p:inputText value="#{controladorMedicamento.medicamentoSel.nombre_Medicamento}" title="ej: Omeprazol" 
                                          required="true" requiredMessage="Ingrese el Nombre del Medicamento"/>
                             <h:outputText value="Forma Farmaceutica:"/>
-                            <p:inputText value="#{medicamentoControlador.objMedicamento.forma_farmaceutica}" title="ej: Solido Oral" 
+                            <p:inputText value="#{controladorMedicamento.medicamentoSel.forma_Farmaceutica}" title="ej: Solido Oral" 
                                          required="true" requiredMessage="Ingrese su Forma Farmaceutica"/>
                             <h:outputText value="Concentracion:"/>
-                            <p:inputText value="#{medicamentoControlador.objMedicamento.concentracion}" title="ej: 20mg" 
+                            <p:inputText value="#{controladorMedicamento.medicamentoSel.concentracion}" title="ej: 20mg" 
                                          required="true" requiredMessage="Ingrese la Concentracion"/>                     
                         </p:panelGrid>
                         
-                        <p:commandButton value="Aceptar" action="#{medicamentoControlador.insertarMedicamento()}" 
+                         <p:commandButton value="Aceptar" action="#{MedicamentoControlador.insertarMedicamento()}" 
                                          update=":frmmedicamento:pnlMedicamento"/>
                         <p:commandButton value="Cancelar" onclick="wdlgNuevoMedicamento.hide()" type="reset"/>
-                    </h:form>
+                    </h:form> 
                 </p:dialog>
                 
                 <p:dialog modal="true" widgetVar="dlgStatus" header="Procesando" draggable="false" closable="false" 
@@ -139,16 +139,16 @@ and open the template in the editor.
                         <p:messages id="messages" autoUpdate="true"/>  
                         <p:panelGrid id="pngEditarMedicamento" columns="2"> 
                              <h:outputText value="Codigo Medicamento:"/>
-                            <p:inputText value="#{medicamentoControlador.Sel.Medicamento.codigo_medicamento}" title="ej:A02BA02 " 
+                             <p:inputText value="#{controladorMedicamento.medicamentoSel.codigo_Medicamento}" title="ej:A02BA02 " 
                                          required="true" requiredMessage="Ingrese el codigo del Medicamento"/>
                             <h:outputText value="Nombre Medicamento:"/>
-                            <p:inputText value="#{medicamentoControlador.Sel.Medicamento.nombre_medicamento}" title="ej: Omeprazol" 
+                            <p:inputText value="#{controladorMedicamento.medicamentoSel.nombre_Medicamento}" title="ej: Omeprazol" 
                                          required="true" requiredMessage="Ingrese el Nombre del Medicamento"/>
                             <h:outputText value="Forma Farmaceutica:"/>
-                            <p:inputText value="#{medicamentoControlador.Sel.Medicamento.forma_farmaceutica}" title="ej: Solido Oral" 
+                            <p:inputText value="#{controladorMedicamento.medicamentoSel.forma_Farmaceutica}" title="ej: Solido Oral" 
                                          required="true" requiredMessage="Ingrese su Forma Farmaceutica"/>
                             <h:outputText value="Concentracion:"/>
-                            <p:inputText value="#{medicamentoControlador.Sel.Medicamento.concentracion}" title="ej: 20mg" 
+                            <p:inputText value="#{controladorMedicamento.medicamentoSel.concentracion}" title="ej: 20mg" 
                                          required="true" requiredMessage="Ingrese la Concentracion"/>  
                         </p:panelGrid>
                         <p:commandButton value="Aceptar" action="#{medicamentoControlador.editarMedicamento()}" 
