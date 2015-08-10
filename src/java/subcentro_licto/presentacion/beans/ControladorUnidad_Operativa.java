@@ -12,6 +12,7 @@ import recursos.Util;
 import subcentro_licto.logica.clases.Unidad_Operativa;
 import subcentro_licto.logica.funciones.FUnidad_Operativa;
 import org.primefaces.context.DefaultRequestContext;
+
 /**
  *
  * @author Mari
@@ -19,7 +20,8 @@ import org.primefaces.context.DefaultRequestContext;
 @ManagedBean
 @RequestScoped
 public class ControladorUnidad_Operativa {
-  /**
+
+    /**
      * Creates a new instance of Unidad Operativa
      */
     private Unidad_Operativa objUnidad_Operativa;
@@ -27,7 +29,7 @@ public class ControladorUnidad_Operativa {
     private ArrayList<Unidad_Operativa> lstUnidad_Operativa;
     private boolean mostrarActualizar;
     private ArrayList<Unidad_Operativa> lst;
-   
+
     public Unidad_Operativa getObjUnidad_Operativa() {
         return objUnidad_Operativa;
     }
@@ -35,7 +37,8 @@ public class ControladorUnidad_Operativa {
     public void setObjUnidad_Operativa(Unidad_Operativa objUnidad_Operativa) {
         this.objUnidad_Operativa = objUnidad_Operativa;
     }
-     public Unidad_Operativa getUnidad_OperativaSel() {
+
+    public Unidad_Operativa getUnidad_OperativaSel() {
         return unidad_operativaSel;
     }
 
@@ -65,7 +68,8 @@ public class ControladorUnidad_Operativa {
     public void reinit() {
 
     }
- public void obtnerUnidad_Operativa() {
+
+    public void obtnerUnidad_Operativa() {
         try {
             this.lst = FUnidad_Operativa.ObtenerUnidad_Operativa();
             this.unidad_operativaSel = lstUnidad_Operativa.get(0);
@@ -89,7 +93,8 @@ public class ControladorUnidad_Operativa {
             System.out.println("private void insertarUnidad Operativa dice: " + e.getMessage());
         }
     }
-public void editarUnidad_Operativa() {
+
+    public void editarUnidad_Operativa() {
         try {
             unidad_operativaSel.setid_uo(unidad_operativaSel.getId_UO());
             if (FUnidad_Operativa.EditarUnidad_Operativa(unidad_operativaSel)) {
@@ -108,18 +113,19 @@ public void editarUnidad_Operativa() {
             System.out.println("private void editarUnidad Operativa dice: " + e.getMessage());
         }
     }
- public void eliminarUnidad_Operativa(){
-        try{
-                if(FUnidad_Operativa.eliminarUnidad_Operativa((int)unidad_operativaSel.getId_UO())){
-                    Util.addErrorMessage("Error al eliminar la información.");
-                    System.out.println("public void eliminarUnidad Operativa dice: Error al eliminar la información");
-                }else {
-                    this.reinit();
-                    DefaultRequestContext.getCurrentInstance().execute("wdlgEliminarUnidad Operativa.hide()");
-                    Util.addSuccessMessage("Información eliminada.");
-                    System.out.println("public void eliminarUnidad Operativa dice: Información eliminada.");
-                }
-        }catch(Exception e) {
+
+    public void eliminarUnidad_Operativa() {
+        try {
+            if (FUnidad_Operativa.eliminarUnidad_Operativa((int) unidad_operativaSel.getId_UO())) {
+                Util.addErrorMessage("Error al eliminar la información.");
+                System.out.println("public void eliminarUnidad Operativa dice: Error al eliminar la información");
+            } else {
+                this.reinit();
+                DefaultRequestContext.getCurrentInstance().execute("wdlgEliminarUnidad Operativa.hide()");
+                Util.addSuccessMessage("Información eliminada.");
+                System.out.println("public void eliminarUnidad Operativa dice: Información eliminada.");
+            }
+        } catch (Exception e) {
             Util.addErrorMessage("private void eliminarUnidad Operativa dice: " + e.getMessage());
             System.out.println("private void eliminarUnidad Operativa dice: " + e.getMessage());
         }

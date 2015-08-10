@@ -98,7 +98,6 @@ and open the template in the editor.
             </ui:define>
 
             <ui:define name="dialogos">
-
                 <p:dialog id="dlgNuevoMedicamento" header="Nuevo Medicamento" widgetVar="wdlgNuevo Medicamento" 
                           modal="true" closable="false" resizable="false"
                           showEffect="clip" hideEffect="fold"> 
@@ -118,11 +117,13 @@ and open the template in the editor.
                             <p:inputText value="#{medicamentoControlador.objMedicamento.concentracion}" title="ej: 20mg" 
                                          required="true" requiredMessage="Ingrese la Concentracion"/>                     
                         </p:panelGrid>
+                        
                         <p:commandButton value="Aceptar" action="#{medicamentoControlador.insertarMedicamento()}" 
-                                         update=":frmpaciente:pnlMedicamento"/>
+                                         update=":frmmedicamento:pnlMedicamento"/>
                         <p:commandButton value="Cancelar" onclick="wdlgNuevoMedicamento.hide()" type="reset"/>
                     </h:form>
                 </p:dialog>
+                
                 <p:dialog modal="true" widgetVar="dlgStatus" header="Procesando" draggable="false" closable="false" 
                           resizable="false"> 
                     <p:graphicImage value="/resources/images/ajaxloadingbar.gif" />  
@@ -130,7 +131,7 @@ and open the template in the editor.
                 
 <!-- EDITAR PACIENTE-->
 
-                <p:dialog id="dlgEditarPaciente" header="Editar Medicamento" widgetVar="wdlgEditarMedicamento" 
+                <p:dialog id="dlgEditarMedicamento" header="Editar Medicamento" widgetVar="wdlgEditarMedicamento" 
                           modal="true" 
                           closable="false" resizable="false" showEffect="clip" hideEffect="fold">  
                     <h:form id="frmEditarMedicamento">
@@ -187,4 +188,4 @@ and open the template in the editor.
             </ui:define>
         </ui:composition>
     </h:body>
-
+</html>
