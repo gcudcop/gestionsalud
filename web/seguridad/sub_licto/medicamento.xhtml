@@ -10,13 +10,11 @@ and open the template in the editor.
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-          
-  <h:head>
-        
+
+    <h:head>
         <title>
             <ui:define name="Medicamento"> **Gestión de Medicamentos**</ui:define>
         </title>
-
     </h:head>
     <h:body>
         <ui:composition template="../../templates/plantillaInternaCenter.xhtml">
@@ -26,52 +24,57 @@ and open the template in the editor.
                 <h:form id="frmmedicamento">
                     <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
                     <p:panel id="pnlMedicamento">
-                        <p:dataTable  id="tblMedicamento" value="#{controladorMedicamento.lstMedicamento}" 
-                                      var="Medicamento" 
-                                      paginator="true" rows="10" rowKey="#{Medicamento.id_Medicamento}" selectionMode="single" 
-                                      selection="#{controladorMedicamento.medicamentoSel}">
-                            <p:column >
-                                <f:facet name="header">
-                                    <h:outputText value="Codigo Medicamento"/>
-                                </f:facet>
+                        <p:dataTable id="tblEstudiante" value="#{controladorMedicamento.lstMedicamento}" 
+                                     var="Medicamento" 
+                                     paginator="true" rows="10" rowKey="#{Medicamento.id_Medicamento}" selectionMode="single" 
+                                     selection="#{controladorMedicamento.medicamentoSel}">
+                            <p:column filterBy="#{Medicamento.id_Medicamento}" filterMatchMode="startsWith" 
+                                      sortBy="#{Medicamento.id_Medicamento}" headerText="Id Medicamento">
+                                <h:outputText value="#{Medicamento.id_Medicamento}"/>
+                            </p:column>
+
+                            <p:column filterBy="#{Medicamento.codigo_Medicamento}" filterMatchMode="startsWith" 
+                                      sortBy="#{Medicamento.codigo_Medicamento}" headerText="Codigo Medicamento">
                                 <h:outputText value="#{Medicamento.codigo_Medicamento}"/>
                             </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Nombre Medicamento"/>
-                                </f:facet>
+
+                            <p:column filterBy="#{Medicamento.nombre_Medicamento}" filterMatchMode="startsWith" 
+                                      sortBy="#{Medicamento.nombre_Medicamento}" headerText="Nombre Medicamento">
                                 <h:outputText value="#{Medicamento.nombre_Medicamento}"/>
                             </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Forma Farmaceutica"/>
-                                </f:facet>
+
+                            <p:column filterBy="#{Medicamento.forma_Farmaceutica}" filterMatchMode="startsWith" 
+                                      sortBy="#{Medicamento.forma_Farmaceutica}" headerText="Forma Farmacéutica">
                                 <h:outputText value="#{Medicamento.forma_Farmaceutica}"/>
                             </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Concentracion"/>
-                                </f:facet>
+                            <p:column filterBy="#{Medicamento.concentracion}" filterMatchMode="startsWith" 
+                                      sortBy="#{Medicamento.concentracion}" headerText="Concentración">
                                 <h:outputText value="#{Medicamento.concentracion}"/>
                             </p:column>
-                                <p:column exportable="false">
-                                <p:commandButton id="btnEditarMedicamento" icon="ui-icon-pencil"  title="Editar Medicamento" 
+
+
+                            <p:column exportable="false">
+                                <p:commandButton id="btnEditarMedicamento" icon="ui-icon-pencil"  title="Editar Estudiante" 
                                                  oncomplete="wdlgEditarMedicamento.show()" 
                                                  process="@this" update=":dlgEditarMedicamento, @form">                                   
                                     <f:setPropertyActionListener value="#{Medicamento}" 
-                                                                 target="#{medicamentoControlador.meicamentoSel}"/>
+                                                                 target="#{controladorMedicamento.medicamentoSel}"/>
                                 </p:commandButton>
-                                <p:commandButton id="btnEliminarMedicamento" icon="ui-icon-close"  title="Eliminar Medicamento"
+
+
+                                <p:commandButton id="btnEliminarMedicamento" icon="ui-icon-close"  title="Eliminar Estudiante"
                                                  oncomplete="wdlgEliminarMedicamento.show()" 
                                                  update=":dlgEliminarMedicamento">                                   
                                     <f:setPropertyActionListener value="#{Medicamento}" 
-                                                                 target="#{medicamentoControlador.medicamentoSel}"/>
+                                                                 target="#{controladorMedicamento.medicamentoSel}"/>
                                 </p:commandButton>
-                            </p:column>  
-                            <!-- PIE DE PAGINA -->
+                            </p:column>
+
+
                             <f:facet name="footer">  
-                                <p:commandButton id="btnNuevaMedicamento" value="Nueva" icon="ui-icon-newwin"
+                                <p:commandButton id="btnNuevoMedicamento" value="Nuevo" icon="ui-icon-newwin"
                                                  oncomplete="wdlgNuevoMedicamento.show()" title="Nuevo Medicamento"/>  
+
                                 <h:commandLink>
                                     <img src="../../resources/images/excel.png" alt=""/>
                                     <p:dataExporter type="xls" target="tblMedicamento" fileName="Medicamento" pageOnly="true" />
@@ -92,18 +95,52 @@ and open the template in the editor.
                                     <p:dataExporter type="xml" target="tblMedicamento" fileName="Medicamento" pageOnly="true" />
                                 </h:commandLink>
                             </f:facet>
+                            
                         </p:dataTable>
-                    </p:panel>
+                    </p:panel>               
+
                 </h:form>
             </ui:define>
 
             <ui:define name="dialogos">
-                <p:dialog id="dlgNuevoMedicamento" header="Nuevo Medicamento" widgetVar="wdlgNuevo Medicamento" 
+
+                <p:dialog id="dlgNuevoMedicamento" header="Nuevo Medicamento" widgetVar="wdlgNuevoMedicamento" 
                           modal="true" closable="false" resizable="false"
                           showEffect="clip" hideEffect="fold"> 
                     <h:form id="frmNuevoMedicamento">
                         <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
                         <p:panelGrid id="pngNuevoMedicamento" columns="2">
+                            <h:outputText value="Codigo Medicamento:"/>
+                            <p:inputText value="#{controladorMedicamento.objMedicamento.codigo_Medicamento}" title="ej:A02BA02 " 
+                                         required="true" requiredMessage="Ingrese el codigo del Medicamento"/>
+                            <h:outputText value="Nombre Medicamento:"/>
+                            <p:inputText value="#{controladorMedicamento.objMedicamento.nombre_Medicamento}" title="ej: Omeprazol" 
+                                         required="true" requiredMessage="Ingrese el Nombre del Medicamento"/>
+                            <h:outputText value="Forma Farmaceutica:"/>
+                            <p:inputText value="#{controladorMedicamento.objMedicamento.forma_Farmaceutica}" title="ej: Solido Oral" 
+                                         required="true" requiredMessage="Ingrese su Forma Farmaceutica"/>
+                            <h:outputText value="Concentracion:"/>
+                            <p:inputText value="#{controladorMedicamento.objMedicamento.concentracion}" title="ej: 20mg" 
+                                         required="true" requiredMessage="Ingrese la Concentracion"/>                     
+                        </p:panelGrid>
+
+                        <p:commandButton value="Aceptar" action="#{controladorMedicamento.insertarMedicamento()}" 
+                                         update=":frmmedicamento:pnlMedicamento"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgNuevoMedicamento.hide()" type="reset"
+                                         update=":frmmedicamento:pnlMedicamento"/>
+                    </h:form> 
+                </p:dialog>
+
+
+                <!-- EDITAR PACIENTE-->
+
+                <p:dialog id="dlgEditarMedicamento" header="Editar Medicamento" widgetVar="wdlgEditarMedicamento" 
+                          modal="true" 
+                          closable="false" resizable="false" showEffect="clip" hideEffect="fold">  
+                    <h:form id="frmEditarMedicamento">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                        <p:messages id="messages" autoUpdate="true"/>  
+                        <p:panelGrid id="pngEditarMedicamento" columns="2"> 
                             <h:outputText value="Codigo Medicamento:"/>
                             <p:inputText value="#{controladorMedicamento.medicamentoSel.codigo_Medicamento}" title="ej:A02BA02 " 
                                          required="true" requiredMessage="Ingrese el codigo del Medicamento"/>
@@ -115,44 +152,15 @@ and open the template in the editor.
                                          required="true" requiredMessage="Ingrese su Forma Farmaceutica"/>
                             <h:outputText value="Concentracion:"/>
                             <p:inputText value="#{controladorMedicamento.medicamentoSel.concentracion}" title="ej: 20mg" 
-                                         required="true" requiredMessage="Ingrese la Concentracion"/>                     
+                                         required="true" requiredMessage="Ingrese la Concentracion"/>  
                         </p:panelGrid>
-                        
-                         <p:commandButton value="Aceptar" action="#{MedicamentoControlador.insertarMedicamento()}" 
+                        <p:commandButton value="Aceptar" action="#{controladorMedicamento.editarMedicamento()}" 
                                          update=":frmmedicamento:pnlMedicamento"/>
-                        <p:commandButton value="Cancelar" onclick="wdlgNuevoMedicamento.hide()" type="reset"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgEditarMedicamento.hide()" type="reset"/>
                     </h:form> 
                 </p:dialog>
                 
-                
-<!-- EDITAR PACIENTE-->
-
-                <p:dialog id="dlgEditarMedicamento" header="Editar Medicamento" widgetVar="wdlgEditarMedicamento" 
-                          modal="true" 
-                          closable="false" resizable="false" showEffect="clip" hideEffect="fold">  
-                    <h:form id="frmEditarMedicamento">
-                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
-                        <p:messages id="messages" autoUpdate="true"/>  
-                        <p:panelGrid id="pngEditarMedicamento" columns="2"> 
-                             <h:outputText value="Codigo Medicamento:"/>
-                             <p:inputText value="#{controladorMedicamento.medicamentoSel.codigo_Medicamento}" title="ej:A02BA02 " 
-                                         required="true" requiredMessage="Ingrese el codigo del Medicamento"/>
-                            <h:outputText value="Nombre Medicamento:"/>
-                            <p:inputText value="#{controladorMedicamento.medicamentoSel.nombre_Medicamento}" title="ej: Omeprazol" 
-                                         required="true" requiredMessage="Ingrese el Nombre del Medicamento"/>
-                            <h:outputText value="Forma Farmaceutica:"/>
-                            <p:inputText value="#{controladorMedicamento.medicamentoSel.forma_Farmaceutica}" title="ej: Solido Oral" 
-                                         required="true" requiredMessage="Ingrese su Forma Farmaceutica"/>
-                            <h:outputText value="Concentracion:"/>
-                            <p:inputText value="#{controladorMedicamento.medicamentoSel.concentracion}" title="ej: 20mg" 
-                                         required="true" requiredMessage="Ingrese la Concentracion"/>  
-                        </p:panelGrid>
-                        <p:commandButton value="Aceptar" action="#{medicamentoControlador.editarMedicamento()}" 
-                                         update=":frmmedicamento:pnlMedicamento"/>
-                        <p:commandButton value="Cancelar" onclick="wdlgEditarMedicamento.hide()" type="reset"/>
-                         </h:form> 
-                </p:dialog>
-             <!-- ELIMINAR PACIENTE-->
+                <!-- ELIMINAR MEDICAMENTO-->
                 <p:dialog id="dlgEliminarMedicamento" header="Eliminar Medicamento" widgetVar="wdlgEliminarMedicamento" 
                           modal="true" closable="false" resizable="false" showEffect="clip" hideEffect="fold">  
                     <h:form id="frmEliminarMedicamento">
@@ -160,28 +168,34 @@ and open the template in the editor.
                         <h:outputText value="¿Desea Eliminar el Medicamento?"/>
                         <p:panelGrid id="pngEliminarMedicamento" columns="2">                         
                             <h:outputText value="Codigo Medicamento:"/>
-                            <p:inputText value="#{medicamentoControlador.Sel.Medicamento.codigo_medicamento}" title="ej:A02BA02 " 
+                            <p:inputText value="#{controladorMedicamento.medicamentoSel.codigo_Medicamento}" title="ej:A02BA02 " 
                                          required="true" requiredMessage="Ingrese el codigo del Medicamento" disabled="true"/>
                             <h:outputText value="Nombre Medicamento:"/>
-                            <p:inputText value="#{medicamentoControlador.Sel.Medicamento.nombre_medicamento}" title="ej: Omeprazol" 
+                            <p:inputText value="#{controladorMedicamento.medicamentoSel.nombre_Medicamento}" title="ej: Omeprazol" 
                                          required="true" requiredMessage="Ingrese el Nombre del Medicamento" disabled="true"/>
                             <h:outputText value="Forma Farmaceutica:"/>
-                            <p:inputText value="#{medicamentoControlador.Sel.Medicamento.forma_farmaceutica}" title="ej: Solido Oral" 
+                            <p:inputText value="#{controladorMedicamento.medicamentoSel.nombre_Medicamento}" title="ej: Solido Oral" 
                                          required="true" requiredMessage="Ingrese su Forma Farmaceutica" disabled="true"/>
                             <h:outputText value="Concentracion:"/>
-                            <p:inputText value="#{medicamentoControlador.Sel.Medicamento.concentracion}" title="ej: 20mg" 
+                            <p:inputText value="#{controladorMedicamento.medicamentoSel.concentracion}" title="ej: 20mg" 
                                          required="true" requiredMessage="Ingrese la Concentracion" disabled="true"/>
-                             </p:panelGrid>
-                        <p:commandButton value="Aceptar" action="#{medicamentoControlador.eliminarMedicamento()}" 
+                        </p:panelGrid>
+                        
+                        <p:commandButton value="Aceptar" action="#{controladorMedicamento.eliminarMedicamento()}" 
                                          update=":frmmedicamento:pnlMedicamento"/>
-                        <p:commandButton value="Cancelar" onclick="wdlgEliminarMedicamento.hide()" type="reset"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgEliminarMedicamento.hide()" type="reset"
+                                         update=":frmmedicamento:pnlMedicamento"/>
                     </h:form> 
                 </p:dialog>
-                  <p:dialog modal="true" widgetVar="dlgStatus" header="Procesando" draggable="false" closable="false" 
+                <p:dialog modal="true" widgetVar="dlgStatus" header="Procesando" draggable="false" closable="false" 
                           resizable="false"> 
                     <p:graphicImage value="/resources/images/ajaxloadingbar.gif" />  
                 </p:dialog>
             </ui:define>
+
+
+
         </ui:composition>
+
     </h:body>
 </html>

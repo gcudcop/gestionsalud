@@ -20,8 +20,8 @@ import subcentro_licto.logica.funciones.FMedicamento;
 @ManagedBean
 @RequestScoped
 public class ControladorMedicamento {
-    
-  /**
+
+    /**
      * Creates a new instance of Medicamento
      */
     private Medicamento objMedicamento;
@@ -29,7 +29,7 @@ public class ControladorMedicamento {
     private ArrayList<Medicamento> lstMedicamento;
     private boolean mostrarActualizar;
     private ArrayList<Medicamento> lst;
-   
+
     public Medicamento getObjMedicamento() {
         return objMedicamento;
     }
@@ -37,7 +37,8 @@ public class ControladorMedicamento {
     public void setObjMedicamento(Medicamento objMedicamento) {
         this.objMedicamento = objMedicamento;
     }
-     public Medicamento getMedicamentoSel() {
+
+    public Medicamento getMedicamentoSel() {
         return medicamentoSel;
     }
 
@@ -62,23 +63,23 @@ public class ControladorMedicamento {
     }
 
     public ControladorMedicamento() {
+        this.reinit();
     }
 
     public void reinit() {
-        this.lstMedicamento=new ArrayList<Medicamento>();
-        this.lst=new ArrayList<Medicamento>();
-        this.objMedicamento=new Medicamento();
-        this.medicamentoSel=new Medicamento();
+        this.lstMedicamento = new ArrayList<Medicamento>();
+        this.lst = new ArrayList<Medicamento>();
+        this.objMedicamento = new Medicamento();
+        this.medicamentoSel = new Medicamento();
         this.obtnerMedicamento();
-        
 
     }
- public void obtnerMedicamento() {
+
+    public void obtnerMedicamento() {
         try {
             this.lstMedicamento = FMedicamento.ObtenerMedicamento();
             this.medicamentoSel = lstMedicamento.get(0);
-            //System.out.println(lstMedicamento.get(0).getId_Medicamento()));
-            
+            System.out.println(lstMedicamento.get(0).getId_Medicamento());
         } catch (Exception e) {
             Util.addErrorMessage("public void obtnerMedicamento  dice: " + e.getMessage());
             System.out.println("public void obtnerMedicamento dice: " + e.getMessage());
@@ -87,20 +88,28 @@ public class ControladorMedicamento {
 
     public void insertarMedicamento() {
         try {
+            //if (FAgresor.Insertar(objAgresor)) {
             if (FMedicamento.InsertarMedicamento(objMedicamento)) {
                 this.reinit();
-                DefaultRequestContext.getCurrentInstance().execute("wdlgNuevaMedicamento.hide()");
+                DefaultRequestContext.getCurrentInstance().execute("wdlgNuevoMedicamento.hide()");
                 Util.addSuccessMessage("Información guardada con éxito");
+                System.out.println("public void insertarMedicamento dice: Información guarada con éxito");
+            }else { 
+                Util.addSuccessMessage("Error al guardar la información");
                 System.out.println("public void insertarMedicamento dice: Error al guardar la información");
-            }
+           }
         } catch (Exception e) {
             Util.addErrorMessage("private void insertarMedicamento dice: " + e.getMessage());
             System.out.println("private void insertarMedicamento dice: " + e.getMessage());
         }
     }
-public void editarMedicamento() {
-        try {
-            medicamentoSel.setid_medicamento(medicamentoSel.getId_Medicamento());
+    
+    
+    
+    
+    public void editarMedicamento() {
+        try {            
+            this.medicamentoSel.setid_medicamento(medicamentoSel.getId_Medicamento());
             if (FMedicamento.EditarMedicamento(medicamentoSel)) {
                 medicamentoSel = new Medicamento();
                 mostrarActualizar = false;
@@ -117,20 +126,29 @@ public void editarMedicamento() {
             System.out.println("private void editarUnidad Operativa dice: " + e.getMessage());
         }
     }
- public void eliminarMedicamento(){
-        try{
-                if(FMedicamento.eliminarMedicamento((int)medicamentoSel.getId_Medicamento())){
-                    Util.addErrorMessage("Error al eliminar la información.");
-                    System.out.println("public void eliminarMedicamento dice: Error al eliminar la información");
-                }else {
-                    this.reinit();
-                    DefaultRequestContext.getCurrentInstance().execute("wdlgEliminarMedicamento.hide()");
-                    Util.addSuccessMessage("Información eliminada.");
-                    System.out.println("public void eliminarMedicamento dice: Información eliminada.");
-                }
-        }catch(Exception e) {
+
+    public void cambiarEstadoMostrarActualizar() {
+        mostrarActualizar = true;
+    }
+            
+     public void eliminarMedicamento() {
+        try {            
+            if (FMedicamento.eliminarMedicamento((int)medicamentoSel.getId_Medicamento())) {
+                this.reinit();
+                DefaultRequestContext.getCurrentInstance().execute("wdlgEliminarMedicamento.hide()");
+                Util.addSuccessMessage("Información eliminada.");
+                System.out.println("public void eliminarMedicamento dice: Información eliminada.");
+            } else {
+                Util.addErrorMessage("Error al eliminar la información.");
+                System.out.println("public void eliminarMedicamento dice: Error al eliminar la información");
+            }
+        } catch (Exception e) {
             Util.addErrorMessage("private void eliminarMedicamento dice: " + e.getMessage());
             System.out.println("private void eliminarMedicamento dice: " + e.getMessage());
         }
+
     }
+
+    
+    
 }
