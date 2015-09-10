@@ -32,10 +32,10 @@ public class FPaciente {
                         rs.getString("phistoria_clinica"),
                         rs.getInt("psexo"),
                         rs.getDate("pfecha_nacimiento"),
-                        rs.getString("pcedula_ciudadania"),
+                        rs.getString("pcedula_ciudadana"),
                         rs.getInt("pnacionalidad"),
                         rs.getInt("pautoidentificacion"),
-                        rs.getInt("paportado_afiliado"),
+                        rs.getInt("paporta_afiliado"),
                         rs.getString("pprovincia"),
                         rs.getString("pcanton"),
                         rs.getString("pparroquia"),
@@ -60,7 +60,7 @@ public class FPaciente {
     public static ArrayList<Paciente> ObtenerPacientes() throws Exception {
         ArrayList<Paciente> lst = new ArrayList<Paciente>();
         try {
-            String sql = "select * from subcentro_licto .f_select_paciente()";
+            String sql = "select * from subcentro_licto.f_select_paciente()";
             ConjuntoResultado rs = AccesoDatos.ejecutaQuery(sql);
             lst = llenarPaciente(rs);
             rs = null;

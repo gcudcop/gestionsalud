@@ -66,6 +66,10 @@ public class ControladorPaciente {
     }
 
     public void reinit() {
+        this.lstPaciente=new ArrayList<Paciente>();
+        this.objPaciente=new Paciente();
+        this.pacienteSel=new Paciente();
+        this.obtnerPacientes();
 
     }
 
