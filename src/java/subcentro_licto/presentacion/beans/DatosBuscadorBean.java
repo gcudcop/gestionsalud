@@ -7,6 +7,7 @@ package subcentro_licto.presentacion.beans;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.Element;
+import com.lowagie.text.Image;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.PdfPCell;
@@ -222,9 +223,9 @@ public class DatosBuscadorBean implements Serializable {
             String name = directorioArchivos + "/documento-datos.pdf";
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(name));
+
             //PdfWriter writer = PdfWriter.getInstance(document,
             //new FileOutputStream("C:"));
-
             Paragraph paragraph = new Paragraph();
 
             PdfPTable table = new PdfPTable(2);
@@ -242,10 +243,13 @@ public class DatosBuscadorBean implements Serializable {
             PdfPTable table12 = new PdfPTable(2);
             PdfPTable table13 = new PdfPTable(1);
 
-            paragraph.add("\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            paragraph.add("\n\n\n\n\n\n");
             paragraph.setAlignment(Paragraph.ALIGN_CENTER);
 
             document.open();
+            Image image1 = Image.getInstance("C:/Users/Usuario/Documents/NetBeansProjects/gestionsalud/web/resources/images/logoMSP.jpg");
+
+            image1.setAlignment(Element.ALIGN_CENTER);
 
             PdfPCell cell5 = new PdfPCell(new Paragraph("Fecha Agresión: " + datosSel.getFecha_agresion()));
             PdfPCell cell7 = new PdfPCell(new Paragraph("Fecha Atención: " + datosSel.getFecha_de_atencion()));
@@ -359,6 +363,7 @@ public class DatosBuscadorBean implements Serializable {
             table12.addCell(cell26);
             table13.addCell(cell27);
 
+            document.add(image1);
             document.add(paragraph);
             document.add(table1);
             document.add(table2);
