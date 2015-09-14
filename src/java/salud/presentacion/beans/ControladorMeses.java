@@ -29,7 +29,7 @@ public class ControladorMeses {
     private ArrayList<String> lstMeses;
     private ArrayList<DatosSalud> lstDatos;
     private ArrayList<DatosSalud> lstDatosDadoMes;
-    private CartesianChartModel lineMeses;    
+    private CartesianChartModel lineMeses;
     private CartesianChartModel lineMeses2012;
     private CartesianChartModel lineMeses2013;
     private CartesianChartModel lineMeses2014;
@@ -57,7 +57,6 @@ public class ControladorMeses {
     public void setLineMeses2014(CartesianChartModel lineMeses2014) {
         this.lineMeses2014 = lineMeses2014;
     }
-    
 
     public ArrayList<String> getLstMeses() {
         return lstMeses;
@@ -106,73 +105,98 @@ public class ControladorMeses {
     private CartesianChartModel graficaMeses() {
         CartesianChartModel model = new CartesianChartModel();
         try {
-            lstDatos=FDatosSalud.obtenerDatosDadoAnio(2011);
-            lstMeses=MesesDias.obtenerMeses();
+            lstDatos = FDatosSalud.obtenerDatosDadoAnio(2011);
+            lstMeses = MesesDias.obtenerMeses();
             ChartSeries meses = new ChartSeries();
             meses.setLabel("Meses");
-            for (int i=0;i<lstMeses.size();i++){
-                for (int j=0;j<lstDatos.size();j++){
-                    lstDatosDadoMes=FDatosSalud.obtenerDatosDadoMesAnio(2011,lstMeses.get(i));
-                    meses.set(lstMeses.get(i),lstDatosDadoMes.size());
-                }
-            }
+             meses.set(lstMeses.get(0), FDatosSalud.obtenerDatosDadoMesAnio(2011, lstMeses.get(0)).size());
+            meses.set(lstMeses.get(1), FDatosSalud.obtenerDatosDadoMesAnio(2011, lstMeses.get(1)).size());
+            meses.set(lstMeses.get(2), FDatosSalud.obtenerDatosDadoMesAnio(2011, lstMeses.get(2)).size());
+            meses.set(lstMeses.get(3), FDatosSalud.obtenerDatosDadoMesAnio(2011, lstMeses.get(3)).size());
+            meses.set(lstMeses.get(4), FDatosSalud.obtenerDatosDadoMesAnio(2011, lstMeses.get(4)).size());
+            meses.set(lstMeses.get(5), FDatosSalud.obtenerDatosDadoMesAnio(2011, lstMeses.get(5)).size());
+            meses.set(lstMeses.get(6), FDatosSalud.obtenerDatosDadoMesAnio(2011, lstMeses.get(6)).size());
+            meses.set(lstMeses.get(7), FDatosSalud.obtenerDatosDadoMesAnio(2011, lstMeses.get(7)).size());
+            meses.set(lstMeses.get(8), FDatosSalud.obtenerDatosDadoMesAnio(2011, lstMeses.get(8)).size());
+            meses.set(lstMeses.get(9), FDatosSalud.obtenerDatosDadoMesAnio(2011, lstMeses.get(9)).size());
+            meses.set(lstMeses.get(10), FDatosSalud.obtenerDatosDadoMesAnio(2011, lstMeses.get(10)).size());
+            meses.set(lstMeses.get(11), FDatosSalud.obtenerDatosDadoMesAnio(2011, lstMeses.get(11)).size());
             model.addSeries(meses);
         } catch (Exception e) {
         }
         return model;
     }
-    
+
     private CartesianChartModel graficaMeses2012() {
         CartesianChartModel model = new CartesianChartModel();
         try {
-            lstDatos=FDatosSalud.obtenerDatosDadoAnio(2012);
-            lstMeses=MesesDias.obtenerMeses();
+            lstDatos = FDatosSalud.obtenerDatosDadoAnio(2012);
+            lstMeses = MesesDias.obtenerMeses();
             ChartSeries meses = new ChartSeries();
             meses.setLabel("Meses");
-            for (int i=0;i<lstMeses.size();i++){
-                for (int j=0;j<lstDatos.size();j++){
-                    lstDatosDadoMes=FDatosSalud.obtenerDatosDadoMesAnio(2012,lstMeses.get(i));
-                    meses.set(lstMeses.get(i),lstDatosDadoMes.size());
-                }
-            }
+            meses.set(lstMeses.get(0), FDatosSalud.obtenerDatosDadoMesAnio(2012, lstMeses.get(0)).size());
+            meses.set(lstMeses.get(1), FDatosSalud.obtenerDatosDadoMesAnio(2012, lstMeses.get(1)).size());
+            meses.set(lstMeses.get(2), FDatosSalud.obtenerDatosDadoMesAnio(2012, lstMeses.get(2)).size());
+            meses.set(lstMeses.get(3), FDatosSalud.obtenerDatosDadoMesAnio(2012, lstMeses.get(3)).size());
+            meses.set(lstMeses.get(4), FDatosSalud.obtenerDatosDadoMesAnio(2012, lstMeses.get(4)).size());
+            meses.set(lstMeses.get(5), FDatosSalud.obtenerDatosDadoMesAnio(2012, lstMeses.get(5)).size());
+            meses.set(lstMeses.get(6), FDatosSalud.obtenerDatosDadoMesAnio(2012, lstMeses.get(6)).size());
+            meses.set(lstMeses.get(7), FDatosSalud.obtenerDatosDadoMesAnio(2012, lstMeses.get(7)).size());
+            meses.set(lstMeses.get(8), FDatosSalud.obtenerDatosDadoMesAnio(2012, lstMeses.get(8)).size());
+            meses.set(lstMeses.get(9), FDatosSalud.obtenerDatosDadoMesAnio(2012, lstMeses.get(9)).size());
+            meses.set(lstMeses.get(10), FDatosSalud.obtenerDatosDadoMesAnio(2012, lstMeses.get(10)).size());
+            meses.set(lstMeses.get(11), FDatosSalud.obtenerDatosDadoMesAnio(2012, lstMeses.get(11)).size());
+
             model.addSeries(meses);
         } catch (Exception e) {
         }
         return model;
     }
-    
+
     private CartesianChartModel graficaMeses2013() {
         CartesianChartModel model = new CartesianChartModel();
         try {
-            lstDatos=FDatosSalud.obtenerDatosDadoAnio(2013);
-            lstMeses=MesesDias.obtenerMeses();
+            lstDatos = FDatosSalud.obtenerDatosDadoAnio(2013);
+            lstMeses = MesesDias.obtenerMeses();
             ChartSeries meses = new ChartSeries();
             meses.setLabel("Meses");
-            for (int i=0;i<lstMeses.size();i++){
-                for (int j=0;j<lstDatos.size();j++){
-                    lstDatosDadoMes=FDatosSalud.obtenerDatosDadoMesAnio(2013,lstMeses.get(i));
-                    meses.set(lstMeses.get(i),lstDatosDadoMes.size());
-                }
-            }
+             meses.set(lstMeses.get(0), FDatosSalud.obtenerDatosDadoMesAnio(2013, lstMeses.get(0)).size());
+            meses.set(lstMeses.get(1), FDatosSalud.obtenerDatosDadoMesAnio(2013, lstMeses.get(1)).size());
+            meses.set(lstMeses.get(2), FDatosSalud.obtenerDatosDadoMesAnio(2013, lstMeses.get(2)).size());
+            meses.set(lstMeses.get(3), FDatosSalud.obtenerDatosDadoMesAnio(2013, lstMeses.get(3)).size());
+            meses.set(lstMeses.get(4), FDatosSalud.obtenerDatosDadoMesAnio(2013, lstMeses.get(4)).size());
+            meses.set(lstMeses.get(5), FDatosSalud.obtenerDatosDadoMesAnio(2013, lstMeses.get(5)).size());
+            meses.set(lstMeses.get(6), FDatosSalud.obtenerDatosDadoMesAnio(2013, lstMeses.get(6)).size());
+            meses.set(lstMeses.get(7), FDatosSalud.obtenerDatosDadoMesAnio(2013, lstMeses.get(7)).size());
+            meses.set(lstMeses.get(8), FDatosSalud.obtenerDatosDadoMesAnio(2013, lstMeses.get(8)).size());
+            meses.set(lstMeses.get(9), FDatosSalud.obtenerDatosDadoMesAnio(2013, lstMeses.get(9)).size());
+            meses.set(lstMeses.get(10), FDatosSalud.obtenerDatosDadoMesAnio(2013, lstMeses.get(10)).size());
+            meses.set(lstMeses.get(11), FDatosSalud.obtenerDatosDadoMesAnio(2013, lstMeses.get(11)).size());
             model.addSeries(meses);
         } catch (Exception e) {
         }
         return model;
     }
-    
+
     private CartesianChartModel graficaMeses2014() {
         CartesianChartModel model = new CartesianChartModel();
         try {
-            lstDatos=FDatosSalud.obtenerDatosDadoAnio(2014);
-            lstMeses=MesesDias.obtenerMeses();
+            lstDatos = FDatosSalud.obtenerDatosDadoAnio(2014);
+            lstMeses = MesesDias.obtenerMeses();
             ChartSeries meses = new ChartSeries();
             meses.setLabel("Meses");
-            for (int i=0;i<lstMeses.size();i++){
-                for (int j=0;j<lstDatos.size();j++){
-                    lstDatosDadoMes=FDatosSalud.obtenerDatosDadoMesAnio(2014,lstMeses.get(i));
-                    meses.set(lstMeses.get(i),lstDatosDadoMes.size());
-                }
-            }
+             meses.set(lstMeses.get(0), FDatosSalud.obtenerDatosDadoMesAnio(2014, lstMeses.get(0)).size());
+            meses.set(lstMeses.get(1), FDatosSalud.obtenerDatosDadoMesAnio(2014, lstMeses.get(1)).size());
+            meses.set(lstMeses.get(2), FDatosSalud.obtenerDatosDadoMesAnio(2014, lstMeses.get(2)).size());
+            meses.set(lstMeses.get(3), FDatosSalud.obtenerDatosDadoMesAnio(2014, lstMeses.get(3)).size());
+            meses.set(lstMeses.get(4), FDatosSalud.obtenerDatosDadoMesAnio(2014, lstMeses.get(4)).size());
+            meses.set(lstMeses.get(5), FDatosSalud.obtenerDatosDadoMesAnio(2014, lstMeses.get(5)).size());
+            meses.set(lstMeses.get(6), FDatosSalud.obtenerDatosDadoMesAnio(2014, lstMeses.get(6)).size());
+            meses.set(lstMeses.get(7), FDatosSalud.obtenerDatosDadoMesAnio(2014, lstMeses.get(7)).size());
+            meses.set(lstMeses.get(8), FDatosSalud.obtenerDatosDadoMesAnio(2014, lstMeses.get(8)).size());
+            meses.set(lstMeses.get(9), FDatosSalud.obtenerDatosDadoMesAnio(2014, lstMeses.get(9)).size());
+            meses.set(lstMeses.get(10), FDatosSalud.obtenerDatosDadoMesAnio(2014, lstMeses.get(10)).size());
+            meses.set(lstMeses.get(11), FDatosSalud.obtenerDatosDadoMesAnio(2014, lstMeses.get(11)).size());
             model.addSeries(meses);
         } catch (Exception e) {
         }
