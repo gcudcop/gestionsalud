@@ -7,6 +7,7 @@ package subcentro_licto.logica.funciones;
 
 import accesodatos.AccesoDatos;
 import accesodatos.ConjuntoResultado;
+import accesodatos.Parametro;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import subcentro_licto.logica.clases.Datos;
@@ -54,9 +55,7 @@ public class FDatos {
                         rs.getString("pcaso_medico"),
                         rs.getString("preferido")
                 );
-                
-                
-                                                       
+
                 lst.add(datos);
             }
         } catch (Exception e) {
@@ -79,18 +78,37 @@ public class FDatos {
         }
         return lst;
     }
-    
-//    public static ArrayList<Producto> ObtenerProductos() throws Exception {
-//        ArrayList<Producto> lst = new ArrayList<Producto>();
-//        try {
-//            String sql = "select * from sgflc.f_select_producto()";
-//            ConjuntoResultado rs = AccesoDatos.ejecutaQuery(sql);
-//            lst = llenarProductos(rs);
-//            rs = null;
-//        } catch (SQLException exConec) {
-//            throw new Exception(exConec.getMessage());
-//        }
-//        return lst;
-//    }
+
+    public static ArrayList<Datos> ObtenerDatosGlobales(String palabra) throws Exception {
+        ArrayList<Datos> lst = new ArrayList<Datos>();
+        try {
+            ArrayList<Parametro> lstP = new ArrayList<Parametro>();
+            String sql = "select * from subcentro_licto.f_select_datos_global(?)";
+            lstP.add(new Parametro(1, palabra));
+            ConjuntoResultado rs = AccesoDatos.ejecutaQuery(sql, lstP);
+            //lst = new Datos();
+            lst = llenarDatos(rs);
+            rs = null;
+        } catch (SQLException exConec) {
+            throw new Exception(exConec.getMessage());
+        }
+        return lst;
+    }
+
+    public static ArrayList<Datos> ObtenerDatosGlobalesEdad(int edad) throws Exception {
+        ArrayList<Datos> lst = new ArrayList<Datos>();
+        try {
+            ArrayList<Parametro> lstP = new ArrayList<Parametro>();
+            String sql = "select * from subcentro_licto.f_select_datos_global_numeros(?)";
+            lstP.add(new Parametro(1, edad));
+            ConjuntoResultado rs = AccesoDatos.ejecutaQuery(sql, lstP);
+            //lst = new Datos();
+            lst = llenarDatos(rs);
+            rs = null;
+        } catch (SQLException exConec) {
+            throw new Exception(exConec.getMessage());
+        }
+        return lst;
+    }
 
 }

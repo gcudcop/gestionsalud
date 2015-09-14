@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class Datos {
     
-      private int id ;
+  private int id ;
   private String provincia ;
   private String canton ;
   private String barrio ;
