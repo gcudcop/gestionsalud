@@ -193,7 +193,7 @@ and open the template in the editor.
                           showEffect="clip" hideEffect="fold"> 
                     <h:form id="frmNuevoPaciente">
                         <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
-                        <p:panelGrid id="pngNuevoPaciente" columns="2">
+                        <p:panelGrid id="pngNuevoPaciente" columns="4">
                             <h:outputText value="Apellidos:"/>
                             <p:inputText value="#{pacienteControlador.objPaciente.apellidos}" title="ej: Yagos Guaman " 
                                          required="true" requiredMessage="Ingrese los Apellidos"/>
@@ -270,7 +270,7 @@ and open the template in the editor.
                     <h:form id="frmEditarPaciente">
                         <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
                         <p:messages id="messages" autoUpdate="true"/>  
-                        <p:panelGrid id="pngEditarPaciente" columns="2">
+                        <p:panelGrid id="pngEditarPaciente" columns="4">
                             <h:outputText value="Apellidos:"/>
                             <p:inputText value="#{pacienteControlador.Sel.Paciente.apellidos}" title="ej: Yagos Guaman " 
                                          required="true" requiredMessage="Ingrese los Apellidos"/>
@@ -340,7 +340,7 @@ and open the template in the editor.
                     <h:form id="frmEliminarPaciente">
                         <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
                         <h:outputText value="¿Desea Eliminar a esta persona?"/>
-                        <p:panelGrid id="pngEliminarPaciente" columns="2">                         
+                        <p:panelGrid id="pngEliminarPaciente" columns="4">                         
                             <h:outputText value="Apellidos:"/>
                             <p:inputText value="#{pacienteControlador.Sel.Paciente.apellidos}" title="ej: Yagos Guaman " 
                                          required="true" requiredMessage="Ingrese los Apellidos" disabled="true"/>

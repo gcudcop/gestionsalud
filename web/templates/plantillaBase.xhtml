@@ -18,7 +18,7 @@
                    document.write('<p class="accent">Le recomendamos instalar:<h2> <a href="http://www.mozilla.com/en-US/" ><img src="./imagenes/logo_mfox.png" alt="Mozilla Firefox" title="Mozilla Firefox"/> </a></h2></p>');
                }
            </script> -->
-        <link rel="shortcut icon" href="/resources/images/oscunach2.png" />
+        <link rel="shortcut icon" href="/resources/images/logo.png" />
         <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'/>
         <title>
             <ui:insert name="tituloNavegador">Gestión de Salud</ui:insert>
@@ -30,12 +30,10 @@
                 <ui:insert name="top">
                     <h:form id="frmCabecera">
                         <h:panelGrid columns="1" cellpadding="0" cellspacing="0">
-                            <p:graphicImage value="/resources/images/banner.jpg"  title="Gestión de Salud"/>                            
-                            <!-- <h1 align="center">
-                                <b>
-                                     OBSERVATORIO DE SEGURIDAD CIUDADANA
-                                 </b>
-                             </h1>-->
+                            <p:graphicImage value="/resources/images/banner.jpg"  title="Gestión de Salud"/>
+                            <h1 align="center">
+                                <!--<b>Ministerio de Salud Publica</b>-->
+                             </h1>
                             <p:outputPanel styleClass="ui-widget-header menu_sitio" style="width: 860px; height: 30px;">
                                 <h:panelGrid columns="15" >
                                     <c:forEach items="#{indexControlador.lstMenuSitio}" var="menuItem">
@@ -81,11 +79,11 @@
                                 <h:commandLink value="Cr&eacute;ditos" action="#"/>
                             </h:panelGrid>
                             <h:panelGrid>
-                                <p:graphicImage value="/resources/images/banner_ridech.png"  title="RIDECH"/>  
+                                <!--<p:graphicImage value="/resources/images/banner_ridech.png"  title="RIDECH"/>  -->
                             </h:panelGrid>
                             <h:panelGrid columns="2" cellpadding="1" cellspacing="0">
-                                <h:commandLink value="Derechos de autor " target="_blank"  action="http://www.unach.edu.ec"/>
-                                <h:outputLabel value="&nbsp; 2015 UNACH"/>
+                                <h:commandLink value="Derechos de autor " target="_blank"  action="http://www.unach.edu.ec"/>                                
+                                <h:outputLabel value="© UNACH - 2015"/>
                             </h:panelGrid>
                         </h:panelGrid>
                     </ui:insert>
