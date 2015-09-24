@@ -12,6 +12,7 @@ import subcentro_licto.logica.clases.Personal;
 import subcentro_licto.logica.funciones.FPersonal;
 import org.primefaces.context.DefaultRequestContext;
 import recursos.Util;
+
 /**
  *
  * @author Mari
@@ -19,15 +20,15 @@ import recursos.Util;
 @ManagedBean
 @RequestScoped
 public class ControladorPersonal {
-  /**
+
+    /**
      * Creates a new instance of ControladorPersonal
      */
     private Personal objPersonal;
     private Personal personalSel;
     private ArrayList<Personal> lstPersonal;
     private boolean mostrarActualizar;
-    private ArrayList<Personal> lst;
-   
+
     public Personal getObjPersonal() {
         return objPersonal;
     }
@@ -35,7 +36,8 @@ public class ControladorPersonal {
     public void setObjPersonal(Personal objPersonal) {
         this.objPersonal = objPersonal;
     }
-     public Personal getPersonalSel() {
+
+    public Personal getPersonalSel() {
         return personalSel;
     }
 
@@ -60,14 +62,20 @@ public class ControladorPersonal {
     }
 
     public ControladorPersonal() {
+        this.reinit();
     }
 
-    public void reinit() {
+    private void reinit() {
+        this.objPersonal = new Personal();
+        this.personalSel = new Personal();
+        this.lstPersonal = new ArrayList<Personal>();
+        this.obtnerPersonal();
 
     }
- public void obtnerPersonal() {
+
+    public void obtnerPersonal() {
         try {
-            this.lst = FPersonal.ObtenerPersonal();
+            this.lstPersonal = FPersonal.ObtenerPersonal();
             this.personalSel = lstPersonal.get(0);
             System.out.println(lstPersonal.get(0).getId_personal());
         } catch (Exception e) {
@@ -89,9 +97,10 @@ public class ControladorPersonal {
             System.out.println("private void insertarPersonal dice: " + e.getMessage());
         }
     }
-public void editarPersonal() {
+
+    public void editarPersonal() {
         try {
-            personalSel.setid_personal(personalSel.getId_personal());
+            //personalSel.setid_personal(personalSel.getId_personal());
             if (FPersonal.EditarPersonal(personalSel)) {
                 personalSel = new Personal();
                 mostrarActualizar = false;
@@ -108,21 +117,21 @@ public void editarPersonal() {
             System.out.println("private void editarPersonal dice: " + e.getMessage());
         }
     }
- public void eliminarPersonal(){
-        try{
-                if(FPersonal.eliminarPersonal((int)personalSel.getId_personal())){
-                    Util.addErrorMessage("Error al eliminar la información.");
-                    System.out.println("public void eliminarPersonal dice: Error al eliminar la información");
-                }else {
-                    this.reinit();
-                    DefaultRequestContext.getCurrentInstance().execute("wdlgEliminarPersonal.hide()");
-                    Util.addSuccessMessage("Información eliminada.");
-                    System.out.println("public void eliminarPersonal dice: Información eliminada.");
-                }
-        }catch(Exception e) {
+
+    public void eliminarPersonal() {
+        try {
+            if (FPersonal.eliminarPersonal((int) personalSel.getId_personal())) {
+                Util.addErrorMessage("Error al eliminar la información.");
+                System.out.println("public void eliminarPersonal dice: Error al eliminar la información");
+            } else {
+                this.reinit();
+                DefaultRequestContext.getCurrentInstance().execute("wdlgEliminarPersonal.hide()");
+                Util.addSuccessMessage("Información eliminada.");
+                System.out.println("public void eliminarPersonal dice: Información eliminada.");
+            }
+        } catch (Exception e) {
             Util.addErrorMessage("private void eliminarPersonal dice: " + e.getMessage());
             System.out.println("private void eliminarPersonal dice: " + e.getMessage());
         }
     }
 }
-
