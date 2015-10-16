@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>
+            <ui:define name="Personal">**Atención a pacientes** </ui:define>
+        </title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../../templates/plantillaInternaCenter.xhtml">
+            <ui:define name="top">Gestión de Pacientes</ui:define>
+            <ui:define name="contenido">
+                <p:growl id="mensajes" autoUpdate="true" showDetail="true"/>
+                <h:form id="frmatencion">
+                    <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+
+                    <p:panel id="pnlBuscarDatos" style="margin-bottom:20px; " >
+                        <h:panelGrid columns="4" cellpadding="10" style="alignment-adjust: middle;"  >
+                            <p:outputLabel value="Ingrese la Cédula del paciente: " style="font-style: initial"  />                                
+                            <p:inputText  size="40" id="globalFilter" value="#{atencionCtrl.cedulaPaciente}"  
+                                          placeholder="Ej. 0603977224"/>
+                            <p:commandButton id="btnBuscar" icon="ui-icon-search" style="width:64px"  
+                                             title="Buscar " action="#{atencionCtrl.obtnerAtencionesDadoCedulaPaciente()}" 
+                                             process="@form, @this" update=":frmatencion:tblAtencion, @form">                                   
+                            </p:commandButton>
+                            <p:commandButton id="btnLimpiar" icon="ui-icon-arrowrefresh-1-e" style="width:50px"  
+                                             title="Limpiar " action="#{atencionCtrl.obtnerAtenciones()}" 
+                                             process="@form, @this" update=":frmatencion:tblAtencion, @form">                                   
+                            </p:commandButton>
+
+                        </h:panelGrid>
+                    </p:panel>
+
+                    <p:panel id="pnlAtencion">
+                        <p:dataTable id="tblAtencion" value="#{atencionCtrl.lstAtencion}" var="atenciones"
+                                     paginator="true" rows="10" rowKey="#{atenciones.id_atencion}" selectionMode="single" 
+                                     selection="#{atencionCtrl.atencionSel}">
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nombres y Apellidos"/>
+                                </f:facet>
+                                <h:outputText value="#{atenciones.id_paciente.apellidos} #{atenciones.id_paciente.nombres}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Fecha Atencion"/>
+                                </f:facet>
+                                <h:outputText value="#{atenciones.fecha_atencion}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Enfermedad"/>
+                                </f:facet>
+                                <h:outputText value="#{atenciones.enfermedad}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Diagnostico"/>
+                                </f:facet>
+                                <h:outputText value="#{atenciones.diagnostico}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Sindrome"/>
+                                </f:facet>
+                                <h:outputText value="#{atenciones.sindrome}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Morbilidad"/>
+                                </f:facet>
+                                <h:outputText value="#{atenciones.morbilidad}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Medicación"/>
+                                </f:facet>
+                                <h:outputText value="#{atenciones.prevencion}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Indicaciones"/>
+                                </f:facet>
+                                <h:outputText value="#{atenciones.descripcion}"/>
+                            </p:column>                           
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Lugar Atencion"/>
+                                </f:facet>
+                                <h:outputText value="#{atenciones.lugar_atencion}"/>
+                            </p:column> 
+
+                            <p:column exportable="false">
+                                <p:commandButton id="btnEditarAtencion" icon="ui-icon-pencil"  title="Editar Atencion" 
+                                                 oncomplete="wdlgEditarAtencion.show()" 
+                                                 process="@this" update=":dlgEditarAtencion, @form">                                   
+                                    <f:setPropertyActionListener value="#{atenciones}" 
+                                                                 target="#{atencionCtrl.atencionSel}"/>
+                                </p:commandButton>
+
+                                <p:commandButton id="btnEliminarAtencion" icon="ui-icon-close"  title="Eliminar Atencion"
+                                                 oncomplete="wdlgEliminarAtencion.show()" 
+                                                 update=":dlgEliminarAtencion">                                   
+                                    <f:setPropertyActionListener value="#{atenciones}" 
+                                                                 target="#{atencionCtrl.atencionSel}"/>
+                                </p:commandButton>
+
+                            </p:column>  
+
+
+
+                            <f:facet name="footer">  
+
+                                <p:commandButton id="btnNuevaAtencion" value="Nueva" icon="ui-icon-newwin"
+                                                 oncomplete="wdlgNuevaAtencion.show()" title="Nueva Atencion"/>  
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/excel.png" alt=""/>
+                                    <p:dataExporter type="xls" target="tblAtencion" fileName="Atencion" pageOnly="true" />
+                                </h:commandLink>
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/pdf.png" alt=""/>
+                                    <p:dataExporter type="pdf" target="tblAtencion" fileName="Atencion" pageOnly="true" />
+                                </h:commandLink>
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/csv.png" alt=""/>
+                                    <p:dataExporter type="csv" target="tblAtencion" fileName="Atencion" pageOnly="true" />
+                                </h:commandLink>
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/xml.png" alt=""/>
+                                    <p:dataExporter type="xml" target="tblAtencion" fileName="Atencion" pageOnly="true" />
+                                </h:commandLink>
+                            </f:facet>
+
+                        </p:dataTable>
+
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="dialogos">
+
+                <p:dialog id="dlgNuevaAtencion" header="Nueva Atencion" widgetVar="wdlgNuevaAtencion" 
+                          modal="true" closable="false" resizable="false"
+                          showEffect="clip" hideEffect="fold"> 
+                    <h:form id="frmNuevaAtencion">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+
+                        <p:panelGrid id="pngNuevaAtencion" columns="4">
+                            <p:outputLabel value="Seleccione el paciente: " />
+                            <p:selectOneMenu id="cmbPacientes" value="#{atencionCtrl.valorPSeleccionado}">
+                                <f:selectItem itemLabel="Elija un paciente" itemValue="#{null}"/>
+                                <f:selectItems value="#{atencionCtrl.lstPaciente}" var="pacientes" 
+                                               itemLabel="#{pacientes.nombres} #{pacientes.apellidos}" itemValue="#{pacientes.id_paciente}"/>
+                            </p:selectOneMenu>
+                            <h:outputText value="Fecha de atenciòn: "/>
+                            <p:calendar id="german" value="#{atencionCtrl.fechaNacimiento}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
+
+                            <h:outputText value="Enfermedad:"/>
+                            <p:inputTextarea rows="3" cols="35" value="#{atencionCtrl.objAtencion.enfermedad}" title="ej: diagnostico" 
+                                             required="true" requiredMessage="Ingrese el diagnóstico"/>
+
+                            <h:outputText value="Diagnóstico:"/>
+                            <p:inputTextarea rows="3" cols="35" value="#{atencionCtrl.objAtencion.diagnostico}" title="ej: diagnostico" 
+                                             required="true" requiredMessage="Ingrese el diagnóstico"/>
+
+                            <h:outputText value="Sindrome:"/>
+                            <p:inputTextarea rows="3" cols="35" value="#{atencionCtrl.objAtencion.sindrome}" title="ej: diagnostico" 
+                                             required="true" requiredMessage="Ingrese el diagnóstico"/>
+
+                            <h:outputText value="Morbilidad:"/>
+                            <p:inputTextarea rows="3" cols="35" value="#{atencionCtrl.objAtencion.morbilidad}" title="ej: diagnostico" 
+                                             required="true" requiredMessage="Ingrese el diagnóstico"/>
+
+                            <h:outputText value="Medicación:"/>
+                            <p:inputTextarea rows="6" cols="35" value="#{atencionCtrl.objAtencion.prevencion}" title="ej: diagnostico" 
+                                             required="true" requiredMessage="Ingrese el diagnóstico"/>
+
+                            <h:outputText value="Indicaciones:"/>
+                            <p:inputTextarea rows="6" cols="35" value="#{atencionCtrl.objAtencion.descripcion}" title="ej: diagnostico" 
+                                             required="true" requiredMessage="Ingrese el diagnóstico"/>                            
+
+                            <h:outputText value="Lugar de Atención:"/>
+                            <p:inputText value="#{atencionCtrl.objAtencion.lugar_atencion}" title="ej: diagnostico" 
+                                         required="true" requiredMessage="Ingrese el diagnóstico"/>                            
+                        </p:panelGrid>
+
+                        <p:commandButton value="Aceptar" action="#{atencionCtrl.insertarAtencion()}" 
+                                         update=":frmatencion:pnlAtencion"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgNuevaAtencion.hide()" type="reset"/>
+                    </h:form> 
+                </p:dialog> 
+
+                <p:dialog id="dlgEditarAtencion" header="Editar Atencion" widgetVar="wdlgEditarAtencion" 
+                          modal="true" 
+                          closable="false" resizable="false" showEffect="clip" hideEffect="fold">  
+                    <h:form id="frmEditarAtencion">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                        <p:messages id="messages" autoUpdate="true"/>  
+                        <p:panelGrid id="pngEditarAtencion" columns="2">
+
+                            <p:outputLabel value="Seleccione el paciente: " />
+                            <p:selectOneMenu id="cmbPacientes" value="#{atencionCtrl.valorPSeleccionado}">
+                                <f:selectItem itemLabel="Elija un paciente" itemValue="#{null}"/>
+                                <f:selectItems value="#{atencionCtrl.lstPaciente}" var="pacientes" 
+                                               itemLabel="#{pacientes.nombres} #{pacientes.apellidos}" itemValue="#{pacientes.id_paciente}"/>
+                            </p:selectOneMenu>
+
+                            <h:outputText value="Fecha de atenciòn: "/>
+                            <p:calendar id="german" value="#{atencionCtrl.fechaNacimiento}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
+
+                            <h:outputText value="Diagnóstico:"/>
+                            <p:inputText value="#{atencionCtrl.atencionSel.diagnostico}" title="ej: diagnostico" 
+                                         required="true" requiredMessage="Ingrese el diagnóstico"/>
+
+                            <h:outputText value="Sindrome:"/>
+                            <p:inputText value="#{atencionCtrl.atencionSel.sindrome}" title="ej: diagnostico" 
+                                         required="true" requiredMessage="Ingrese el diagnóstico"/>
+
+                            <h:outputText value="Morbilidad:"/>
+                            <p:inputText value="#{atencionCtrl.atencionSel.morbilidad}" title="ej: diagnostico" 
+                                         required="true" requiredMessage="Ingrese el diagnóstico"/>
+
+                            <h:outputText value="Prevencion:"/>
+                            <p:inputText value="#{atencionCtrl.atencionSel.prevencion}" title="ej: diagnostico" 
+                                         required="true" requiredMessage="Ingrese el diagnóstico"/>
+
+                            <h:outputText value="Descripcion:"/>
+                            <p:inputText value="#{atencionCtrl.atencionSel.descripcion}" title="ej: diagnostico" 
+                                         required="true" requiredMessage="Ingrese el diagnóstico"/>
+
+                            <h:outputText value="Enfermedad:"/>
+                            <p:inputText value="#{atencionCtrl.atencionSel.enfermedad}" title="ej: diagnostico" 
+                                         required="true" requiredMessage="Ingrese el diagnóstico"/>
+
+                            <h:outputText value="Lugar de Atención:"/>
+                            <p:inputText value="#{atencionCtrl.atencionSel.lugar_atencion}" title="ej: diagnostico" 
+                                         required="true" requiredMessage="Ingrese el diagnóstico"/> 
+
+
+                        </p:panelGrid>
+                        <p:commandButton value="Aceptar" action="#{atencionCtrl.editarAtencion()}" 
+                                         update=":frmatencion:pnlAtencion"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgEditarAtencion.hide()" type="reset"/>
+                    </h:form> 
+                </p:dialog>
+
+                <p:dialog id="dlgEliminarAtencion" header="Eliminar Atencion" widgetVar="wdlgEliminarAtencion" 
+                          modal="true" closable="false" resizable="false" showEffect="clip" hideEffect="fold">  
+                    <h:form id="frmEliminarAtencion">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                        <h:outputText value="¿Desea Eliminar a esta persona?"/>
+                        <p:panelGrid id="pngEliminarAtencion" columns="2">
+
+                            <p:outputLabel value="Paciente:"/>
+                            <p:outputLabel value="#{atencionCtrl.atencionSel.id_paciente.nombres} #{atencionCtrl.atencionSel.id_paciente.apellidos}"/>
+
+                            <h:outputText value="Fecha de atenciòn: "/>
+                            <p:outputLabel value="#{atencionCtrl.atencionSel.fecha_atencion}"/>
+
+                            <h:outputText value="Diagnóstico:"/>
+                            <p:inputText value="#{atencionCtrl.atencionSel.diagnostico}" title="ej: diagnostico" 
+                                         required="true" requiredMessage="Ingrese el diagnóstico" disabled="true"/>
+
+                            <h:outputText value="Sindrome:"/>
+                            <p:inputText value="#{atencionCtrl.atencionSel.sindrome}" title="ej: diagnostico" 
+                                         required="true" requiredMessage="Ingrese el diagnóstico" disabled="true"/>
+
+                            <h:outputText value="Morbilidad:"/>
+                            <p:inputText value="#{atencionCtrl.atencionSel.morbilidad}" title="ej: diagnostico" 
+                                         required="true" requiredMessage="Ingrese el diagnóstico" disabled="true"/>
+
+                            <h:outputText value="Prevencion:"/>
+                            <p:inputText value="#{atencionCtrl.atencionSel.prevencion}" title="ej: diagnostico" 
+                                         required="true" requiredMessage="Ingrese el diagnóstico" disabled="true"/>
+
+                            <h:outputText value="Descripcion:"/>
+                            <p:inputText value="#{atencionCtrl.atencionSel.descripcion}" title="ej: diagnostico" 
+                                         required="true" requiredMessage="Ingrese el diagnóstico" disabled="true"/>
+
+                            <h:outputText value="Enfermedad:"/>
+                            <p:inputText value="#{atencionCtrl.atencionSel.enfermedad}" title="ej: diagnostico" 
+                                         required="true" requiredMessage="Ingrese el diagnóstico" disabled="true"/>
+
+                            <h:outputText value="Lugar de Atención:"/>
+                            <p:inputText value="#{atencionCtrl.atencionSel.lugar_atencion}" title="ej: diagnostico" 
+                                         required="true" requiredMessage="Ingrese el diagnóstico" disabled="true"/>                                                                                                                                            
+                        </p:panelGrid>
+                        <p:commandButton value="Aceptar" action="#{atencionCtrl.eliminarAtencion()}" 
+                                         update=":frmatencion:pnlAtencion"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgEliminarAtencion.hide()" type="reset"/>
+                    </h:form> 
+                </p:dialog>
+
+                <p:dialog modal="true" widgetVar="dlgStatus" header="Procesando" draggable="false" closable="false" 
+                          resizable="false"> 
+                    <p:graphicImage value="/resources/images/ajaxloadingbar.gif" />  
+                </p:dialog>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

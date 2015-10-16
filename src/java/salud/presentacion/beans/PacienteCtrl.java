@@ -162,7 +162,13 @@ public class PacienteCtrl {
     
     public void editarPaciente() {
         try {
-            //pacienteSel.setid_paciente(pacienteSel.getId_paciente());
+            
+            pacienteSel.setSexo(sexoPaciente);
+            pacienteSel.setNacionalidad(nacionalidad); 
+            pacienteSel.setFecha_nacimiento(StringToDate.devolverFecha(fechaNacimiento));
+            pacienteSel.setAutoidentificacion(autoidentificacion);
+            pacienteSel.setAporta_afiliado(aporte);
+            pacienteSel.setGrupo_prioritario(grupoPrioritario);
             
             if (FPaciente.actualizarPaciente(pacienteSel)){
                 pacienteSel = new Paciente();

@@ -117,5 +117,21 @@ public class FMedicamento {
           return eje;
     }
     
+    public static Medicamento obtenerMedicamentoDadoCodigo(int codigo) throws Exception {
+        Medicamento lst;
+        try {
+            ArrayList<Parametro> lstP = new ArrayList<Parametro>();
+            String sql = "select * from salud.f_select_paciente_dado_codigo(?)";
+            lstP.add(new Parametro(1, codigo));
+            ConjuntoResultado rs = AccesoDatos.ejecutaQuery(sql, lstP);
+            lst = new Medicamento();
+            lst = llenarDatos(rs).get(0);
+            rs = null;
+        } catch (SQLException exConec) {
+            throw new Exception(exConec.getMessage());
+        }
+        return lst;
+    }
+    
     
 }

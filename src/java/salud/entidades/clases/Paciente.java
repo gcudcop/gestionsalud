@@ -17,8 +17,8 @@ public class Paciente {
     private String apellidos;
     private String nombres;
     private String historia_clinica;
-    private int sexo;
-    private Date fecha_nacimiento;
+    private int sexo;    
+    private Date fecha_nacimiento;    
     private String cedula_ciudadana;
     private int nacionalidad;
     private int autoidentificacion;

@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>
+            <ui:define name="Personal">**Gestión del Personal** </ui:define>
+        </title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../../templates/plantillaInternaCenter.xhtml">
+            <ui:define name="top">Gestión de Pacientes</ui:define>
+            <ui:define name="contenido">
+                <p:growl id="mensajes" autoUpdate="true" showDetail="true"/>
+                <h:form id="frmpersonal">
+                    <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                    <p:panel id="pnlPersonal">
+                        <p:dataTable id="tblPersonal" value="#{personalCtrl.lstPersonal}" var="personal"
+                                     paginator="true" rows="10" rowKey="#{personal.id_personal}" selectionMode="single" 
+                                     selection="#{personalCtrl.personalSel}">
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nombres y Apellidos"/>
+                                </f:facet>
+                                <h:outputText value="#{personal.nombres} #{personal.apellidos}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Sexo"/>
+                                </f:facet>
+                                <h:outputText value="#{personal.sexo}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Cedula de Identidad"/>
+                                </f:facet>
+                                <h:outputText value="#{personal.cedula_ciudadania}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Codigo MPS"/>
+                                </f:facet>
+                                <h:outputText value="#{personal.codigo_mps}"/>
+                            </p:column>
+
+
+                            <p:column exportable="false">
+                                <p:commandButton id="btnEditarPersonal" icon="ui-icon-pencil"  title="Editar Personal" 
+                                                 oncomplete="wdlgEditarPersonal.show()" 
+                                                 process="@this" update=":dlgEditarPersonal, @form">                                   
+                                    <f:setPropertyActionListener value="#{personal}" 
+                                                                 target="#{personalCtrl.personalSel}"/>
+                                </p:commandButton>
+                                <p:commandButton id="btnEliminarPersonal" icon="ui-icon-close"  title="Eliminar Personal"
+                                                 oncomplete="wdlgEliminarPersonal.show()" 
+                                                 update=":dlgEliminarPersonal">                                   
+                                    <f:setPropertyActionListener value="#{personal}" 
+                                                                 target="#{personalCtrl.personalSel}"/>
+                                </p:commandButton>
+                                                                
+                            </p:column>  
+                            
+                            
+                            
+                            
+                            <f:facet name="footer">  
+                                <p:commandButton id="btnNuevoPersonal" value="Nuevo" icon="ui-icon-newwin"
+                                                 oncomplete="wdlgNuevoPersonal.show()" title="Nuevo Personal"/> 
+                                <h:commandLink>
+                                    <img src="../../resources/images/excel.png" alt=""/>
+                                    <p:dataExporter type="xls" target="tblPersonal" fileName="Personal" pageOnly="true" />
+                                </h:commandLink>
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/pdf.png" alt=""/>
+                                    <p:dataExporter type="pdf" target="tblPersonal" fileName="Personal" pageOnly="true" />
+                                </h:commandLink>
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/csv.png" alt=""/>
+                                    <p:dataExporter type="csv" target="tblPersonal" fileName="Personal" pageOnly="true" />
+                                </h:commandLink>
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/xml.png" alt=""/>
+                                    <p:dataExporter type="xml" target="tblPersonal" fileName="Personal" pageOnly="true" />
+                                </h:commandLink>
+                            </f:facet>
+
+                        </p:dataTable>
+
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="dialogos">
+
+                <p:dialog id="dlgNuevoPersonal" header="Nuevo Personal" widgetVar="wdlgNuevoPersonal" 
+                          modal="true" closable="false" resizable="false"
+                          showEffect="clip" hideEffect="fold"> 
+                    <h:form id="frmNuevoPersonal">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                        <p:panelGrid id="pngNuevoPersonal" columns="2">
+                            <h:outputText value="Apellidos:"/>
+                            <p:inputText value="#{personalCtrl.objPersonal.apellidos}" title="ej: Yagos Guaman " 
+                                         required="true" requiredMessage="Ingrese los Apellidos" size="35"/>
+                            <h:outputText value="Nombres:"/>
+                            <p:inputText value="#{personalCtrl.objPersonal.nombres}" title="ej: Alejadra Estefania" 
+                                         required="true" requiredMessage="Ingrese los Nombres"/>
+                            <h:outputText value="Fecha Nacimiento"/>
+                            <p:calendar id="german" value="#{personalCtrl.fechaNacimiento}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
+
+                            <h:outputText value="Cedula Ciudadania:"/>
+                            <p:inputText value="#{personalCtrl.objPersonal.cedula_ciudadania}" title="ej: 0607856980" 
+                                         required="true" requiredMessage="Ingrese la cedula de ciudadania"/>
+                            <h:outputText value="Sexo:"/>
+                            <p:selectOneMenu value="#{personalCtrl.sexoPersonal}">
+                                <f:selectItem itemLabel="Elija una opcion" itemValue="#{null}"/>
+                                <f:selectItem itemLabel="Hombre" itemValue="1"/>
+                                <f:selectItem itemLabel="Mujer" itemValue="2"/>
+                            </p:selectOneMenu>                            
+
+                            <h:outputText value="Formacion:"/>
+                            <p:selectOneMenu value="#{personalCtrl.formacionPersonal}">
+                                <f:selectItem itemLabel="Elija una opcion" itemValue="#{null}"/>
+                                <f:selectItem itemLabel="Tercer Nivel" itemValue="1"/>
+                                <f:selectItem itemLabel="Cuarto Nivel" itemValue="2"/>
+                            </p:selectOneMenu>                                                         
+
+                            <h:outputText value="Especialidad o Subespecialidad:"/>
+                            <p:selectOneMenu value="#{personalCtrl.especialidadPersonal}">
+                                <f:selectItem itemLabel="Elija una opcion" itemValue="#{null}"/>
+                                <f:selectItem itemLabel="Medico/a" itemValue="1"/>
+                                <f:selectItem itemLabel="Obstetriz" itemValue="2"/>
+                            </p:selectOneMenu>                                                                                                              
+
+                            <h:outputText value="Nacionalidad:"/>
+                            <p:selectOneMenu value="#{personalCtrl.nacionalidadPersonal}">
+                                <f:selectItem itemLabel="Elija una opcion" itemValue="#{null}"/>
+                                <f:selectItem itemLabel="Ecuatoriano" itemValue="1"/>
+                                <f:selectItem itemLabel="Peruano" itemValue="2"/>
+                                <f:selectItem itemLabel="Colombiano" itemValue="3"/>
+                            </p:selectOneMenu>                                                        
+
+                            <h:outputText value="Autoidentificacion:"/>
+                            <p:selectOneMenu value="#{personalCtrl.autoidentificacion}">
+                                <f:selectItem itemLabel="Elija una opcion" itemValue="#{null}"/>
+                                <f:selectItem itemLabel="Indígena" itemValue="1"/>
+                                <f:selectItem itemLabel="Afroecuatoriano/a Afrodescendiente" itemValue="2"/>
+                                <f:selectItem itemLabel="Negro/a" itemValue="3"/>
+                                <f:selectItem itemLabel="Mulato/a" itemValue="4"/>
+                                <f:selectItem itemLabel="Montubio/a" itemValue="5"/>
+                                <f:selectItem itemLabel="Mestizo/a" itemValue="6"/>
+                                <f:selectItem itemLabel="Otro/a" itemValue="7"/>
+                                <f:selectItem itemLabel="No sabe/no responde" itemValue="8"/>                                
+                            </p:selectOneMenu>
+
+                            <h:outputText value="Codigo MPS:"/>                            
+                            <p:inputText value="#{personalCtrl.objPersonal.codigo_mps}" title="ej: "           
+                                         required="true" requiredMessage="Ingrese el Codigo MPS"/>
+                        </p:panelGrid>
+                        <p:commandButton value="Aceptar" action="#{personalCtrl.insertarPersonal()}" 
+                                         update=":frmpersonal:pnlPersonal"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgNuevoPersonal.hide()" type="reset"/>
+                    </h:form>
+                </p:dialog>
+
+
+                <p:dialog id="dlgEditarPersonal" header="Editar Personal" widgetVar="wdlgEditarPersonal" 
+                          modal="true" 
+                          closable="false" resizable="false" showEffect="clip" hideEffect="fold">  
+                    <h:form id="frmEditarPersonal">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                        <p:messages id="messages" autoUpdate="true"/>  
+                        <p:panelGrid id="pngEditarPersonal" columns="2">
+                            <h:outputText value="Apellidos:"/>
+                            <p:inputText value="#{personalCtrl.personalSel.apellidos}" title="ej: Yagos Guaman " 
+                                         required="true" requiredMessage="Ingrese los Apellidos" size="35"/>
+                            <h:outputText value="Nombres:"/>
+                            <p:inputText value="#{personalCtrl.personalSel.nombres}" title="ej: Alejadra Estefania" 
+                                         required="true" requiredMessage="Ingrese los Nombres"/>
+                            <h:outputText value="Fecha Nacimiento"/>
+                            <p:calendar id="german" value="#{personalCtrl.fechaNacimiento}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
+
+                            <h:outputText value="Cedula Ciudadania:"/>
+                            <p:inputText value="#{personalCtrl.personalSel.cedula_ciudadania}" title="ej: 0607856980" 
+                                         required="true" requiredMessage="Ingrese la cedula de ciudadania"/>
+                            <h:outputText value="Sexo:"/>
+                            <p:selectOneMenu value="#{personalCtrl.sexoPersonal}">
+                                <f:selectItem itemLabel="Elija una opcion" itemValue="#{null}"/>
+                                <f:selectItem itemLabel="Hombre" itemValue="1"/>
+                                <f:selectItem itemLabel="Mujer" itemValue="2"/>
+                            </p:selectOneMenu>                            
+
+                            <h:outputText value="Formacion:"/>
+                            <p:selectOneMenu value="#{personalCtrl.formacionPersonal}">
+                                <f:selectItem itemLabel="Elija una opcion" itemValue="#{null}"/>
+                                <f:selectItem itemLabel="Tercer Nivel" itemValue="1"/>
+                                <f:selectItem itemLabel="Cuarto Nivel" itemValue="2"/>
+                            </p:selectOneMenu>                                                         
+
+                            <h:outputText value="Especialidad o Subespecialidad:"/>
+                            <p:selectOneMenu value="#{personalCtrl.especialidadPersonal}">
+                                <f:selectItem itemLabel="Elija una opcion" itemValue="#{null}"/>
+                                <f:selectItem itemLabel="Medico/a" itemValue="1"/>
+                                <f:selectItem itemLabel="Obstetriz" itemValue="2"/>
+                            </p:selectOneMenu>                                                                                                              
+
+                            <h:outputText value="Nacionalidad:"/>
+                            <p:selectOneMenu value="#{personalCtrl.nacionalidadPersonal}">
+                                <f:selectItem itemLabel="Elija una opcion" itemValue="#{null}"/>
+                                <f:selectItem itemLabel="Ecuatoriano" itemValue="1"/>
+                                <f:selectItem itemLabel="Peruano" itemValue="2"/>
+                                <f:selectItem itemLabel="Colombiano" itemValue="3"/>
+                            </p:selectOneMenu>                                                        
+
+                            <h:outputText value="Autoidentificacion:"/>
+                            <p:selectOneMenu value="#{personalCtrl.autoidentificacion}">
+                                <f:selectItem itemLabel="Elija una opcion" itemValue="#{null}"/>
+                                <f:selectItem itemLabel="Indígena" itemValue="1"/>
+                                <f:selectItem itemLabel="Afroecuatoriano/a Afrodescendiente" itemValue="2"/>
+                                <f:selectItem itemLabel="Negro/a" itemValue="3"/>
+                                <f:selectItem itemLabel="Mulato/a" itemValue="4"/>
+                                <f:selectItem itemLabel="Montubio/a" itemValue="5"/>
+                                <f:selectItem itemLabel="Mestizo/a" itemValue="6"/>
+                                <f:selectItem itemLabel="Otro/a" itemValue="7"/>
+                                <f:selectItem itemLabel="No sabe/no responde" itemValue="8"/>                                
+                            </p:selectOneMenu>
+
+                            <h:outputText value="Codigo MPS:"/>                            
+                            <p:inputText value="#{personalCtrl.personalSel.codigo_mps}" title="ej: "           
+                                         required="true" requiredMessage="Ingrese el Codigo MPS"/>
+                        </p:panelGrid>
+                        <p:commandButton value="Aceptar" action="#{personalCtrl.editarPersonal()}" 
+                                         update=":frmpersonal:pnlPersonal"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgEditarPersonal.hide()" type="reset"/>
+                    </h:form> 
+                </p:dialog>
+                
+                <p:dialog id="dlgEliminarPersonal" header="Eliminar Personal" widgetVar="wdlgEliminarPersonal" 
+                          modal="true" closable="false" resizable="false" showEffect="clip" hideEffect="fold">  
+                    <h:form id="frmEliminarPaciente">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                        <h:outputText value="¿Desea Eliminar a esta persona?"/>
+                        <p:panelGrid id="pngEliminarPaciente" columns="2">                         
+                            <h:outputText value="Apellidos:"/>
+                            <p:inputText value="#{personalCtrl.personalSel.apellidos}" title="ej: Yagos Guaman " 
+                                         required="true" requiredMessage="Ingrese los Apellidos" size="35" disabled="true"/>
+                            <h:outputText value="Nombres:"/>
+                            <p:inputText value="#{personalCtrl.personalSel.nombres}" title="ej: Alejadra Estefania" 
+                                         required="true" requiredMessage="Ingrese los Nombres"/>
+                            <h:outputText value="Fecha Nacimiento"/>
+                            <p:inputText value="#{personalCtrl.personalSel.fecha_nacimiento}" disabled="true"/>
+
+                            <h:outputText value="Cedula Ciudadania:"/>
+                            <p:inputText value="#{personalCtrl.personalSel.cedula_ciudadania}" title="ej: 0607856980" 
+                                         required="true" requiredMessage="Ingrese la cedula de ciudadania" disabled="true"/>
+                            <h:outputText value="Sexo:"/>
+                            <p:inputText value="#{personalCtrl.personalSel.sexo}" disabled="true"/>
+                            
+                            <h:outputText value="Formacion:"/>
+                            <p:inputText value="#{personalCtrl.personalSel.formacion}" disabled="true"/>                                                       
+
+                            <h:outputText value="Especialidad o Subespecialidad:"/>
+                            <p:inputText value="#{personalCtrl.personalSel.especialidad_subespecialidad}" disabled="true"/>                                                                                                           
+
+                            <h:outputText value="Nacionalidad:"/>
+                            <p:inputText value="#{personalCtrl.personalSel.nacionalidad}" disabled="true"/>                                                      
+
+                            <h:outputText value="Autoidentificacion:"/>
+                            <p:inputText value="#{personalCtrl.personalSel.autoidentificacion}" disabled="true"/>
+
+                            <h:outputText value="Codigo MPS:"/>                            
+                            <p:inputText value="#{personalCtrl.personalSel.codigo_mps}" title="ej: "           
+                                         required="true" requiredMessage="Ingrese el Codigo MPS" disabled="true"/>
+                        </p:panelGrid>
+                        <p:commandButton value="Aceptar" action="#{personalCtrl.eliminarPersonal()}" 
+                                         update=":frmpersonal:pnlPersonal"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgEliminarPersonal.hide()" type="reset"/>
+                    </h:form> 
+                </p:dialog>
+
+
+
+
+
+
+
+                <p:dialog modal="true" widgetVar="dlgStatus" header="Procesando" draggable="false" closable="false" 
+                          resizable="false"> 
+                    <p:graphicImage value="/resources/images/ajaxloadingbar.gif" />  
+                </p:dialog>
+
+
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

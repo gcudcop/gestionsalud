@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>
+            <ui:define name="Personal">**Atención a pacientes** </ui:define>
+        </title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../../templates/plantillaInternaCenter.xhtml">
+            <ui:define name="top">Gestión de Pacientes</ui:define>
+            <ui:define name="contenido">
+                <p:growl id="mensajes" autoUpdate="true" showDetail="true"/>
+                <h:form id="frmabastecimiento">
+                    <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                    <p:panel id="pnlAbastecimiento">
+                        <p:dataTable id="tblAbastecimiento" value="#{abastecimientoCtrl.lstAbastecimiento}" var="abastecimientos"
+                                     paginator="true" rows="10" rowKey="#{abastecimientos.id_abastecimiento}" selectionMode="single" 
+                                     selection="#{abastecimientoCtrl.abastecimientoSel}">
+
+                            <f:facet name="header">
+                                <p:outputLabel value="Stock de Medicamentos"/>
+                            </f:facet>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Medicamento"/>
+                                </f:facet>
+                                <h:outputText value="#{abastecimientos.id_medicamento.nombre_medicamento}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Fecha de entrega"/>
+                                </f:facet>
+                                <h:outputText value="#{abastecimientos.fecha_abastecimiento}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Unidad Global"/>
+                                </f:facet>
+                                <h:outputText value="#{abastecimientos.cantidad_global} #{abastecimientos.unidad_cantidad_global}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Unitarios"/>
+                                </f:facet>
+                                <h:outputText value="#{abastecimientos.valores_unitarios} #{abastecimientos.unidades}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Responsable de Abastecimiento"/>
+                                </f:facet>
+                                <h:outputText value="#{abastecimientos.id_usuario.nombres} #{abastecimientos.id_usuario.apellidos}"/>
+                            </p:column>
+
+                            <f:facet name="footer">   
+                                <p:commandButton id="btnNuevoAbastecimiento" value="Nuevo" icon="ui-icon-newwin"
+                                                 oncomplete="wdlgNuevoAbastecimiento.show()" title="Nuevo Abastecimiento"/>  
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/excel.png" alt=""/>
+                                    <p:dataExporter type="xls" target="tblAtencion" fileName="Atencion" pageOnly="true" />
+                                </h:commandLink>
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/pdf.png" alt=""/>
+                                    <p:dataExporter type="pdf" target="tblAtencion" fileName="Atencion" pageOnly="true" />
+                                </h:commandLink>
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/csv.png" alt=""/>
+                                    <p:dataExporter type="csv" target="tblAtencion" fileName="Atencion" pageOnly="true" />
+                                </h:commandLink>
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/xml.png" alt=""/>
+                                    <p:dataExporter type="xml" target="tblAtencion" fileName="Atencion" pageOnly="true" />
+                                </h:commandLink>
+                            </f:facet>
+
+                        </p:dataTable>
+
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="dialogos">
+
+                <p:dialog id="dlgNuevoAbastecimiento" header="Nuevo Abastecimiento" widgetVar="wdlgNuevoAbastecimiento" 
+                          modal="true" closable="false" resizable="false"
+                          showEffect="clip" hideEffect="fold"> 
+                    <h:form id="frmNuevoAbastecimiento">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                        <p:panelGrid id="pngNuevAbastecimiento" columns="2">
+                            <p:outputLabel value="Seleccione el medicamento"/>
+                            <p:selectOneMenu id="cmbMedicamentos" value="#{abastecimientoCtrl.valorMSeleccionado}">
+                                <f:selectItem itemLabel="Elija un medicamento" itemValue="#{null}"/>
+                                <f:selectItems value="#{abastecimientoCtrl.lstMedicamentos}" var="medicamentos" 
+                                               itemLabel="#{medicamentos.nombre_medicamento}" itemValue="#{medicamentos.id_medicamento}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Seleccione la fecha de entrega:"/>
+                            <p:calendar id="german" value="#{abastecimientoCtrl.fechaAbastecimiento}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
+
+                            <p:outputLabel value="Seleccione la unidad global" />
+                            <p:selectOneMenu value="#{abastecimientoCtrl.objAbastecimiento.unidad_cantidad_global}">
+                                <f:selectItem itemLabel="Elija una opcion" itemValue="#{null}"/>
+                                <f:selectItem itemLabel="Caja" itemValue="Caja"/>
+                                <f:selectItem itemLabel="Paquete" itemValue="Paquete"/>
+                                <f:selectItem itemLabel="Funda" itemValue="Funda"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Ingrese la cantidad a abastecer: "/>
+                            <p:inputText value="#{abastecimientoCtrl.cajasAIngresar}"/>
+                            <p:outputLabel value="Seleccione la unidad del medicamento a ingresar:"/>
+                            <p:selectOneMenu value="#{abastecimientoCtrl.objAbastecimiento.unidades}">
+                                <f:selectItem itemLabel="Elija una opcion" itemValue="#{null}"/>
+                                <f:selectItem itemLabel="Tabletas" itemValue="Tabletas"/>
+                                <f:selectItem itemLabel="Jarabes" itemValue="Jarabes"/>                                
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Ingrese el numero de unidades a abastecer:"/>
+                            <p:inputText value="#{abastecimientoCtrl.unidadesAIngresar}"/>
+                            <p:outputLabel value="Seleccione la persona responsable del abastecimiento"/>
+                            <p:selectOneMenu id="cmbUsuarios" value="#{abastecimientoCtrl.valorUSeleccionado}">
+                                <f:selectItem itemLabel="Elija un usuario" itemValue="#{null}"/>
+                                <f:selectItems value="#{abastecimientoCtrl.lstUsuarios}" var="usuarios" 
+                                               itemLabel="#{usuarios.nombres} #{usuarios.apellidos}" itemValue="#{usuarios.codigo}"/>
+                            </p:selectOneMenu>
+
+
+                        </p:panelGrid>
+
+                        <p:commandButton value="Aceptar" action="#{abastecimientoCtrl.insertarAbastecimiento()}" 
+                                         update=":frmabastecimiento:pnlAbastecimiento"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgNuevoAbastecimiento.hide()" type="reset"/>
+                    </h:form> 
+                </p:dialog> 
+
+                <p:dialog modal="true" widgetVar="dlgStatus" header="Procesando" draggable="false" closable="false" 
+                          resizable="false"> 
+                    <p:graphicImage value="/resources/images/ajaxloadingbar.gif" />  
+                </p:dialog>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

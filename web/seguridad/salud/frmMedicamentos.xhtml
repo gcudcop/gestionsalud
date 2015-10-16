@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>
+            <ui:define name="Personal">**Atención a pacientes** </ui:define>
+        </title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../../templates/plantillaInternaCenter.xhtml">
+            <ui:define name="top">Gestión de Medicamentos</ui:define>
+            <ui:define name="contenido">
+                <p:growl id="mensajes" autoUpdate="true" showDetail="true"/>
+                <h:form id="frmmedicamentos">
+                    <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                    <p:panel id="pnlBuscarDatos" style="margin-bottom:20px; " >
+                        <h:panelGrid columns="4" cellpadding="10" style="alignment-adjust: middle;"  >
+                            <p:outputLabel value="Ingrese el nombre del medicamento: " style="font-style: initial"  />                                
+                            <p:inputText  size="40" id="globalFilter" value="#{medicamentosCtrl.medicamentoBuscado}"  
+                                          placeholder="Ej. Aspirina"/>
+                            <p:commandButton id="btnBuscar" icon="ui-icon-search" style="width:64px"  
+                                             title="Buscar " action="#{medicamentosCtrl.obtnerMedicamentosDadoNombre()}" 
+                                             process="@form, @this" update=":frmmedicamentos:tblMedicamentos, @form">                                   
+                            </p:commandButton>
+                            <p:commandButton id="btnLimpiar" icon="ui-icon-arrowrefresh-1-e" style="width:50px"  
+                                             title="Limpiar " action="#{medicamentosCtrl.obtnerMedicamentos()}" 
+                                             process="@form, @this" update=":frmmedicamentos:tblMedicamentos, @form">                                   
+                            </p:commandButton>
+
+                        </h:panelGrid>
+                    </p:panel>
+                    <p:panel id="pnlMedicamentos">
+                        <p:dataTable id="tblMedicamentos" value="#{medicamentosCtrl.lstMedicamentos}" var="medicamentos"
+                                     paginator="true" rows="15" rowKey="#{medicamentos.id_medicamentos}" selectionMode="single" 
+                                     selection="#{medicamentosCtrl.medicamentoSel}">
+
+                            <f:facet name="header">
+                                <p:outputLabel value="Stock de Medicamentos"/>
+                            </f:facet>
+                            
+                            <p:column headerText="Codigo:">
+                                <h:outputText value="#{medicamentos.codigo_medicamento}"/>
+                            </p:column>
+
+                            <p:column headerText="Nombre">
+                                <h:outputText value="#{medicamentos.nombre_medicamento}"/>
+                            </p:column>
+
+                            <p:column headerText="Forma Farmacéutica">
+                                <h:outputText value="#{medicamentos.forma_farmaceutica}"/>
+                            </p:column>
+
+                            <p:column headerText="Concentración">
+                                <h:outputText value="#{medicamentos.concentracion}"/>
+                            </p:column>
+
+                            <p:column headerText="Tipo">
+                                <h:outputText value="#{medicamentos.tipo}"/>
+                            </p:column>
+
+                            <p:column headerText="Presentación:">
+                                <h:outputText value="#{medicamentos.presentacion}"/>
+                            </p:column>
+
+                            <p:column headerText="Stock disponible:">
+                                <h:outputText value="#{medicamentos.unidades}"/>
+                            </p:column>
+
+                            <p:column headerText="Fecha almacenamiento:">
+                                <h:outputText value="#{medicamentos.fecha_ingreso}"/>
+                            </p:column>
+
+                            <p:column headerText="Proveedor:">
+                                <h:outputText value="#{medicamentos.proveedor}"/>
+                            </p:column>
+
+                            
+                            <p:column exportable="false">
+                                <p:commandButton id="btnEditarMedicamento" icon="ui-icon-pencil"  title="Editar Medicamento" 
+                                                 oncomplete="wdlgEditarMedicamentos.show()" 
+                                                 process="@this" update=":dlgEditarMedicamentos, @form">                                   
+                                    <f:setPropertyActionListener value="#{medicamentos}" 
+                                                                 target="#{medicamentosCtrl.medicamentoSel}"/>
+                                </p:commandButton>
+                                
+                                <p:commandButton id="btnEliminarMedicamento" icon="ui-icon-close"  title="Eliminar Medicamento"
+                                                 oncomplete="wdlgEliminarMedicamento.show()" 
+                                                 update=":dlgEliminarMedicamento">                                   
+                                    <f:setPropertyActionListener value="#{medicamentos}" 
+                                                                 target="#{medicamentosCtrl.eliminarMedicamento()}"/>
+                                </p:commandButton>
+
+
+                            </p:column>  
+
+                            <f:facet name="footer">   
+                                <p:commandButton id="btnNuevoMedicamento" value="Nuevo" icon="ui-icon-newwin"
+                                                 oncomplete="wdlgNuevoMedicamento.show()" title="Nuevo Medicamento"/>  
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/excel.png" alt=""/>
+                                    <p:dataExporter type="xls" target="tblMedicamentos" fileName="Medicamentos" pageOnly="true" />
+                                </h:commandLink>
+                                <h:commandLink>
+                                    <img src="../../resources/images/pdf.png" alt=""/>
+                                    <p:dataExporter type="pdf" target="tblMedicamentos" fileName="Medicamentos" pageOnly="true" />
+                                </h:commandLink>
+                                <h:commandLink>
+                                    <img src="../../resources/images/csv.png" alt=""/>
+                                    <p:dataExporter type="csv" target="tblMedicamentos" fileName="Medicamentos" pageOnly="true" />
+                                </h:commandLink>
+
+                                <h:commandLink>
+                                    <img src="../../resources/images/xml.png" alt=""/>
+                                    <p:dataExporter type="xml" target="tblMedicamentos" fileName="Medicamentosn" pageOnly="true" />
+                                </h:commandLink>
+                            </f:facet>
+
+                        </p:dataTable>
+
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="dialogos">
+
+
+                <p:dialog id="dlgNuevoMedicamento" header="Nuevo Medicamento" widgetVar="wdlgNuevoMedicamento" 
+                          modal="true" closable="false" resizable="false"
+                          showEffect="clip" hideEffect="fold"> 
+                    <h:form id="frmNuevoMedicamento">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                        <p:panelGrid id="pngNuevMedicamento" columns="4">
+                            <p:outputLabel value="Ingrese el codigo del medicamento:"/>
+                            <p:inputText value="#{medicamentosCtrl.objMedicamentos.codigo_medicamento}"/>
+                            <p:outputLabel value="Ingrese el nombre del medicamento:"/>
+                            <p:inputText value="#{medicamentosCtrl.objMedicamentos.nombre_medicamento}" />
+                            <p:outputLabel value="Ingrese la forma formaceutica:"/>
+                            <p:inputText value="#{medicamentosCtrl.objMedicamentos.forma_farmaceutica}"/>
+                            <p:outputLabel value="Ingrese la concentración:"/>
+                            <p:inputText value="#{medicamentosCtrl.objMedicamentos.concentracion}"/>
+                            <p:outputLabel value="Escoja el tipo de medicamento:"/>
+                            <p:selectOneMenu value="#{medicamentosCtrl.objMedicamentos.tipo}">
+                                <f:selectItem itemLabel="Elija una opcion" itemValue="#{null}"/>
+                                <f:selectItem itemLabel="Genérico" itemValue="Generico"/>
+                                <f:selectItem itemLabel="Tipo 1" itemValue="Tipo 1"/>
+                                <f:selectItem itemLabel="Tipo 2" itemValue="Tipo 2"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Seleccione la presentación:"/>
+                            <p:selectOneMenu value="#{medicamentosCtrl.objMedicamentos.presentacion}">
+                                <f:selectItem itemLabel="Elija una opcion" itemValue="#{null}"/>
+                                <f:selectItem itemLabel="Tabletas" itemValue="Tabletas"/>
+                                <f:selectItem itemLabel="Tipo 1" itemValue="Tipo 1"/>
+                                <f:selectItem itemLabel="Tipo 2" itemValue="Tipo 2"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Ingrese el total de unidades a ingresar"/>
+                            <p:inputText value="#{medicamentosCtrl.objMedicamentos.unidades}"/>
+                            <p:outputLabel value="Ingrese el Registro Sanitario"/>
+                            <p:inputText value="#{medicamentosCtrl.objMedicamentos.registro_sanitario}"/>
+                            <p:outputLabel value="Fecha de Ingreso:"/>
+                            <p:calendar id="german" value="#{medicamentosCtrl.fechaEntrega}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
+                            <p:outputLabel value="Ingrese el provvedor"/>
+                            <p:inputText value="#{medicamentosCtrl.objMedicamentos.proveedor}"/>
+
+
+                        </p:panelGrid>
+
+                        <p:commandButton value="Aceptar" action="#{medicamentosCtrl.insertarMedicamentos()}" 
+                                         update=":frmmedicamentos:pnlMedicamentos"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgNuevoMedicamento.hide()" type="reset"/>
+                    </h:form> 
+                </p:dialog> 
+
+                <p:dialog id="dlgEditarMedicamentos" header="Editar Medicamento" widgetVar="wdlgEditarMedicamentos" 
+                          modal="true" 
+                          closable="false" resizable="false" showEffect="clip" hideEffect="fold">  
+                    <h:form id="frmEditarMedicamentos">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                        <p:messages id="messages" autoUpdate="true"/>  
+                        <p:panelGrid id="pngEditarMedicamentos" columns="2"> 
+                            <p:outputLabel value="Ingrese el codigo del medicamento:"/>
+                            <p:inputText value="#{medicamentosCtrl.medicamentoSel.codigo_medicamento}"/>
+                            <p:outputLabel value="Ingrese el nombre del medicamento:"/>
+                            <p:inputText value="#{medicamentosCtrl.medicamentoSel.nombre_medicamento}" />
+                            <p:outputLabel value="Ingrese la forma formaceutica:"/>
+                            <p:inputText value="#{medicamentosCtrl.medicamentoSel.forma_farmaceutica}"/>
+                            <p:outputLabel value="Ingrese la concentración:"/>
+                            <p:inputText value="#{medicamentosCtrl.medicamentoSel.concentracion}"/>
+                            <p:outputLabel value="Escoja el tipo de medicamento:"/>
+                            <p:selectOneMenu value="#{medicamentosCtrl.medicamentoSel.tipo}">
+                                <f:selectItem itemLabel="Elija una opcion" itemValue="#{null}"/>
+                                <f:selectItem itemLabel="Genérico" itemValue="Generico"/>
+                                <f:selectItem itemLabel="Tipo 1" itemValue="Tipo 1"/>
+                                <f:selectItem itemLabel="Tipo 2" itemValue="Tipo 2"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Seleccione la presentación:"/>
+                            <p:selectOneMenu value="#{medicamentosCtrl.medicamentoSel.presentacion}">
+                                <f:selectItem itemLabel="Elija una opcion" itemValue="#{null}"/>
+                                <f:selectItem itemLabel="Tabletas" itemValue="Tabletas"/>
+                                <f:selectItem itemLabel="Tipo 1" itemValue="Tipo 1"/>
+                                <f:selectItem itemLabel="Tipo 2" itemValue="Tipo 2"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Ingrese el total de unidades a ingresar"/>
+                            <p:inputText value="#{medicamentosCtrl.medicamentoSel.unidades}"/>
+                            <p:outputLabel value="Ingrese el Registro Sanitario"/>
+                            <p:inputText value="#{medicamentosCtrl.medicamentoSel.registro_sanitario}"/>
+                            <p:outputLabel value="Fecha de Ingreso:"/>
+                            <p:calendar id="german" value="#{medicamentosCtrl.fechaEntrega}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
+                            <p:outputLabel value="Ingrese el provvedor"/>
+                            <p:inputText value="#{medicamentosCtrl.medicamentoSel.proveedor}"/>
+                        </p:panelGrid>
+                        <p:commandButton value="Aceptar" action="#{medicamentosCtrl.editarMedicamento()}" 
+                                         update=":frmmedicamentos:pnlMedicamentos"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgEditarMedicamentos.hide()" type="reset"/>
+                    </h:form> 
+                </p:dialog>
+
+                <p:dialog id="dlgEliminarMedicamento" header="Eliminar Medicamento" widgetVar="wdlgEliminarMedicamento" 
+                          modal="true" closable="false" resizable="false" showEffect="clip" hideEffect="fold">  
+                    <h:form id="frmEliminarMedicamento">
+                        <p:ajaxStatus onstart="dlgStatus.show();" oncomplete="dlgStatus.hide();"/>
+                        <h:outputText value="¿Desea Eliminar el Medicamento?"/>
+                        <p:panelGrid id="pngEliminarMedicamento" columns="2">                         
+                             <p:outputLabel value="Ingrese el codigo del medicamento:"/>
+                            <p:outputLabel value="#{medicamentosCtrl.medicamentoSel.codigo_medicamento}"/>
+                            <p:outputLabel value="Ingrese el nombre del medicamento:"/>
+                            <p:outputLabel value="#{medicamentosCtrl.medicamentoSel.nombre_medicamento}" />
+                            <p:outputLabel value="Ingrese la forma formaceutica:"/>
+                            <p:outputLabel value="#{medicamentosCtrl.medicamentoSel.forma_farmaceutica}"/>
+                            <p:outputLabel value="Ingrese la concentración:"/>
+                            <p:outputLabel value="#{medicamentosCtrl.medicamentoSel.concentracion}"/>
+                            <p:outputLabel value="Escoja el tipo de medicamento:"/>
+                            <p:outputLabel value="#{medicamentosCtrl.medicamentoSel.tipo}"/>                                
+                            <p:outputLabel value="Seleccione la presentación:"/>
+                            <p:outputLabel value="#{medicamentosCtrl.medicamentoSel.presentacion}"/>                                
+                            <p:outputLabel value="Ingrese el total de unidades a ingresar"/>
+                            <p:outputLabel value="#{medicamentosCtrl.medicamentoSel.unidades}"/>
+                            <p:outputLabel value="Ingrese el Registro Sanitario"/>
+                            <p:outputLabel value="#{medicamentosCtrl.medicamentoSel.registro_sanitario}"/>
+                            <p:outputLabel value="Fecha de Ingreso:"/>
+                            <p:outputLabel value="#{medicamentosCtrl.medicamentoSel.fecha_ingreso}"/>
+                            <p:outputLabel value="Ingrese el provvedor"/>
+                            <p:outputLabel value="#{medicamentosCtrl.medicamentoSel.proveedor}"/>
+                        </p:panelGrid>
+                        
+                        <p:commandButton value="Aceptar" action="#{medicamentosCtrl.eliminarMedicamento()}" 
+                                         update=":frmmedicamentos:pnlMedicamentos"/>
+                        <p:commandButton value="Cancelar" onclick="wdlgEliminarMedicamento.hide()" type="reset"
+                                         update=":frmmedicamentos:pnlMedicamentos"/>
+                    </h:form> 
+                </p:dialog>
+
+
+
+
+                <p:dialog modal="true" widgetVar="dlgStatus" header="Procesando" draggable="false" closable="false" 
+                          resizable="false"> 
+                    <p:graphicImage value="/resources/images/ajaxloadingbar.gif" />  
+                </p:dialog>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

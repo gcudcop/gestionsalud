@@ -62,7 +62,6 @@ public class MedicamentoCtrl {
     }
 
     private void reinit() {
-
         this.objMedicamento = new Medicamento();
         this.medicamentoSel = new Medicamento();
         this.lstMedicamento = new ArrayList<Medicamento>();
