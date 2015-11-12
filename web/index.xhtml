@@ -9,8 +9,38 @@
         <ui:define name="tituloNavegador">Gestion de Salud</ui:define>
         <ui:define name="content">
             <h:form id="frmIndex">
-                <h:panelGrid id="pnlIndexPrincipal" columns="1" class="center_content">
-                </h:panelGrid>                           
+                <p:panelGrid columns="2">
+                    <p:panel>
+                        <f:facet name="header">
+                            <p:outputLabel value="Detalles del Sistema"/>
+                        </f:facet>
+                        <p> El Sistema de Información Geográfica de la Parroquia de Licto, permite ubicar geoespacialmente los 
+                            lugares turísticos y principales edificaciones de salud, educacion y casas comunales."</p>
+
+                    </p:panel>
+                    <p:panel>
+                        <f:facet name="header">
+                            <p:outputLabel value="Sistema de Información Geográfica sobre Licto"/>                                
+                        </f:facet>
+                        <p:graphicImage value="/resources/images/siglicto.jpg"/>                        
+                        <p>El Sistema de Información Geográfica de la Parroquia de Licto, permite ubicar geoespacialmente los 
+                            lugares turísticos y principales edificaciones de salud, educacion y casas comunales.
+                            <a href="http://www.google.com">ir al Visor</a>
+                        </p>                                                                      
+                    </p:panel>
+
+                </p:panelGrid>
+                <p:panel id="pnlGalería">
+                    <f:facet name="header">
+                        <p:outputLabel value="Galería de Licto"/>
+                    </f:facet>
+                    <p:imageSwitch effect="shuffle">
+                        <ui:repeat value="#{galeriaLicto.imagesLicto}" var="imagesLicto" >
+                            <p:graphicImage value="/resources/images/licto/#{imagesLicto}" title="#{imagesLicto}" 
+                                            alt="Licto #{imagesLicto}" />
+                        </ui:repeat>
+                    </p:imageSwitch>                        
+                </p:panel>                                                              
             </h:form>           
         </ui:define>
     </ui:composition>
